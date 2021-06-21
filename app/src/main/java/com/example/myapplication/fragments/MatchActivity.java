@@ -33,6 +33,7 @@ public class MatchActivity extends Fragment {
         FragmentStateAdapter pagerAdapter = new MyPagerAdapter(getActivity());
         viewPager =  v.findViewById(R.id.match_view_pager);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(1);
         TabLayout tabLayout  = null;
         tabLayout = v.findViewById(R.id.match_tabs);
 
@@ -42,10 +43,7 @@ public class MatchActivity extends Fragment {
                 tab.setText(titles[position]);
             }
         }).attach();
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.fragment_container, fragment)
-//                .commit();
+
         return v;
     }
     private static class MyPagerAdapter extends FragmentStateAdapter {
@@ -60,7 +58,7 @@ public class MatchActivity extends Fragment {
         public Fragment createFragment(int pos) {
             switch (pos) {
                 case 0: {
-                    return LoginFragment.newInstance("fragment 1");
+                    return RegisterFragment.newInstance("fragment 1");
                 }
                 case 1: {
 

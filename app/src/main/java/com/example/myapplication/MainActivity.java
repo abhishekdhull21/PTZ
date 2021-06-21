@@ -14,6 +14,7 @@ import android.view.View;
 import com.example.myapplication.fragments.GameFragment;
 import com.example.myapplication.fragments.LoginFragment;
 import com.example.myapplication.fragments.MatchActivity;
+import com.example.myapplication.fragments.MatchVirewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationBarVie
                 loadFragment(new GameFragment());
                 break;
             case R.id.navigation_dashboard:
-                loadFragment(new LoginFragment());
+                loadFragment(new MatchVirewFragment());
         }
         return false;
     }
