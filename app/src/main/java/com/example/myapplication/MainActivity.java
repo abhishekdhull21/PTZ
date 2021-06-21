@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.myapplication.fragments.GameFragment;
 import com.example.myapplication.fragments.LoginFragment;
@@ -21,7 +23,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements  NavigationBarView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
 
     public static MainActivity main;
     @Override
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationBarVie
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View view =getSupportActionBar().getCustomView();
+        ImageView notification = view.findViewById(R.id.notification_custom_navbar);
+        notification.setOnClickListener(this);
     }
     public void loadFragment(Fragment f){
         if (f==null)
@@ -68,5 +72,13 @@ public class MainActivity extends AppCompatActivity implements  NavigationBarVie
                 loadFragment(new MyZoneFragment());
         }
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.notification_custom_navbar:
+                startActivity(new Intent(this,NotificationActivity.class));
+        }
     }
 }
