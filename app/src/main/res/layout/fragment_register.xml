@@ -40,7 +40,7 @@
                     android:background="@drawable/border_edittext"
                     android:elevation="16sp"
                     android:hint="First Name"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:padding="10sp"
                     android:shadowRadius="8" />
 
@@ -53,7 +53,7 @@
                     android:background="@drawable/border_edittext"
                     android:elevation="16sp"
                     android:hint="Last Name"
-                    android:inputType="number"
+                    android:inputType="textPersonName|text"
                     android:padding="10sp"
                     android:shadowRadius="8" />
             </LinearLayout>
