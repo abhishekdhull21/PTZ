@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.myapplication.Utils.UserInfo;
+import com.example.myapplication.Utils.Utils;
 import com.example.myapplication.fragments.GameFragment;
 import com.example.myapplication.fragments.LoginFragment;
 import com.example.myapplication.fragments.MatchActivity;
@@ -21,7 +24,10 @@ import com.example.myapplication.fragments.MyZoneFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.Serializable;
 import java.util.Objects;
+
+import static com.example.myapplication.fragments.RegisterFragment.TAG;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
 
@@ -33,6 +39,14 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         main = this;
         customActionbar();
         loadFragment(new GameFragment());
+//        get intent from pervious activity
+        UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");;
+        SharedPreferences sp = getSharedPreferences("token",MODE_PRIVATE);
+        if(!sp.contains("token")) {
+            assert i != null;
+            Utils.saveTokenLocal(sp,i.getToken());
+        }
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnItemSelectedListener(this);
     }
