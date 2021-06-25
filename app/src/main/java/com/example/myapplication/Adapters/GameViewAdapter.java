@@ -1,32 +1,36 @@
 package com.example.myapplication.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.Modals.GameModal;
 import com.example.myapplication.R;
-import com.example.myapplication.fragments.GameFragment;
-import com.example.myapplication.fragments.LoginFragment;
-import com.example.myapplication.fragments.MatchActivity;
+import com.example.myapplication.MatchActivity;
 
-import java.util.zip.Inflater;
+import java.util.List;
+
+import static com.example.myapplication.fragments.RegisterFragment.TAG;
 
 public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHolder>  {
     Context context;
-    MainActivity main;
+    List<GameModal> games;
 
-    public GameViewAdapter(MainActivity main) {
-        this.main = main;
+    public GameViewAdapter(Context context, List<GameModal> games) {
+        this.games =games;
+        this.context = context;
     }
 
     @NonNull
@@ -39,27 +43,36 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        GameModal game = games.get(position);
+        holder.game_title.setText(game.getTitle());
+        Log.d(TAG, "onBindViewHolder: "+game.getPic());
+        Glide.with(context).load(game.getPic()).into(holder.game_img);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                main.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MatchActivity()).addToBackStack(null).commit();
+                Intent i = new Intent(context,MatchActivity.class);
+                i.putExtra("game", game);
+                context.startActivity(i);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return games.size();
     }
 
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
+        public ImageView game_img;
+        public TextView game_title;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.game_card_layout);
+            game_img = itemView.findViewById(R.id.game_img);
+            game_title = itemView.findViewById(R.id.game_title);
         }
     }
 }

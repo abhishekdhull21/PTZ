@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.NotificationActivity;
+import com.example.myapplication.PayActivityTest;
 import com.example.myapplication.R;
 import com.example.myapplication.WalletActivity;
 
@@ -25,9 +26,16 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener {
         View v =  inflater.inflate(R.layout.fragment_my_zone, container, false);
         CardView walletView = v.findViewById(R.id.my_wallet);
         CardView notification = v.findViewById(R.id.myzone_notification);
+        CardView setting = v.findViewById(R.id.myzone_settings);
 
         notification.setOnClickListener(this);
         walletView.setOnClickListener(this);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireActivity(), PayActivityTest.class));
+            }
+        });
         return v;
     }
 

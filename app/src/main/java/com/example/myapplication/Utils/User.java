@@ -3,6 +3,7 @@ package com.example.myapplication.Utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,7 +35,12 @@ public class User {
         queue = Volley.newRequestQueue(this.context);
     }
 
-
+    public static String userToken(Context context) {
+        String token;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("token",Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("token","");
+        return token;
+    }
     public void register(Map<String, String>params, ProgressDialog dialog) {
 
         dialog.dismiss();
@@ -71,7 +77,6 @@ public class User {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
-
     public void login(Map<String, String>params, ProgressDialog dialog) {
 
         dialog.dismiss();

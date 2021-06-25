@@ -35,6 +35,6 @@ public class SplashActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 //         close splash activity
-        //finish();
+        finish();
     }
 }

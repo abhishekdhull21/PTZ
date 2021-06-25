@@ -4,12 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,27 +17,26 @@ import com.example.myapplication.Utils.UserInfo;
 import com.example.myapplication.Utils.Utils;
 import com.example.myapplication.fragments.GameFragment;
 import com.example.myapplication.fragments.LoginFragment;
-import com.example.myapplication.fragments.MatchActivity;
-import com.example.myapplication.fragments.MatchVirewFragment;
+import com.example.myapplication.fragments.MatchViewFragment;
 import com.example.myapplication.fragments.MyZoneFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import static com.example.myapplication.fragments.RegisterFragment.TAG;
-
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
-
+    final Fragment fragment1 = new GameFragment();
+    final Fragment fragment2 = new LoginFragment();
+    final Fragment fragment3 = new MyZoneFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
     public static MainActivity main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        main = this;
         customActionbar();
-        loadFragment(new GameFragment());
+        loadFragment();
 //        get intent from pervious activity
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");;
         SharedPreferences sp = getSharedPreferences("token",MODE_PRIVATE);
@@ -58,16 +56,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         ImageView notification = view.findViewById(R.id.notification_custom_navbar);
         notification.setOnClickListener(this);
     }
-    public void loadFragment(Fragment f){
-        if (f==null)
-            return;
-        // Begin the transaction
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        // Replace the contents of the container with the new fragment
-        ft.replace(R.id.fragment_container, f);
-        // or ft.add(R.id.your_placeholder, new FooFragment());
-        // Complete the changes added above
-        ft.commit();
+    public void loadFragment(){
+        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
     }
 
 
@@ -77,13 +69,17 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
         switch (item.getItemId()){
             case R.id.navigation_home:
-                loadFragment(new GameFragment());
-                break;
+                fm.beginTransaction().hide(active).show(fragment1).commit();
+                active = fragment1;
+                return true;
             case R.id.navigation_dashboard:
-                loadFragment(new MatchVirewFragment());
-                break;
+                fm.beginTransaction().hide(active).show(fragment2).commit();
+                active = fragment2;
+                return true;
             case R.id.myzone_menu_item:
-                loadFragment(new MyZoneFragment());
+                fm.beginTransaction().hide(active).show(fragment3).commit();
+                active = fragment3;
+                return true;
         }
         return false;
     }
