@@ -7,7 +7,7 @@ android {
         viewBinding = true
     }
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.aimers.zone"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
