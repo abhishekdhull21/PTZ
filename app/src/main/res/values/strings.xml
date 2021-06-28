@@ -93,4 +93,20 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="yt_watch_live">Watch Live</string>
+    <string name="completed">Completed</string>
+    <string name="erengle">ERENGLE</string>
+    <string name="tpp">TPP</string>
+    <string name="solo">Solo</string>
+    <string name="map">Map</string>
+    <string name="version">Version</string>
+    <string name="type">Type</string>
+    <string name="_10">10</string>
+    <string name="_900">900</string>
+    <string name="entry_fee">Entry Fee</string>
+    <string name="per_kill">Per Kill</string>
+    <string name="prize_pool">Prize Pool</string>
+    <string name="time_21_06_2021_at_12_00pm">time :21/06/2021 at 12:00PM</string>
+    <string name="pubg_mobile_india">Pubg mobile india</string>
+    <string name="join">Join</string>
 </resources>

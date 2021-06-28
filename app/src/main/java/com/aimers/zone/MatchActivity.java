@@ -2,7 +2,6 @@ package com.aimers.zone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -10,10 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 
 import com.aimers.zone.Modals.GameModal;
-import com.aimers.zone.R;
-import com.aimers.zone.fragments.LoginFragment;
 import com.aimers.zone.fragments.MatchViewFragment;
-import com.aimers.zone.fragments.RegisterFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -62,16 +58,16 @@ public class MatchActivity extends AppCompatActivity {
 
         @NotNull
         @Override
-        public Fragment createFragment(int pos) {
+        public MatchViewFragment createFragment(int pos) {
             switch (pos) {
                 case 0: {
-                    return RegisterFragment.newInstance("fragment 1");
+                    return MatchViewFragment.newInstance(game,0);
                 }
                 case 1: {
-                   return MatchViewFragment.newInstance(game);
+                   return MatchViewFragment.newInstance(game, 1);
                 }
                 case 2:
-                   return LoginFragment.newInstance("gfh");
+                   return MatchViewFragment.newInstance(game,2);
 
             }
             return null;
@@ -82,9 +78,5 @@ public class MatchActivity extends AppCompatActivity {
             return NUM_PAGES;
         }
     }
-//    public void loadFragment(){
-//        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
-//        fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
-//        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
-//    }
+
 }

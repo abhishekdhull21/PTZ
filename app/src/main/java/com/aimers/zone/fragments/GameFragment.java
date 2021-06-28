@@ -75,7 +75,7 @@ public class GameFragment extends Fragment {
                         public void onResponse(JSONObject response) {
                             try {
                                 if (response.getBoolean("success")){
-                                    Log.d("TAGa", "onResponse: "+response);
+//                                    Log.d("TAGa", "onResponse: "+response);
                                     String img_url = response.getString("img_url");
                                     JSONArray data = response.getJSONArray("data");
                                     for (int i=0;i<data.length();i++) {
@@ -105,7 +105,7 @@ public class GameFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
-                    Log.d(TAG, "onErrorResponse: "+error.getLocalizedMessage() );
+//                    Log.d(TAG, "onErrorResponse: "+error.getLocalizedMessage() );
                     if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
                         Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
                     else

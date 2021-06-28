@@ -9,27 +9,47 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.aimers.zone.Modals.UserBio;
 import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.Utils.Utils;
 import com.aimers.zone.fragments.GameFragment;
 import com.aimers.zone.fragments.LoginFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Objects;
+
+import static com.aimers.zone.Utils.Constant.GET_USER_INFO;
+import static com.aimers.zone.Utils.Constant.REGISTER_URL;
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
     final Fragment fragment1 = new GameFragment();
     final Fragment fragment2 = new LoginFragment();
     final Fragment fragment3 = new MyZoneFragment();
     final FragmentManager fm = getSupportFragmentManager();
+    public static UserBio user;
     Fragment active = fragment1;
-    public static MainActivity main;
+
+    private HashMap<String,String> params;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +59,13 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 //        get intent from pervious activity
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");;
         SharedPreferences sp = getSharedPreferences("token",MODE_PRIVATE);
+
         if(!sp.contains("token")) {
             assert i != null;
             Utils.saveTokenLocal(sp,i.getToken());
+
         }
+
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnItemSelectedListener(this);
@@ -60,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
         fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
     }
-
 
 
     @Override

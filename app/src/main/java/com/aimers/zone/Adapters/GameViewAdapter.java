@@ -43,7 +43,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameModal game = games.get(position);
         holder.game_title.setText(game.getTitle());
-        Log.d(TAG, "onBindViewHolder: "+game.getPic());
+//        Log.d(TAG, "onBindViewHolder: "+game.getPic());
         Glide.with(context).load(game.getPic()).into(holder.game_img);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

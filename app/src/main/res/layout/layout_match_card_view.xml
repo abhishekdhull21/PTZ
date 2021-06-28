@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -56,11 +57,12 @@
                         android:layout_marginTop="6sp"
                         android:autoText="true"
                         android:padding="8sp"
-                        android:text="Pubg mobile india"
+                        android:text="@string/pubg_mobile_india"
                         android:textAlignment="viewStart"
                         android:textAllCaps="true"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="Deprecated,TextViewEdits" />
 
                     <TextView
                         android:id="@+id/txt_time"
@@ -69,16 +71,17 @@
                         android:autoText="true"
                         android:padding="8sp"
                         android:paddingTop="0sp"
-                        android:text="time :21/06/2021 at 12:00PM"
+                        android:text="@string/time_21_06_2021_at_12_00pm"
                         android:textAlignment="viewStart"
-                        android:textAllCaps="true" />
+                        android:textAllCaps="true"
+                        tools:ignore="Deprecated,TextViewEdits" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="2">
 
                 <TableRow
@@ -91,7 +94,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Prize Pool"
+                        android:text="@string/prize_pool"
                         android:textAlignment="center" />
 
                     <TextView
@@ -99,7 +102,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Per Kill"
+                        android:text="@string/per_kill"
                         android:textAlignment="center" />
 
                     <TextView
@@ -107,7 +110,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Entry Fee"
+                        android:text="@string/entry_fee"
                         android:textAlignment="center" />
                 </TableRow>
 
@@ -134,7 +137,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:paddingStart="2sp"
-                        android:text="900"
+                        android:text="@string/_900"
                         android:textColor="#000000"
                         android:textStyle="bold" />
 
@@ -152,7 +155,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:paddingStart="2sp"
-                        android:text="10"
+                        android:text="@string/_10"
                         android:textColor="#000000"
                         android:textStyle="bold" />
 
@@ -170,7 +173,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:paddingStart="2sp"
-                        android:text="10"
+                        android:text="@string/_10"
                         android:textColor="#000000"
                         android:textStyle="bold" />
                 </TableRow>
@@ -184,21 +187,21 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Type"
+                        android:text="@string/type"
                         android:textAlignment="center" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Version"
+                        android:text="@string/version"
                         android:textAlignment="center" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Map"
+                        android:text="@string/map"
                         android:textAlignment="center" />
                 </TableRow>
 
@@ -216,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:paddingStart="2sp"
-                        android:text="Solo"
+                        android:text="@string/solo"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textStyle="bold" />
@@ -227,7 +230,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:paddingStart="2sp"
-                        android:text="TPP"
+                        android:text="@string/tpp"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textStyle="bold" />
@@ -238,24 +241,27 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:paddingStart="2sp"
-                        android:text="ERENGLE"
+                        android:text="@string/erengle"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textStyle="bold" />
                 </TableRow>
 
                 <TableRow
+                    android:id="@+id/tblRow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:padding="8sp"
                     android:paddingTop="8sp"
-                    android:weightSum="6">
+                    android:weightSum="10">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dimen_0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="6"
+                        android:layout_weight="8"
                         android:orientation="vertical"
                         android:padding="8sp"
+                        android:visibility="visible"
                         android:weightSum="8">
 
                         <ProgressBar
@@ -295,10 +301,50 @@
 
                     <Button
                         android:id="@+id/btn_join"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dimen_0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Join" />
+                        android:background="#3F51B5"
+                        android:text="@string/join"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:visibility="visible" />
+
+                    <Button
+                        android:id="@+id/btn_yt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|center_horizontal|fill_horizontal"
+                        android:layout_marginEnd="2sp"
+                        android:layout_weight="2"
+                        android:background="#F81212"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingStart="4sp"
+                        android:paddingEnd="4sp"
+                        android:text="@string/yt_watch_live"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:typeface="serif"
+                        tools:visibility="gone" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8sp"
+                    android:paddingTop="8sp"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/txtCompleted"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:text="@string/completed"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:visibility="gone" />
                 </TableRow>
 
             </TableLayout>

@@ -4,7 +4,7 @@ public class MatchModal {
     String match_id,
             game_id,
             match_date,match_time,prize_pool,per_kill,entry_fee,type,version,map,total_slot,alloted_slot,remaining_slot;
-
+int pos;
     public String getMatch_id() {
         return match_id;
     }
@@ -57,7 +57,16 @@ public class MatchModal {
         return remaining_slot;
     }
 
-    public MatchModal(String match_id, String game_id, String match_date, String match_time, String prize_pool, String per_kill, String entry_fee, String type, String version, String map, String total_slot, String alloted_slot, String remaining_slot) {
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public MatchModal(int pos, String match_id, String game_id, String match_date, String match_time, String prize_pool, String per_kill, String entry_fee, String type, String version, String map, String total_slot, String alloted_slot, String remaining_slot) {
+        this.pos = pos;
         this.match_id = match_id;
         this.game_id = game_id;
         this.match_date = match_date;

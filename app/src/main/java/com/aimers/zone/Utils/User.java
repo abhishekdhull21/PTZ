@@ -52,12 +52,13 @@ public class User {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("success"))
-                                Log.d("TAG", "onResponse: "+response);
+                                login(params,dialog);
+//                                Log.d("TAG", "onResponse: "+response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         dialog.dismiss();
-                        Toast.makeText(context, ""+response, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+response, Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -121,6 +122,9 @@ public class User {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+    public  void logout(){
+        Utils.removeTokenLocal(context.getSharedPreferences("token",Context.MODE_PRIVATE));
 
+    }
 
 }

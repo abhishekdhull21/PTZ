@@ -31,8 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.aimers.zone.Utils.Constant.MATCH_STATUS;
 import static com.aimers.zone.Utils.Constant.MATCH_URL;
-import static com.aimers.zone.Utils.Constant.UPCOMING;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
@@ -43,13 +43,11 @@ public class MatchViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static  GameModal game;
+    private int pos;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MatchViewFragment(GameModal param1) {
+    public MatchViewFragment(GameModal param1, int pos) {
         game = param1;
+       this.pos = pos;
     }
 
     /**
@@ -60,15 +58,13 @@ public class MatchViewFragment extends Fragment {
      * @return A new instance of fragment MatchVirewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MatchViewFragment newInstance(GameModal param1) {
-        MatchViewFragment fragment = new MatchViewFragment(param1);
-        return fragment;
+    public static MatchViewFragment newInstance(GameModal param1, int pos) {
+        return new MatchViewFragment(param1,pos);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -80,14 +76,14 @@ public class MatchViewFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_match_virew, container, false);
         recyclerView= v.findViewById(R.id.match_view_recyler);
 
-        getMatchInfo();
+        getMatchInfo(pos);
         return v;
     }
 
-    public void getMatchInfo(){
+    public void getMatchInfo(int pos){
         Map<String,String> map = new HashMap<>();
         map.put("game_id",game.getId());
-        map.put("status",UPCOMING);
+        map.put("status",MATCH_STATUS[pos]);
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,MATCH_URL,new JSONObject(map),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -100,7 +96,7 @@ public class MatchViewFragment extends Fragment {
                                 Log.d(TAG, "onResponse: "+ data.getString(0));
                                 for (int i=0;i<data.length();i++) {
                                     JSONObject object = data.getJSONObject(i);
-                                    match.add(new MatchModal(
+                                    match.add(new MatchModal(pos,
                                             object.getString("match_id"),
                                             object.getString("game_id"),
                                             object.getString("match_date"),
