@@ -6,21 +6,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="m">
-
-
-        <activity android:name="com.aimers.zone.PayActivityTest" />
+<!--        <activity android:name=".MyMatchActivity"></activity>-->
+<!--        <activity-->
+<!--            android:name=".MatchJoinActivity"-->
+<!--            android:label="@string/title_activity_match_join"></activity>-->
+        <activity android:name=".PayActivityTest" />
         <activity
-            android:name="com.aimers.zone.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,13 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.aimers.zone.NotificationShowActivity" />
-        <activity android:name="com.aimers.zone.MatchActivity" />
-        <activity android:name="com.aimers.zone.NotificationActivity" />
-        <activity android:name="com.aimers.zone.WalletActivity" />
-        <activity android:name="com.aimers.zone.SignActivity" />
+        <activity android:name=".NotificationShowActivity" />
+        <activity android:name=".MatchActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".WalletActivity" />
+        <activity android:name=".SignActivity" />
         <activity
-            android:name="com.aimers.zone.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/CustomTheme" />
     </application>
 

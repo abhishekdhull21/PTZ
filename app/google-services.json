@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "665077478924",
+    "project_id": "aimerszone007",
+    "storage_bucket": "aimerszone007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665077478924:android:96a6c16ad672726e0b2029",
+        "android_client_info": {
+          "package_name": "com.aimers.zone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665077478924-r00vmkgul2rgueqt4n5060p81qgdd3i6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDajtkxoBZXzKq_Hz_xMhKrlvb_6iveIyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665077478924-r00vmkgul2rgueqt4n5060p81qgdd3i6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

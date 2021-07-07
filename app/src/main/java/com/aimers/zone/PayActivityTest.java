@@ -39,7 +39,6 @@ public class PayActivityTest extends AppCompatActivity {
     private final String MID ="VCWQWH26061118544596";
     private RequestQueue queue;
     private  Map<String, String> trans;
-    private String txnTokenString;
     private String orderIdString;
     private String midString="OgdBig44888892307561";
     private String txnAmountString;
@@ -117,18 +116,17 @@ public class PayActivityTest extends AppCompatActivity {
     }
     public void startPaytmPayment (String token,String callBackUrl){
 
-        txnTokenString = token;
         // for test mode use it
          String host = "https://securegw-stage.paytm.in/";
         // for production mode use it
 //        String host = "https://securegw.paytm.in/";
-        String orderDetails = "MID: " + trans.get("MID") + ", OrderId: " + trans.get("order_id") + ", TxnToken: " + txnTokenString
+        String orderDetails = "MID: " + trans.get("MID") + ", OrderId: " + trans.get("order_id") + ", TxnToken: " + token
                 + ", Amount: " + trans.get("amount");
         //Log.e(TAG, "order details "+ orderDetails);
 
 //        String callBackUrl = host + "theia/paytmCallback?ORDER_ID="+orderIdString;
 //        Log.e(TAG, " callback URL "+callBack);
-        PaytmOrder paytmOrder = new PaytmOrder(orderIdString, midString, txnTokenString, txnAmountString, callBackUrl);
+        PaytmOrder paytmOrder = new PaytmOrder(orderIdString, midString, token, txnAmountString, callBackUrl);
         TransactionManager transactionManager = new TransactionManager(paytmOrder, new PaytmPaymentTransactionCallback(){
             @Override
             public void onTransactionResponse(Bundle bundle) {

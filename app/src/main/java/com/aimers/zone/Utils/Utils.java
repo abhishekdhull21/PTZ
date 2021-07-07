@@ -28,6 +28,7 @@ public class Utils {
         if(sharedPreferences.contains("token")){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.remove("token");
+            editor.clear();
             editor.apply();
         }
     }

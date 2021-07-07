@@ -22,16 +22,15 @@ public class MatchActivity extends AppCompatActivity {
 //    final FragmentManager fm = getSupportFragmentManager();
 //    Fragment active = fragment1;
     ViewPager2 viewPager;
-    private GameModal game;
     private static final int NUM_PAGES = 3;
     private String[] titles = new String[]{"ONGOING", "UPCOMING","RESULT"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
-         game = (GameModal) getIntent().getSerializableExtra("game");
+        GameModal game = (GameModal) getIntent().getSerializableExtra("game");
 
-        FragmentStateAdapter pagerAdapter = new MyPagerAdapter(this,game);
+        FragmentStateAdapter pagerAdapter = new MyPagerAdapter(this, game);
         viewPager =  findViewById(R.id.match_view_pager);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(1);

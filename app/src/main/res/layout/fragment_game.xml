@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FC0E0E0D"
+    android:background="@color/colorBackground"
     tools:context=".fragments.GameFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -30,22 +30,23 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:background="#D3434343"
                 android:minWidth="32sp"
                 android:minHeight="32sp"
                 android:padding="8sp"
+                android:tint="#FFFFFF"
                 app:srcCompat="@drawable/ic_baseline_email_24"
                 tools:src="@drawable/ic_baseline_email_24"
                 tools:srcCompat="@drawable/ic_baseline_email_24" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="8"
                 android:padding="8sp"
                 android:text="This is demo alert you should get ok alert from the admin to server the best qualti w\sadfjklasd  "
                 android:textColor="#000000"

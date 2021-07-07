@@ -1,6 +1,8 @@
 package com.aimers.zone.Modals;
 
-public class MatchModal {
+import java.io.Serializable;
+
+public class MatchModal implements Serializable {
     String match_id,
             game_id,
             match_date,match_time,prize_pool,per_kill,entry_fee,type,version,map,total_slot,alloted_slot,remaining_slot;

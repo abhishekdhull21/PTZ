@@ -18,6 +18,7 @@ import com.aimers.zone.Interface.UsersFromServer;
 import com.aimers.zone.NotificationActivity;
 import com.aimers.zone.PayActivityTest;
 import com.aimers.zone.R;
+import com.aimers.zone.Utils.User;
 import com.aimers.zone.WalletActivity;
 import com.aimers.zone.databinding.FragmentMyZoneBinding;
 
@@ -39,17 +40,19 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         setProfileName();
         notification.setOnClickListener(this);
         walletView.setOnClickListener(this);
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(requireActivity(), PayActivityTest.class));
-            }
-        });
+        setting.setOnClickListener(this);
         return v;
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // Refresh your fragment here
+        }
+    }
     public void setProfileName(){
-        UserFromServer(requireActivity(), this);
-    //        new MyTask(requireActivity()).loadInBackground();
+        UserFromServer(requireActivity(),this);
+//            new MyTask(requireActivity()).loadInBackground();
     }
     @Override
     public void onClick(View v) {
@@ -60,6 +63,9 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
                 break;
             case R.id.myzone_notification:
                 i = new Intent(getActivity(), NotificationActivity.class);
+                break;
+            case R.id.myzone_settings:
+                    User.logout(requireActivity());
                 break;
 
         }

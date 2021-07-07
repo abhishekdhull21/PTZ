@@ -8,12 +8,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.aimers.zone.Modals.Wallet;
 import com.aimers.zone.fragments.AddMoneyWalletFragment;
 import com.aimers.zone.fragments.RedeemMoneyWalletFragment;
 import com.aimers.zone.fragments.TransactionWalletFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import static com.aimers.zone.Modals.Wallet.*;
 
 public class WalletActivity extends AppCompatActivity {
     ViewPager2 viewPager;
@@ -28,6 +32,8 @@ public class WalletActivity extends AppCompatActivity {
 //        TextView textView = findViewById(R.id.textView49);
         viewPager = findViewById(R.id.wallet_view_pager);
         viewPager.setAdapter(pagerAdapter);
+        TextView txtTotalCoin = findViewById(R.id.txtTotleCoin);
+        txtTotalCoin.setText(wallet.getCoins());
         TabLayout tabLayout = null;
         tabLayout = findViewById(R.id.wallet_tabs);
 

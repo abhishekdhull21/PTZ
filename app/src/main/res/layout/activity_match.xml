@@ -5,13 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MatchActivity">
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/match_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/colorSecondaryLight"
+        app:tabIndicator="@color/colorSecondaryDark"
+        app:tabIndicatorColor="@color/colorSecondaryDark"
+        app:tabIndicatorHeight="@dimen/dimen_4sp"
+        app:tabSelectedTextColor="@color/white" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/match_view_pager"

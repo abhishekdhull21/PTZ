@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.aimers.zone.Interface.UsersFromServer;
 import com.aimers.zone.Utils.User;
+import com.aimers.zone.fragments.MyZoneFragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -131,7 +132,7 @@ public class UserBio {
         this.gender = gender;
     }
 
-    public static boolean UserFromServer(Context  context, UsersFromServer fromServer){
+    public static boolean UserFromServer(Context context, UsersFromServer fromServer){
 
         queue = Volley.newRequestQueue(context);
         String token = User.userToken(context);

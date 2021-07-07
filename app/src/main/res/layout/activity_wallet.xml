@@ -36,13 +36,13 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/textView15"
+        app:layout_constraintEnd_toStartOf="@+id/txtTotleCoin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rupee" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/txtTotleCoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
