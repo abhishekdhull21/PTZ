@@ -6,30 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.aimers.zone.Modals.Wallet;
-import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.UserInfo;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.aimers.zone.Utils.Constant.GET_USER_INFO;
-import static com.aimers.zone.Utils.Constant.WALLET_URL;
-import static com.aimers.zone.fragments.RegisterFragment.TAG;
-import static java.lang.Thread.sleep;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -61,9 +41,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private class Wait implements Runnable {
-        private Context context;
-        private Intent i;
-        private boolean iSLogin;
+        private final Context context;
+        private final Intent i;
+        private final boolean iSLogin;
 
         Wait(Context context, Intent i, boolean iSLogin) {
             this.context = context;

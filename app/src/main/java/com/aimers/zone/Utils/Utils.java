@@ -1,10 +1,14 @@
 package com.aimers.zone.Utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.util.Log;
+
+import com.aimers.zone.R;
+import com.tapadoo.alerter.Alerter;
 
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
@@ -33,4 +37,15 @@ public class Utils {
         }
     }
 
+    public static void alert(String title,String message,Activity context, boolean success){
+        Alerter alerter = Alerter.create(context)
+                .setText(message)
+                .setTitle(title);
+        if (success) {
+            alerter.setBackgroundColorRes(R.color.colorBackgroundSuccess);
+        } else {
+            alerter.setBackgroundColorRes(R.color.alert_default_error_background);
+        }
+        alerter.show();
+    }
 }

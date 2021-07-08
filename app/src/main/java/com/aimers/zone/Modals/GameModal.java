@@ -3,7 +3,9 @@ package com.aimers.zone.Modals;
 import java.io.Serializable;
 
 public class GameModal implements Serializable {
-    private String id,title,pic;
+    private final String id;
+    private final String title;
+    private final String pic;
 
     public String getId() {
         return id;

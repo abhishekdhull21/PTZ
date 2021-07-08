@@ -23,7 +23,7 @@ public class MatchActivity extends AppCompatActivity {
 //    Fragment active = fragment1;
     ViewPager2 viewPager;
     private static final int NUM_PAGES = 3;
-    private String[] titles = new String[]{"ONGOING", "UPCOMING","RESULT"};
+    private final String[] titles = new String[]{"ONGOING", "UPCOMING","RESULT"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +48,7 @@ public class MatchActivity extends AppCompatActivity {
 
     }
     private static class MyPagerAdapter extends FragmentStateAdapter {
-        GameModal game;
+        final GameModal game;
         public MyPagerAdapter(FragmentActivity fa,GameModal game) {
             super(fa);
             this.game = game;

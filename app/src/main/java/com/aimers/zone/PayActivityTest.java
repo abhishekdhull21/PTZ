@@ -34,15 +34,16 @@ import java.util.Random;
 import static com.aimers.zone.Utils.Constant.PAYMENT_INIT;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
+@SuppressWarnings("Convert2Lambda")
 public class PayActivityTest extends AppCompatActivity {
     private String orderId = "order_from_app";
     private final String MID ="VCWQWH26061118544596";
     private RequestQueue queue;
     private  Map<String, String> trans;
     private String orderIdString;
-    private String midString="OgdBig44888892307561";
+    private final String midString="OgdBig44888892307561";
     private String txnAmountString;
-    private int ActivityRequestCode=2;
+    private final int ActivityRequestCode=2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class PayActivityTest extends AppCompatActivity {
         int min =1000, max= 9999;
 // nextInt as provided by Random is exclusive of the top value so you need to add 1
         int randomNum = rand.nextInt((max - min) + 1) + min;
-        return  date+String.valueOf(randomNum);
+        return  date+ randomNum;
     }
     public void startPaytmPayment (String token,String callBackUrl){
 
@@ -140,7 +141,7 @@ public class PayActivityTest extends AppCompatActivity {
 
             @Override
             public void onErrorProceed(String s) {
-                Log.e(TAG, " onErrorProcess "+s.toString());
+                Log.e(TAG, " onErrorProcess "+ s);
             }
 
             @Override

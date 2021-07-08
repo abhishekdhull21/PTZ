@@ -2,7 +2,6 @@ package com.aimers.zone.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,9 @@ import com.aimers.zone.MatchActivity;
 
 import java.util.List;
 
-import static com.aimers.zone.fragments.RegisterFragment.TAG;
-
 public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHolder>  {
     Context context;
-    List<GameModal> games;
+    final List<GameModal> games;
 
     public GameViewAdapter(Context context, List<GameModal> games) {
         this.games =games;
@@ -63,9 +60,9 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView cardView;
-        public ImageView game_img;
-        public TextView game_title;
+        public final CardView cardView;
+        public final ImageView game_img;
+        public final TextView game_title;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.game_card_layout);

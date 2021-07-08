@@ -55,11 +55,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-           switch (v.getId()){
-               case R.id.btnLogin:
-                   user.login(loginInfo(),dialog);
-                   break;
-           }
+        if (v.getId() == R.id.btnLogin) {
+            user.login(loginInfo(), dialog);
+        }
     }
     private Map<String,String> loginInfo(){
         Map<String,String> map = new HashMap<String, String>();

@@ -23,7 +23,7 @@ import java.util.Objects;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
     private FragmentRegisterBinding binding;
-    public static String TAG= "mtag";
+    public static final String TAG= "mtag";
     private ProgressDialog dialog;
     private User user;
     public RegisterFragment() {
@@ -58,12 +58,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         dialog.setMessage("wait");
 
-        switch (v.getId()){
-            case R.id.btn_register:
-                    dialog.show();
-                    user.register(userInfo(),dialog);
-
-                break;
+        if (v.getId() == R.id.btn_register) {
+            dialog.show();
+            user.register(userInfo(), dialog);
         }
     }
 

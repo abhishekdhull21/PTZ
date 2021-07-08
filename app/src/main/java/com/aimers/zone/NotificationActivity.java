@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.aimers.zone.Adapters.NotificationAdapter;
-import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 
 public class NotificationActivity extends AppCompatActivity {
 

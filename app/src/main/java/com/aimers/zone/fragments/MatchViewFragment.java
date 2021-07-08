@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.aimers.zone.Utils.Utils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,17 +34,18 @@ import java.util.Map;
 
 import static com.aimers.zone.Utils.Constant.MATCH_STATUS;
 import static com.aimers.zone.Utils.Constant.MATCH_URL;
+import static com.aimers.zone.Utils.Utils.*;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
 public class MatchViewFragment extends Fragment {
     private RequestQueue queue;
     private RecyclerView recyclerView;
-    private ArrayList <MatchModal> match = new ArrayList<>();
+    private final ArrayList <MatchModal> match = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static  GameModal game;
-    private int pos;
+    private final int pos;
 
     public MatchViewFragment(GameModal param1, int pos) {
         game = param1;
@@ -117,8 +119,8 @@ public class MatchViewFragment extends Fragment {
 
                             }
                             else {
-
-                                Toast.makeText(requireActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
+                                alert("error that hate ",response.getString("error"),requireActivity(),false);
+//                                Toast.makeText(requireActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -133,9 +135,11 @@ public class MatchViewFragment extends Fragment {
 
                 Log.d(TAG, "onErrorResponse: "+error.getLocalizedMessage() );
                 if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                    Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+                    alert("","error occurred: try after sometime",requireActivity(),false);
+//                    Toast.makeText(requireActivity(), "", Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    alert("error",error.getLocalizedMessage(),requireActivity(),false);
+//                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

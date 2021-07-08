@@ -5,15 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.aimers.zone.Adapters.MyMatchAdapter;
-
-import java.util.Objects;
 
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 

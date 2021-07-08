@@ -28,11 +28,11 @@ import java.util.ArrayList;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.ViewHolder> implements View.OnClickListener {
-    ArrayList<MatchModal> matches ;
-    GameModal game;
+    final ArrayList<MatchModal> matches ;
+    final GameModal game;
     MatchModal match;
     private BottomSheetBehavior mBottomSheetBehavior1;
-    private Context context;
+    private final Context context;
     BottomSheetDialogFragment bottomSheetDialogFragment;
     public MatchViewAdapter(Context context,ArrayList<MatchModal> match, GameModal game) {
         this.matches = match;
@@ -130,13 +130,24 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtTime,txtPrize,txtPerKill,txtFee,txtType,txtVersion,txtMap,
-        txtSlot,txtRemaining,txtGameName,txtCompleted;
-        public ProgressBar progressBar;
-        public ImageView gameImg;
-        public Button btnJoin,btnYT,btnBottomsheetJoin;
-        public TableRow tableRow;
-        public View bottomsheet;
+        public final TextView txtTime;
+        public final TextView txtPrize;
+        public final TextView txtPerKill;
+        public final TextView txtFee;
+        public final TextView txtType;
+        public final TextView txtVersion;
+        public final TextView txtMap;
+        public final TextView txtSlot;
+        public final TextView txtRemaining;
+        public final TextView txtGameName;
+        public final TextView txtCompleted;
+        public final ProgressBar progressBar;
+        public final ImageView gameImg;
+        public final Button btnJoin;
+        public final Button btnYT;
+        public final Button btnBottomsheetJoin;
+        public final TableRow tableRow;
+        public final View bottomsheet;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtPrize = itemView.findViewById(R.id.txt_pool);

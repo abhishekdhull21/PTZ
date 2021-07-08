@@ -28,7 +28,7 @@ public class MyMatchAdapter extends RecyclerView.Adapter<MyMatchAdapter.ViewHold
         return 15;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -3,9 +3,19 @@ package com.aimers.zone.Modals;
 import java.io.Serializable;
 
 public class MatchModal implements Serializable {
-    String match_id,
-            game_id,
-            match_date,match_time,prize_pool,per_kill,entry_fee,type,version,map,total_slot,alloted_slot,remaining_slot;
+    final String match_id;
+    final String game_id;
+    final String match_date;
+    final String match_time;
+    final String prize_pool;
+    final String per_kill;
+    final String entry_fee;
+    final String type;
+    final String version;
+    final String map;
+    final String total_slot;
+    final String alloted_slot;
+    final String remaining_slot;
 int pos;
     public String getMatch_id() {
         return match_id;

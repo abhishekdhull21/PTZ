@@ -1,7 +1,7 @@
 package com.aimers.zone.Modals;
 
 public class Wallet {
-    public static Wallet wallet = new Wallet();
+    public static final Wallet wallet = new Wallet();
     private String id,user_id,coins;
 
     public String getId() {

@@ -1,8 +1,6 @@
 package com.aimers.zone;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,14 +14,12 @@ import android.widget.Toast;
 
 import com.aimers.zone.Modals.MatchModal;
 import com.aimers.zone.Utils.User;
-import com.aimers.zone.databinding.ActivityMatchJoinBinding;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tapadoo.alerter.Alerter;
 
@@ -33,14 +29,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.aimers.zone.Utils.Constant.GET_USER_INFO;
 import static com.aimers.zone.Utils.Constant.MATCH_JOIN_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class MatchJoinActivity extends BottomSheetDialogFragment {
 //    private BottomSheetListner
-    MatchModal match;
-    Context context;
+final MatchModal match;
+    final Context context;
     private EditText editTextGame;
 
     public MatchJoinActivity(Context context, MatchModal match) {

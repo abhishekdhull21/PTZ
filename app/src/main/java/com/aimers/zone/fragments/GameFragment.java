@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ import java.util.List;
 
 import static com.aimers.zone.Utils.Constant.BASE_URL;
 import static com.aimers.zone.Utils.Constant.GAME_URL;
-import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class GameFragment extends Fragment {
     private RequestQueue queue;

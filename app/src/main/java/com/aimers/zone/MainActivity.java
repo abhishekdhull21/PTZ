@@ -34,6 +34,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.onesignal.OneSignal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,15 +42,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Queue;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 import static com.aimers.zone.Utils.Constant.WALLET_URL;
+import static com.aimers.zone.Utils.Utils.*;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
@@ -60,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     final FragmentManager fm = getSupportFragmentManager();
     public static UserBio user;
-
+    private static final String ONESIGNAL_APP_ID ="75715159-da5b-4540-9b57-76bc9916d532" ;
     Fragment active = fragment2;
 
     private HashMap<String, String> params;
@@ -72,16 +67,20 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         setContentView(R.layout.activity_main);
         customActionbar();
         loadFragment();
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
         queue = Volley.newRequestQueue(this);
         progressBar =new ProgressDialog(this);
 //        get intent from pervious activity
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");
-        ;
         SharedPreferences sp = getSharedPreferences("token", MODE_PRIVATE);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         if (!sp.contains("token")) {
             assert i != null;
-            Utils.saveTokenLocal(sp, i.getToken());
+            saveTokenLocal(sp, i.getToken());
         }
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -164,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                                 Wallet.wallet.setUser_id(object.getString("user_id"));
                                 Wallet.wallet.setId(object.getString("id"));
                             } else {
-
-                                Toast.makeText(MainActivity.this, "" + response.getString("error"), Toast.LENGTH_SHORT).show();
+                                alert("error",response.getString("error"),MainActivity.this,false);
+//                                Toast.makeText(MainActivity.this, "" + response.getString("error"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -178,11 +177,14 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.d(TAG, " splash  onErrorResponse: " + error.getLocalizedMessage());
+                Log.d(TAG, " main  onErrorResponse: " + error.getLocalizedMessage());
                 if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty())
-                    Toast.makeText(MainActivity.this, "" + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    alert("error",error.getLocalizedMessage(),MainActivity.this,false);
+//                    Toast.makeText(MainActivity.this, "" + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(MainActivity.this, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+                    alert("error","error occurred: try after sometime",MainActivity.this,false);
+
+//                Toast.makeText(MainActivity.this, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
                 progressBar.dismiss();
             }
 

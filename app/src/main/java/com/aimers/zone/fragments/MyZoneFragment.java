@@ -3,7 +3,6 @@ package com.aimers.zone.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import com.aimers.zone.Interface.UsersFromServer;
 import com.aimers.zone.NotificationActivity;
-import com.aimers.zone.PayActivityTest;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.WalletActivity;
@@ -46,9 +44,7 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            // Refresh your fragment here
-        }
+        // Refresh your fragment here
     }
     public void setProfileName(){
         UserFromServer(requireActivity(),this);
@@ -81,7 +77,7 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         binding.txtMatchPlayedCount.setText(user.getMatch_played());
     }
 
-    private class MyTask extends AsyncTaskLoader<String>{
+    private static class MyTask extends AsyncTaskLoader<String>{
 
         public MyTask(@NonNull Context context) {
             super(context);

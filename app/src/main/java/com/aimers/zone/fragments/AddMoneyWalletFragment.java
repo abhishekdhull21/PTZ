@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.aimers.zone.MainActivity;
-import com.aimers.zone.PayActivityTest;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.User;
 import com.android.volley.Request;
@@ -40,7 +38,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
-import java.util.Set;
 
 import static com.aimers.zone.Utils.Constant.PAYMENT_INIT;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
@@ -62,9 +59,9 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
     private RequestQueue queue;
     private Map<String, String> trans;
     private String orderIdString;
-    private String midString="OgdBig44888892307561";
+    private final String midString="OgdBig44888892307561";
     private String txnAmountString;
-    private int ActivityRequestCode=2;
+    private final int ActivityRequestCode=2;
     private ProgressDialog progressDialog;
 
     public AddMoneyWalletFragment() {
@@ -186,7 +183,7 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
         int min =1000, max= 9999;
 // nextInt as provided by Random is exclusive of the top value so you need to add 1
         int randomNum = rand.nextInt((max - min) + 1) + min;
-        return  date+String.valueOf(randomNum);
+        return  date+ randomNum;
     }
     public void startPaytmPayment (String token,String callBackUrl){
 
@@ -220,19 +217,19 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
 
             @Override
             public void onErrorProceed(String s) {
-                alert(s.toString(),false);
-                Log.e(TAG, " onErrorProcess "+s.toString());
+                alert(s,false);
+                Log.e(TAG, " onErrorProcess "+ s);
             }
 
             @Override
             public void clientAuthenticationFailed(String s) {
-                alert(s.toString(),false);
+                alert(s,false);
                 Log.e(TAG, "Clientauth "+s);
             }
 
             @Override
             public void someUIErrorOccurred(String s) {
-                alert(s.toString(),false);
+                alert(s,false);
                 Log.e(TAG, " UI error "+s);
             }
 

@@ -27,8 +27,8 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
 public class User {
-    private RequestQueue queue;
-    private  Context context;
+    private final RequestQueue queue;
+    private final Context context;
 
     public User(Context context) {
         this.context = context;

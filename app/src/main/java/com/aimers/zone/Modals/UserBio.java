@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import com.aimers.zone.Interface.UsersFromServer;
 import com.aimers.zone.Utils.User;
-import com.aimers.zone.fragments.MyZoneFragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,11 +22,12 @@ import java.util.Map;
 import static com.aimers.zone.Utils.Constant.GET_USER_INFO;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
+@SuppressWarnings("SameReturnValue")
 public class UserBio {
     static RequestQueue queue;
    private String uid,username,name,lastName,mobile,email,address, dob,gender,coins,kills,match_played;
 
-    public static UserBio user = new UserBio();
+    public static final UserBio user = new UserBio();
 
     public String getMatch_played() {
         return match_played;

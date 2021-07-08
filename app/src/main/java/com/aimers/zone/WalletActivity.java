@@ -10,19 +10,20 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.aimers.zone.Modals.Wallet;
 import com.aimers.zone.fragments.AddMoneyWalletFragment;
 import com.aimers.zone.fragments.RedeemMoneyWalletFragment;
 import com.aimers.zone.fragments.TransactionWalletFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import org.jetbrains.annotations.NotNull;
+
 import static com.aimers.zone.Modals.Wallet.*;
 
 public class WalletActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     private static final int NUM_PAGES = 3;
-    private String[] titles = new String[]{"ADD MONEY", "REDEEM MONEY","TRANSACTION"};
+    private final String[] titles = new String[]{"ADD MONEY", "REDEEM MONEY","TRANSACTION"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class WalletActivity extends AppCompatActivity {
         }
 
 
+        @NotNull
         @Override
         public Fragment createFragment(int pos) {
             switch (pos) {

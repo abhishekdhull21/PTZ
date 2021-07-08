@@ -14,7 +14,7 @@ import com.aimers.zone.NotificationShowActivity;
 import com.aimers.zone.R;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
-    Context context;
+    final Context context;
 
     public NotificationAdapter(Context context) {
         this.context = context;
@@ -42,7 +42,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView notification_cardview;
+        public final CardView notification_cardview;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             notification_cardview = itemView.findViewById(R.id.notification_msg_node_cardview);

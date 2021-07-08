@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 public class SignActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     private static final int NUM_PAGES = 2;
-    private String[] titles = new String[]{"Login", "Register"};
+    private final String[] titles = new String[]{"Login", "Register"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
