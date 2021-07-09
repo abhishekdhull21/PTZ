@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -21,7 +20,6 @@ import com.aimers.zone.Modals.UserBio;
 import com.aimers.zone.Modals.Wallet;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.UserInfo;
-import com.aimers.zone.Utils.Utils;
 import com.aimers.zone.fragments.GameFragment;
 import com.aimers.zone.fragments.LoginFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
@@ -31,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.androidstudy.networkmanager.Tovuti;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
@@ -43,8 +42,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
+
 import static com.aimers.zone.Utils.Constant.WALLET_URL;
-import static com.aimers.zone.Utils.Utils.*;
+import static com.aimers.zone.Utils.Utils.alert;
+import static com.aimers.zone.Utils.Utils.saveTokenLocal;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
@@ -82,11 +84,25 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             assert i != null;
             saveTokenLocal(sp, i.getToken());
         }
+//MaterialDialog
+        MaterialDialog mDialog = new MaterialDialog.Builder(MainActivity.this)
+                .setTitle("Network State")
+                .setMessage("No Internet Connection Live")
+                .setCancelable(false)
+                .build();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         loadData();
         navigation.setOnItemSelectedListener(this);
         fab.setOnClickListener(this);
+
+
+        Tovuti.from(this).monitor((connectionType, isConnected, isFast) -> {
+            mDialog.dismiss();
+            if(!isConnected) {
+                mDialog.show();
+            }
+        });
 
     }
 
@@ -94,7 +110,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+
         View view = getSupportActionBar().getCustomView();
         assert actionBar != null;
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
@@ -179,10 +198,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
                 Log.d(TAG, " main  onErrorResponse: " + error.getLocalizedMessage());
                 if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty())
-                    alert("error",error.getLocalizedMessage(),MainActivity.this,false);
+                    alert("error","error occurred: try after sometime",MainActivity.this,false);
 //                    Toast.makeText(MainActivity.this, "" + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 else
-                    alert("error","error occurred: try after sometime",MainActivity.this,false);
+                    alert("error",""+error.getLocalizedMessage(),MainActivity.this,false);
 
 //                Toast.makeText(MainActivity.this, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
                 progressBar.dismiss();
@@ -193,4 +212,5 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
 }

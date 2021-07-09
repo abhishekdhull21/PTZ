@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -49,9 +50,11 @@ final MatchModal match;
         View v=inflater.inflate(R.layout.activity_match_join,container,false);
 
         editTextGame = v.findViewById(R.id.txtUserGameID);
-        v.findViewById(R.id.join_req_btn).setOnClickListener(new View.OnClickListener() {
+        Button btnJoin =v.findViewById(R.id.join_req_btn);
+        btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnJoin.setActivated(false);
                 Log.d(TAG, "onClick: bottom sheet btn clicked");
                 joinMatchRequest();
             }
@@ -69,14 +72,22 @@ final MatchModal match;
         return v;
     }
     public void joinMatchRequest( ){
-        RequestQueue queue = Volley.newRequestQueue(context);
         String token = User.userToken(context);
         Map<String,String> params = new HashMap<>();
         params.put("token",token);
         params.put("match_id",match.getMatch_id());
         String game_id = editTextGame.getText().toString();
-        if(!game_id.isEmpty())
-        params.put("user_game_id",game_id);
+        if(!game_id.isEmpty()) {
+            params.put("user_game_id", game_id);
+            sendRequestForMatchJoin(params);
+        }
+
+
+    }
+
+    public void sendRequestForMatchJoin(Map<String, String> params){
+
+        RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,MATCH_JOIN_URL,new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -90,7 +101,7 @@ final MatchModal match;
                                         .setBackgroundColorRes(R.color.colorBackgroundSuccess)
                                         .setText("Join Match Successfully...")
                                         .show();
-                                    startActivity(new Intent(requireActivity(),MyMatchActivity.class));
+                                startActivity(new Intent(requireActivity(),MyMatchActivity.class));
                             }else{
 
 
@@ -122,7 +133,6 @@ final MatchModal match;
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
     }
 
 

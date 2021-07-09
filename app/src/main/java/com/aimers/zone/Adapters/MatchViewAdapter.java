@@ -31,7 +31,6 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
     final ArrayList<MatchModal> matches ;
     final GameModal game;
     MatchModal match;
-    private BottomSheetBehavior mBottomSheetBehavior1;
     private final Context context;
     BottomSheetDialogFragment bottomSheetDialogFragment;
     public MatchViewAdapter(Context context,ArrayList<MatchModal> match, GameModal game) {
