@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.aimers.zone.fragments.AddMoneyWalletFragment;
+import com.aimers.zone.fragments.RedeemFragment;
 import com.aimers.zone.fragments.RedeemMoneyWalletFragment;
 import com.aimers.zone.fragments.TransactionWalletFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -63,7 +64,7 @@ public class WalletActivity extends AppCompatActivity {
                 }
                 case 1: {
 
-                    return RedeemMoneyWalletFragment.newInstance("fragment 2");
+                    return RedeemFragment.newInstance("fragment 2","2");
                 }
                 default:
                     return TransactionWalletFragment.newInstance("fragment 1, Default");

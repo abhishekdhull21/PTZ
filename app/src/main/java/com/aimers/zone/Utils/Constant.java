@@ -2,7 +2,7 @@ package com.aimers.zone.Utils;
 
 public class Constant {
     //Urls
-    public static final String BASE_URL = "https://22942209db28.ngrok.io";
+    public static final String BASE_URL = "https://818793ccc8b5.ngrok.io";
     public static final String REGISTER_URL = BASE_URL+"/ptz/api/register.php";
     public static final String GET_USER_INFO = BASE_URL+"/ptz/api/get-user.php";
     public static final String LOGIN_URL = BASE_URL+"/ptz/api/login.php";

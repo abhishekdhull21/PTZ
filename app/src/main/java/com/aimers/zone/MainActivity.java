@@ -34,6 +34,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.onesignal.OneSignal;
+import com.rahman.dialog.Activity.SmartDialog;
+import com.rahman.dialog.Utilities.SmartDialogBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +43,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 
 import static com.aimers.zone.Utils.Constant.WALLET_URL;
 import static com.aimers.zone.Utils.Utils.alert;
@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             saveTokenLocal(sp, i.getToken());
         }
 //MaterialDialog
-        MaterialDialog mDialog = new MaterialDialog.Builder(MainActivity.this)
+        SmartDialog mDialog = new SmartDialogBuilder(MainActivity.this)
                 .setTitle("Network State")
-                .setMessage("No Internet Connection Live")
-                .setCancelable(false)
+                .setSubTitle("No Internet Connection Live")
+                .setCancalable(false)
                 .build();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -106,14 +106,13 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     }
 
+
     private void customActionbar() {
         ActionBar actionBar = getSupportActionBar();
+        if(actionBar == null)return;
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
-
-
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
-
         View view = getSupportActionBar().getCustomView();
         assert actionBar != null;
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));

@@ -41,11 +41,7 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         setting.setOnClickListener(this);
         return v;
     }
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        // Refresh your fragment here
-    }
+
     public void setProfileName(){
         UserFromServer(requireActivity(),this);
 //            new MyTask(requireActivity()).loadInBackground();

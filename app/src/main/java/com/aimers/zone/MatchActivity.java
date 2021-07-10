@@ -1,12 +1,14 @@
 package com.aimers.zone;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.os.Bundle;
 
 import com.aimers.zone.Modals.GameModal;
 import com.aimers.zone.fragments.MatchViewFragment;
@@ -29,7 +31,7 @@ public class MatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
         GameModal game = (GameModal) getIntent().getSerializableExtra("game");
-
+        customActionbar();
         FragmentStateAdapter pagerAdapter = new MyPagerAdapter(this, game);
         viewPager =  findViewById(R.id.match_view_pager);
         viewPager.setAdapter(pagerAdapter);
@@ -46,6 +48,31 @@ public class MatchActivity extends AppCompatActivity {
         }).attach();
 
 
+    }
+    private void customActionbar() {
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar == null) return;
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+
+        actionBar.setCustomView(R.layout.custom_actionbar_backbutton);
+
+        View view = actionBar.getCustomView();
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+//        view.setBackgroundColor(getColor(R.color.colorPrimary));
+//        view.setPadding(0,0,0,0);
+//        ImageView backBtn = view.findViewById(R.id.back_btn_actionbar );
+//        Log.d(TAG, "customActionbar: "+backBtn);
+/*
+        backBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MatchActivity.super.onBackPressed();
+            }
+        });
+*/
     }
     private static class MyPagerAdapter extends FragmentStateAdapter {
         final GameModal game;
