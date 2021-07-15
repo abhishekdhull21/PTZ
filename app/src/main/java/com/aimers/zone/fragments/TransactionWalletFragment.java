@@ -4,58 +4,109 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.R;
+import com.aimers.zone.Utils.Constant;
+import com.aimers.zone.Utils.NetworkRequest;
+import com.aimers.zone.Utils.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TransactionWalletFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import ir.androidexception.datatable.DataTable;
+import ir.androidexception.datatable.model.DataTableHeader;
+import ir.androidexception.datatable.model.DataTableRow;
+
+import static com.aimers.zone.Utils.Constant.TEST_URL;
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
+
+
 public class TransactionWalletFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
+    private View v;
+    private DataTable dataTable;
     public TransactionWalletFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @return A new instance of fragment TransactionWalletFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TransactionWalletFragment newInstance(String param1) {
-        TransactionWalletFragment fragment = new TransactionWalletFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // TODO: Rename and change types of parameters
-            String mParam1 = getArguments().getString(ARG_PARAM1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public static TransactionWalletFragment newInstance(String param1) {return new TransactionWalletFragment();}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transaction_wallet, container, false);
+        v = inflater.inflate(R.layout.fragment_transaction_wallet, container, false);
+        initTable();
+        sendRequest();
+
+
+        return v;
+    }
+    private void initTable(){
+        dataTable = v.findViewById(R.id.data_table);
+        Log.d(TAG, "initTable: "+dataTable);
+        DataTableHeader header = new DataTableHeader.Builder()
+                .item("Sn",1)
+                .item("Type",3)
+                .item("Rs",2)
+                .build();
+        dataTable.setHeader(header);
+    }
+
+    private void sendRequest(){
+        Map<String,String> params = initRequest();
+        NetworkRequest request = new NetworkRequest(requireActivity());
+        request.sendRequest(params, TEST_URL, new RedeemRequestResponse() {
+            @Override
+            public void onSuccessResponse(JSONObject response) throws JSONException {
+                showTable(response);
+            }
+
+
+            @Override
+            public void onErrorResponse(JSONObject response) {
+                Log.e(TAG, "onErrorResponse: "+response );
+            }
+        });
+    }
+
+    private void showTable(JSONObject response) throws JSONException {
+        if(!response.getBoolean("success")) return;
+        JSONArray responseArray = response.getJSONArray("data");
+        ArrayList<DataTableRow> rows = new ArrayList<>();
+        // define 200 fake rows for table
+        for(int i=0;i<responseArray.length();i++) {
+            JSONObject data = responseArray.getJSONObject(i);
+            DataTableRow row = new DataTableRow.Builder()
+                    .value("#" + i)
+                    .value(data.getString("type"))
+                    .value(data.getString("coins"))
+
+                    .build();
+            rows.add(row);
+        }
+
+//        dataTable.setTypeface(typeface);
+
+        dataTable.setRows(rows);
+        dataTable.inflate(requireActivity());
+
+    }
+    private Map<String, String> initRequest(){
+        Map<String, String> params = new HashMap<>();
+        params.put("token", User.userToken(requireActivity()));
+        return params;
     }
 }

@@ -36,11 +36,15 @@ public class NetworkRequest {
     public void sendRequest(Map<String, String> params, String url, RedeemRequestResponse redeemRequestResponse){
 
          
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,url,null,
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,url,new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        redeemRequestResponse.onSuccessResponse(response);
+                        try {
+                            redeemRequestResponse.onSuccessResponse(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 //                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 //                        try {
 //                            if (response.getBoolean("success")){
