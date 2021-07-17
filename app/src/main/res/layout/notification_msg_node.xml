@@ -5,8 +5,7 @@
     android:id="@+id/notification_child_node"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16sp"
-    android:layout_marginBottom="24sp">
+    android:layout_margin="16sp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/notification_msg_node_cardview"
@@ -37,13 +36,20 @@
 
             <TextView
                 android:id="@+id/txt_notification_child_node"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start|center_vertical"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="3"
                 android:paddingStart="8sp"
                 android:paddingEnd="8sp"
                 android:text="notification zone"
-                android:textAlignment="viewStart"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

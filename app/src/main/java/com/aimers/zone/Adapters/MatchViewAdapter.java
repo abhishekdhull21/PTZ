@@ -15,12 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aimers.zone.MatchJoinActivity;
+import com.aimers.zone.fragments.MatchJoinActivity;
 import com.bumptech.glide.Glide;
 import com.aimers.zone.Modals.GameModal;
 import com.aimers.zone.Modals.MatchModal;
 import com.aimers.zone.R;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -55,7 +54,11 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             holder.btnJoin.setVisibility(View.VISIBLE);
             holder.btnYT.setVisibility(View.GONE);
             holder.txtCompleted.setVisibility(View.GONE);
-            holder.btnJoin.setOnClickListener(this);
+            holder.btnJoin.setOnClickListener(v -> {
+                Log.e(TAG, "onClick: "+matches.get(position).getMatch_id() );
+                bottomSheetDialogFragment = new MatchJoinActivity(context,matches.get(position));
+                bottomSheetDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+            });
         }
         else if (match.getPos() == 0){
             holder.tableRow.setVisibility(View.VISIBLE);
@@ -70,7 +73,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             holder.btnYT.setVisibility(View.GONE);
             holder.txtCompleted.setVisibility(View.VISIBLE);
         }
-        Log.d(TAG, "onBindViewHolder: "+matches.size());
+        Log.d(TAG, "onBindViewHolder: "+match.getMatch_id());
         holder.txtTime.setText(String.format("Time :%s at %s", match.getMatch_date(), match.getMatch_time()));
         holder.progressBar.setMax(Integer.parseInt(match.getTotal_slot()));
         holder.progressBar.setProgress(Integer.parseInt(match.getAlloted_slot()));
@@ -107,8 +110,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
 
                 break;
             case R.id.btn_join:
-                 bottomSheetDialogFragment = new MatchJoinActivity(context,match);
-                bottomSheetDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+
 //                if(mBottomSheetBehavior1.getState() != BottomSheetBehavior.STATE_EXPANDED) {
 //                    mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_EXPANDED);
 //                    mButton1.setText("close");

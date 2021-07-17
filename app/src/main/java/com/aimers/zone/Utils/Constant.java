@@ -11,6 +11,7 @@ public class Constant {
     public static final String MATCH_URL = BASE_URL+"/ptz/api/matches.php";
     public static final String MATCH_JOIN_URL = BASE_URL+"/ptz/api/join-match.php";
     public static final String PAYMENT_INIT = BASE_URL+"/ptz/api/paytm/initiate-payment.php";
+    public static final String NOTIFICATION_URL = BASE_URL+"/ptz/api/notification/notification.php";
     public static final String WALLET_URL = BASE_URL+"/ptz/api/initiate-wallet.php";
 
     //application type

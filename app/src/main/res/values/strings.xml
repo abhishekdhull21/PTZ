@@ -36,4 +36,8 @@
     <string name="winning">Winning</string>
     <string name="bonus">Bonus</string>
     <string name="deposited">Deposited</string>
+    <string name="enter_correct_game_username">enter correct game username</string>
+    <string name="game_username_for_prize_distribution">Game username (for prize distribution)</string>
+    <string name="string_done">Done</string>
+    <string name="failed">Failed…</string>
 </resources>

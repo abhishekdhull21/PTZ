@@ -42,8 +42,6 @@ public class MatchViewFragment extends Fragment {
     private RequestQueue queue;
     private RecyclerView recyclerView;
     private final ArrayList <MatchModal> match = new ArrayList<>();
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static  GameModal game;
     private final int pos;
 
@@ -52,14 +50,7 @@ public class MatchViewFragment extends Fragment {
        this.pos = pos;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
 
-     * @return A new instance of fragment MatchVirewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MatchViewFragment newInstance(GameModal param1, int pos) {
         return new MatchViewFragment(param1,pos);
     }
@@ -95,8 +86,9 @@ public class MatchViewFragment extends Fragment {
 //                                Log.d("TAGa", "onResponse: "+response);
 //                                String img_url = response.getString("img_url");
                                 JSONArray data = response.getJSONArray("data");
-                                Log.d(TAG, "onResponse: "+ data.getString(0));
+
                                 for (int i=0;i<data.length();i++) {
+                                    Log.d(TAG, "onResponse: "+ data.getString(i));
                                     JSONObject object = data.getJSONObject(i);
                                     match.add(new MatchModal(pos,
                                             object.getString("match_id"),

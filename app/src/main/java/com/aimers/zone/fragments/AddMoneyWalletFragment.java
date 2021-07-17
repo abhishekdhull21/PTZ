@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.MainActivity;
 import com.aimers.zone.R;
+import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
+import com.aimers.zone.Utils.Utils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,17 +45,9 @@ import java.util.Random;
 import static com.aimers.zone.Utils.Constant.PAYMENT_INIT;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddMoneyWalletFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddMoneyWalletFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private String orderId = "order_from_app";
     private final String MID ="VCWQWH26061118544596";
@@ -68,31 +63,12 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1
-     * @return A new instance of fragment AddMoneyWalletFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AddMoneyWalletFragment newInstance(String param1) {
-        AddMoneyWalletFragment fragment = new AddMoneyWalletFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
+
+        return new AddMoneyWalletFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // TODO: Rename and change types of parameters
-            String mParam1 = getArguments().getString(ARG_PARAM1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,11 +96,9 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.btnPay50:
                 trans("50");
-
                 break;
             case R.id.btnPay100:
                 trans("100");
-
                 break;
         }
     }
@@ -139,40 +113,61 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
         trans.put("order_id",orderIdString);
         trans.put("amount",txnAmountString);
         trans.put("MID",midString);
-
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,PAYMENT_INIT,new JSONObject(trans),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.getBoolean("success")){
-
+        NetworkRequest request = new NetworkRequest(requireActivity());
+        request.sendRequest(trans, PAYMENT_INIT, new RedeemRequestResponse() {
+            @Override
+            public void onSuccessResponse(JSONObject response) throws JSONException {
+                if (response.getBoolean("success")){
                                 JSONObject data = response.getJSONObject("data");
                                 startPaytmPayment(data.getString("txnToken"),data.getString("callback"));
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
                         Log.d("TAG", "onResponse: "+response);
                         Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
-                    }
+            }
 
-                }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.d(TAG, "onErrorResponse: "+error );
-                if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+            public void onErrorResponse(JSONObject response) {
+                Log.d("TAG", "onResponse: "+response);
+                Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+//        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,PAYMENT_INIT,new JSONObject(trans),
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            if (response.getBoolean("success")){
+//
+//                                JSONObject data = response.getJSONObject("data");
+//                                startPaytmPayment(data.getString("txnToken"),data.getString("callback"));
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        Log.d("TAG", "onResponse: "+response);
+//                        Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
+//                        progressDialog.dismiss();
+//                    }
+//
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//                Log.d(TAG, "onErrorResponse: "+error );
+//                if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
+//                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+//                else
+//                    Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+//                progressDialog.dismiss();
+//            }
+//        });
+//
+//        // Add the request to the RequestQueue.
+//        queue.add(stringRequest);
     }
 
     public String generateOrderId() {
@@ -191,9 +186,8 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
         String host = "https://securegw-stage.paytm.in/";
         // for production mode use it
 //        String host = "https://securegw.paytm.in/";
-        String orderDetails = "MID: " + trans.get("MID") + ", OrderId: " + trans.get("order_id") + ", TxnToken: " + token
-                + ", Amount: " + trans.get("amount");
-        //Log.e(TAG, "order details "+ orderDetails);
+//        String orderDetails = "MID: " + trans.get("MID") + ", OrderId: " + trans.get("order_id") + ", TxnToken: " + token+ ", Amount: " + trans.get("amount");
+//        Log.e(TAG, "order details "+ orderDetails);
 
 //        String callBackUrl = host + "theia/paytmCallback?ORDER_ID="+orderIdString;
 //        Log.e(TAG, " callback URL "+callBack);

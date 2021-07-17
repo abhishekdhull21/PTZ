@@ -173,33 +173,63 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/txt_loading_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_24dp"
+            android:cursorVisible="true"
+            android:text="wait for server"
+            android:textAlignment="gravity"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/game_username_for_prize_distribution"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:background="@drawable/border_edittext"
+            android:backgroundTint="@color/colorBackground"
+            android:ems="10"
+            android:hint="@string/enter_correct_game_username"
+            android:inputType="textPersonName"
+            android:padding="@dimen/dimen_8dp" />
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_12dp"
             android:backgroundTint="#FFFFFF"
-            android:padding="@dimen/dimen_8dp"
             android:text="@string/enter_your_game_id"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/txtUserGameID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_12dp"
+            android:layout_marginTop="0sp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
             android:autofillHints=""
             android:background="@drawable/border_edittext"
             android:backgroundTint="@color/colorBackground"
             android:ems="10"
             android:hint="@string/make_sure_it_s_correct"
             android:inputType="textPersonName"
-            android:padding="@dimen/dimen_18sp"
+            android:padding="@dimen/dimen_8dp"
             android:pointerIcon="cell"
             android:soundEffectsEnabled="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:typeface="sans" />
 
         <Button

@@ -16,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.aimers.zone.Interface.RedeemRequestResponse;
+import com.aimers.zone.Modals.Notification;
 import com.aimers.zone.Modals.UserBio;
 import com.aimers.zone.Modals.Wallet;
+import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.fragments.GameFragment;
@@ -37,13 +40,17 @@ import com.onesignal.OneSignal;
 import com.rahman.dialog.Activity.SmartDialog;
 import com.rahman.dialog.Utilities.SmartDialogBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.aimers.zone.Utils.Constant.NOTIFICATION_URL;
 import static com.aimers.zone.Utils.Constant.WALLET_URL;
 import static com.aimers.zone.Utils.Utils.alert;
 import static com.aimers.zone.Utils.Utils.saveTokenLocal;
@@ -63,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     private HashMap<String, String> params;
     private RequestQueue queue;
     private ProgressDialog progressBar;
+    public static ArrayList<Notification> notifications;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         loadData();
+//        loadNotification();
         navigation.setOnItemSelectedListener(this);
         fab.setOnClickListener(this);
 
@@ -114,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View view = getSupportActionBar().getCustomView();
-        assert actionBar != null;
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
 //        view.setBackgroundColor(getColor(R.color.colorPrimary));
 //        view.setPadding(0,0,0,0);
@@ -127,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
     }
+
+
 
 
     @Override
