@@ -40,4 +40,5 @@
     <string name="game_username_for_prize_distribution">Game username (for prize distribution)</string>
     <string name="string_done">Done</string>
     <string name="failed">Failed…</string>
+    <string name="joind_true">Joined Successfully</string>
 </resources>

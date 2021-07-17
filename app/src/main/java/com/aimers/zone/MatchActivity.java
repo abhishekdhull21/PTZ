@@ -18,11 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import org.jetbrains.annotations.NotNull;
 
 public class MatchActivity extends AppCompatActivity {
-//    final Fragment fragment1 = new GameFragment();
-//    final Fragment fragment2 = new MatchViewFragment();
-//    final Fragment fragment3 = new MyZoneFragment();
-//    final FragmentManager fm = getSupportFragmentManager();
-//    Fragment active = fragment1;
+
     ViewPager2 viewPager;
     private static final int NUM_PAGES = 3;
     private final String[] titles = new String[]{"ONGOING", "UPCOMING","RESULT"};

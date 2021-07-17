@@ -3,6 +3,7 @@ package com.aimers.zone.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.aimers.zone.WalletActivity;
 import com.aimers.zone.databinding.FragmentMyZoneBinding;
 
 import static com.aimers.zone.Modals.UserBio.*;
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
 public class MyZoneFragment extends Fragment implements View.OnClickListener, UsersFromServer {
@@ -46,6 +48,15 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         UserFromServer(requireActivity(),this);
 //            new MyTask(requireActivity()).loadInBackground();
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            setProfileName();
+        }
+    }
+
     @Override
     public void onClick(View v) {
         Intent i =null;
@@ -73,7 +84,7 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         binding.txtMatchPlayedCount.setText(user.getMatch_played());
     }
 
-    private static class MyTask extends AsyncTaskLoader<String>{
+/*    private static class MyTask extends AsyncTaskLoader<String>{
 
         public MyTask(@NonNull Context context) {
             super(context);
@@ -86,5 +97,5 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
 //                Log.d("TAG", "loadInBackground: "+user.getName());
             return null;
         }
-    }
+    }*/
 }

@@ -10,12 +10,16 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.aimers.zone.Interface.WalletFetchResponse;
 import com.aimers.zone.fragments.AddMoneyWalletFragment;
 import com.aimers.zone.fragments.RedeemFragment;
 import com.aimers.zone.fragments.RedeemMoneyWalletFragment;
 import com.aimers.zone.fragments.TransactionWalletFragment;
+import com.aimers.zone.wallet.Wallet;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.rahman.dialog.Activity.SmartDialog;
+import com.rahman.dialog.Utilities.SmartDialogBuilder;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +27,7 @@ import static com.aimers.zone.Modals.Wallet.*;
 
 public class WalletActivity extends AppCompatActivity {
     ViewPager2 viewPager;
+
     private static final int NUM_PAGES = 3;
     private final String[] titles = new String[]{"ADD MONEY", "REDEEM MONEY","TRANSACTION"};
     @Override
@@ -35,7 +40,19 @@ public class WalletActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.wallet_view_pager);
         viewPager.setAdapter(pagerAdapter);
         TextView txtTotalCoin = findViewById(R.id.txtTotleCoin);
-        txtTotalCoin.setText(wallet.getCoins());
+        Wallet.fetch(WalletActivity.this, status -> {
+            if (status){
+                txtTotalCoin.setText(wallet.getCoins());
+            }
+            else{
+                SmartDialog mDialog = new SmartDialogBuilder(WalletActivity.this)
+                        .setTitle("Error")
+                        .setSubTitle("Something Going Wrong Please try after restart the app")
+                        .setCancalable(false)
+                        .build();
+            }
+        });
+
         TabLayout tabLayout = null;
         tabLayout = findViewById(R.id.wallet_tabs);
 

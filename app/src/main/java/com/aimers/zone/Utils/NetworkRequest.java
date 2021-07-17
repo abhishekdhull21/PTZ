@@ -37,14 +37,12 @@ public class NetworkRequest {
 
          
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,url,new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            redeemRequestResponse.onSuccessResponse(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    try {
+                        redeemRequestResponse.onSuccessResponse(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 //                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 //                        try {
 //                            if (response.getBoolean("success")){
@@ -68,9 +66,6 @@ public class NetworkRequest {
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
 //                        }
-
-                    }
-
 
                 }, new Response.ErrorListener() {
             @Override

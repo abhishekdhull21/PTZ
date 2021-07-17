@@ -1,9 +1,6 @@
 package com.aimers.zone.fragments;
 
-import androidx.annotation.Nullable;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,31 +9,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.MatchModal;
-import com.aimers.zone.MyMatchActivity;
 import com.aimers.zone.R;
 import com.aimers.zone.R.color;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.tapadoo.alerter.Alerter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 
 import static com.aimers.zone.Utils.Constant.MATCH_JOIN_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
@@ -69,19 +57,11 @@ final MatchModal match;
 
             joinMatchRequest();
         });
-//        binding = ActivityMatchJoinBinding.inflate(getLayoutInflater());
-//        View v = binding.getRoot();
-//        setContentView(v);
-//        match = (MatchModal) getIntent().getSerializableExtra("match");
-//        v.findViewById(R.id.).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                joinMatchRequest();
-//            }
-//        });
+
         return v;
     }
     public void joinMatchRequest( ){
+        btnJoin.setEnabled(false);
         txt_loading_status.setVisibility(View.VISIBLE);
         String token = User.userToken(context);
         Map<String,String> params = new HashMap<>();
@@ -106,14 +86,15 @@ final MatchModal match;
             public void onSuccessResponse(JSONObject response) throws JSONException {
                 Log.e(TAG, "onSuccessResponse: "+response );
                 if (response.getBoolean("success")){
-                                JSONObject object = response.getJSONObject("data");
+                             /*   JSONObject object = response.getJSONObject("data");
 //                                Alerter.create(requireActivity())
 //                                        .setTitle("Congrats")
 //                                        .setBackgroundColorRes(R.color.colorBackgroundSuccess)
 //                                        .setText("Join Match Successfully...")
 //                                        .show();
+*/
 
-                    txt_loading_status.setText("Joined Successfully");
+                    txt_loading_status.setText(R.string.joind_true);
                     txt_loading_status.setTextColor(getResources().getColor(R.color.colorBackgroundSuccess));
 
 //                    startActivity(new Intent(requireActivity(), MyMatchActivity.class));

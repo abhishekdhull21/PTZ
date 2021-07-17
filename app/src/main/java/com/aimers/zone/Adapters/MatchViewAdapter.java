@@ -55,9 +55,13 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             holder.btnYT.setVisibility(View.GONE);
             holder.txtCompleted.setVisibility(View.GONE);
             holder.btnJoin.setOnClickListener(v -> {
-                Log.e(TAG, "onClick: "+matches.get(position).getMatch_id() );
+//                Log.e(TAG, "onClick: "+matches.get(position).getMatch_id() );
                 bottomSheetDialogFragment = new MatchJoinActivity(context,matches.get(position));
                 bottomSheetDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+//                bottomSheetDialogFragment.onDismiss();
+
+
+
             });
         }
         else if (match.getPos() == 0){

@@ -15,17 +15,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.Notification;
 import com.aimers.zone.Modals.UserBio;
-import com.aimers.zone.Modals.Wallet;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.fragments.GameFragment;
 import com.aimers.zone.fragments.LoginFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
+import com.aimers.zone.wallet.Wallet;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -40,17 +40,14 @@ import com.onesignal.OneSignal;
 import com.rahman.dialog.Activity.SmartDialog;
 import com.rahman.dialog.Utilities.SmartDialogBuilder;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.aimers.zone.Utils.Constant.NOTIFICATION_URL;
 import static com.aimers.zone.Utils.Constant.WALLET_URL;
 import static com.aimers.zone.Utils.Utils.alert;
 import static com.aimers.zone.Utils.Utils.saveTokenLocal;
@@ -101,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 .build();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        loadData();
+        Wallet.fetch(MainActivity.this,status -> {
+
+        });
 //        loadNotification();
         navigation.setOnItemSelectedListener(this);
         fab.setOnClickListener(this);
@@ -153,12 +152,15 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 active = fragment2;
                 return true;
             case R.id.myzone_menu_item:
+//                fragment3 = new MyZoneFragment();
                 fm.beginTransaction().hide(active).show(fragment3).commit();
+//                replaceFragment(new MyZoneFragment());
                 active = fragment3;
                 return true;
         }
         return false;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -172,55 +174,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         }
     }
 
-    public void loadData() {
-        progressBar.setMessage("getting to serve");
-        progressBar.setTitle("Wait for second");
-        progressBar.setCancelable(false);
-        progressBar.show();
-//        progressBar.
-        String token = User.userToken(this);
-        Map<String, String> params = new HashMap<>();
-        params.put("token", token);
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, WALLET_URL, new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.getBoolean("success")) {
-                                JSONObject object = response.getJSONObject("data");
-                                Wallet.wallet.setCoins(object.getString("coins"));
-                                Wallet.wallet.setUser_id(object.getString("user_id"));
-                                Wallet.wallet.setId(object.getString("id"));
-                            } else {
-                                alert("error",response.getString("error"),MainActivity.this,false);
-//                                Toast.makeText(MainActivity.this, "" + response.getString("error"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        progressBar.dismiss();
-                    }
 
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.d(TAG, " main  onErrorResponse: " + error.getLocalizedMessage());
-                if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty())
-                    alert("error","error occurred: try after sometime",MainActivity.this,false);
-//                    Toast.makeText(MainActivity.this, "" + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                else
-                    alert("error",""+error.getLocalizedMessage(),MainActivity.this,false);
-
-//                Toast.makeText(MainActivity.this, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
-                progressBar.dismiss();
-            }
-
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-    }
 
 }
