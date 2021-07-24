@@ -41,4 +41,11 @@
     <string name="string_done">Done</string>
     <string name="failed">Failed…</string>
     <string name="joind_true">Joined Successfully</string>
+    <string name="view_more">View More</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="e_mail">E-mail</string>
+    <string name="aimerszone29_gmail_com">aimerszone29@gmail.com</string>
+    <string name="submit_query">Submit Query</string>
+    <string name="enter_your_query">Enter Your Query</string>
+    <string name="submit">Submit</string>
 </resources>

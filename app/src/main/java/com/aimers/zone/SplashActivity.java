@@ -26,14 +26,8 @@ public class SplashActivity extends AppCompatActivity {
             i = new Intent(SplashActivity.this, MainActivity.class);
             UserInfo userInfo = new UserInfo(sharedPreferences.getString("token", null));
             i.putExtra("token", userInfo);
-            iSLogin = true;
-        }
+            iSLogin = true;        }
         new Thread(new Wait(this, i, iSLogin)).start();
-
-
-//         close splash activity
-
-
     }
 
     public void finishActivity() {
@@ -41,12 +35,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private class Wait implements Runnable {
-        private final Context context;
         private final Intent i;
         private final boolean iSLogin;
 
         Wait(Context context, Intent i, boolean iSLogin) {
-            this.context = context;
             this.i = i;
             this.iSLogin = iSLogin;
         }
@@ -54,7 +46,6 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void run() {
             if (iSLogin) {
-                RequestQueue queue = Volley.newRequestQueue(context);
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {

@@ -4,7 +4,7 @@
     package="com.aimers.zone">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,13 +16,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-<!--        <activity android:name=".MyMatchActivity"></activity>-->
-<!--        <activity-->
-<!--            android:name=".MatchJoinActivity"-->
-<!--            android:label="@string/title_activity_match_join"></activity>-->
-        <activity android:name=".PayActivityTest" />
+        <activity android:name=".SupportActivity"></activity>
+        <activity
+            android:name=".MatchResultActivity"
+            android:screenOrientation="portrait" /> <!-- <activity android:name=".MyMatchActivity"></activity> -->
+        <!-- <activity -->
+        <!-- android:name=".MatchJoinActivity" -->
+        <!-- android:label="@string/title_activity_match_join"></activity> -->
+        <activity
+            android:name=".PayActivityTest"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,13 +36,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotificationShowActivity" />
-        <activity android:name=".MatchActivity" />
-        <activity android:name=".NotificationActivity" />
-        <activity android:name=".WalletActivity" />
-        <activity android:name=".SignActivity" />
+        <activity
+            android:name=".NotificationShowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MatchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/CustomTheme" />
     </application>
 

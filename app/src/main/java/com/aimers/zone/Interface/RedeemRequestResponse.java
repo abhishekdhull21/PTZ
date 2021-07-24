@@ -5,5 +5,5 @@ import org.json.JSONObject;
 
 public interface RedeemRequestResponse {
    void onSuccessResponse(JSONObject response) throws JSONException;
-   void onErrorResponse(JSONObject response);
+   void onErrorResponse(JSONObject response) throws JSONException;
 }

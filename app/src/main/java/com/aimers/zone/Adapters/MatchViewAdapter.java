@@ -1,12 +1,15 @@
 package com.aimers.zone.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -15,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aimers.zone.MatchResultActivity;
 import com.aimers.zone.fragments.MatchJoinActivity;
 import com.bumptech.glide.Glide;
 import com.aimers.zone.Modals.GameModal;
@@ -24,19 +28,30 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
+import static com.aimers.zone.MainActivity.*;
+import static com.aimers.zone.Utils.Constant.YT_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.ViewHolder> implements View.OnClickListener {
-    final ArrayList<MatchModal> matches ;
-    final GameModal game;
-    MatchModal match;
-    private final Context context;
+    private ArrayList<MatchModal> matches ;
+    private GameModal game;
+    private MatchModal match;
+    private  Context context;
     BottomSheetDialogFragment bottomSheetDialogFragment;
+
     public MatchViewAdapter(Context context,ArrayList<MatchModal> match, GameModal game) {
         this.matches = match;
         this.game = game;
         this.context = context;
     }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        Log.e(TAG, "onViewDetachedFromWindow: " );
+    }
+
+
 
     @NonNull
     @Override
@@ -49,34 +64,52 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         match = matches.get(position);
         Button mButton1 = holder.btnJoin;
-        if(match.getPos() == 1){
-            holder.tableRow.setVisibility(View.VISIBLE);
+        if (jMatch !=null)
+        Log.e(TAG, "get match id: "+ jMatch.getMatchId().get(0));
+
+        if(match.getPos() == 1) {
+            holder.layout_slots.setVisibility(View.VISIBLE);
             holder.btnJoin.setVisibility(View.VISIBLE);
             holder.btnYT.setVisibility(View.GONE);
-            holder.txtCompleted.setVisibility(View.GONE);
-            holder.btnJoin.setOnClickListener(v -> {
-//                Log.e(TAG, "onClick: "+matches.get(position).getMatch_id() );
-                bottomSheetDialogFragment = new MatchJoinActivity(context,matches.get(position));
-                bottomSheetDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-//                bottomSheetDialogFragment.onDismiss();
+            holder.btnCompleted.setVisibility(View.GONE);
+            if (jMatch.getMatchId().contains(match.getMatch_id())) {
+                        mButton1.setText(R.string.view_more);
+                        mButton1.setOnClickListener(v -> {
+                            Intent i  =new Intent(context, MatchResultActivity.class);
+                        i.putExtra("match",match);
+                            context.startActivity(i);
+                        });
 
+            } else {
 
+                holder.btnJoin.setOnClickListener(v -> {
+                    bottomSheetDialogFragment = new MatchJoinActivity(context, matches.get(position));
+                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
 
-            });
+                });
+            }
         }
-        else if (match.getPos() == 0){
-            holder.tableRow.setVisibility(View.VISIBLE);
+        else{                                               //(match.getPos() == 0)
+            holder.layout_slots.setVisibility(View.GONE);
             holder.btnJoin.setVisibility(View.GONE);
             holder.btnYT.setVisibility(View.VISIBLE);
-            holder.txtCompleted.setVisibility(View.GONE);
-            holder.btnYT.setOnClickListener(this);
+            holder.btnCompleted.setVisibility(View.VISIBLE);
+            holder.btnYT.setOnClickListener(v->{
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(YT_URL));
+                context.startActivity(intent);
+            });
+            holder.btnCompleted.setOnClickListener(v -> {
+                Intent i  =new Intent(context, MatchResultActivity.class);
+                i.putExtra("match",match);
+                context.startActivity(i);
+            });
         }
-        else if(match.getPos() ==2){
-            holder.tableRow.setVisibility(View.GONE);
-            holder.btnJoin.setVisibility(View.GONE);
-            holder.btnYT.setVisibility(View.GONE);
-            holder.txtCompleted.setVisibility(View.VISIBLE);
-        }
+//        else if(match.getPos() ==2){
+//            holder.btnJoin.setVisibility(View.GONE);
+//            holder.btnYT.setVisibility(View.GONE);
+//            holder.txtCompleted.setVisibility(View.VISIBLE);
+//        }
         Log.d(TAG, "onBindViewHolder: "+match.getMatch_id());
         holder.txtTime.setText(String.format("Time :%s at %s", match.getMatch_date(), match.getMatch_time()));
         holder.progressBar.setMax(Integer.parseInt(match.getTotal_slot()));
@@ -90,7 +123,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         holder.txtPerKill.setText(match.getPer_kill());
         holder.txtPrize.setText(match.getPrize_pool());
         //game title
-        holder.txtGameName.setText(game.getTitle());
+        holder.txtGameName.setText(String.format("%s %s", game.getTitle(), match.getMatch_id()));
 //        View btmSheet = bottomSheetDialogFragment.getView(R.layout.activity_match_join);
 //        Button btn = btmSheet.findViewById(R.id.join_req_btn);
 //        Log.d(TAG, "onBindViewHolder: "+btn);
@@ -145,13 +178,13 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         public final TextView txtSlot;
         public final TextView txtRemaining;
         public final TextView txtGameName;
-        public final TextView txtCompleted;
+        public final Button btnCompleted;
         public final ProgressBar progressBar;
         public final ImageView gameImg;
         public final Button btnJoin;
         public final Button btnYT;
         public final Button btnBottomsheetJoin;
-        public final TableRow tableRow;
+        public final LinearLayout layout_slots;
         public final View bottomsheet;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -165,12 +198,12 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             txtRemaining = itemView.findViewById(R.id.txt_remaining_slot);
             txtTime = itemView.findViewById(R.id.txt_time);
             txtGameName = itemView.findViewById(R.id.txt_game_name);
-            txtCompleted = itemView.findViewById(R.id.txtCompleted);
+            btnCompleted = itemView.findViewById(R.id.btnCompleted);
             progressBar = itemView.findViewById(R.id.progressBar_slot);
             btnJoin = itemView.findViewById(R.id.btn_join);
             btnYT = itemView.findViewById(R.id.btn_yt);
             gameImg = itemView.findViewById(R.id.match_game_img);
-            tableRow = itemView.findViewById(R.id.tblRow);
+            layout_slots = itemView.findViewById(R.id.layout_slot_spot);
             bottomsheet = itemView.findViewById(R.id.bottomsheet);
             btnBottomsheetJoin = itemView.findViewById(R.id.join_req_btn);
         }

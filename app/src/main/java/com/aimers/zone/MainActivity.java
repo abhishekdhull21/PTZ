@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.aimers.zone.Interface.RedeemRequestResponse;
+import com.aimers.zone.Modals.JoinedMatch;
 import com.aimers.zone.Modals.Notification;
 import com.aimers.zone.Modals.UserBio;
 import com.aimers.zone.Utils.NetworkRequest;
@@ -25,6 +28,7 @@ import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.fragments.GameFragment;
 import com.aimers.zone.fragments.LoginFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
+import com.aimers.zone.fragments.SupportkFragment;
 import com.aimers.zone.wallet.Wallet;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,6 +44,7 @@ import com.onesignal.OneSignal;
 import com.rahman.dialog.Activity.SmartDialog;
 import com.rahman.dialog.Utilities.SmartDialogBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,6 +53,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.aimers.zone.Utils.Constant.JOINED_MATCH_URL;
 import static com.aimers.zone.Utils.Constant.WALLET_URL;
 import static com.aimers.zone.Utils.Utils.alert;
 import static com.aimers.zone.Utils.Utils.saveTokenLocal;
@@ -55,12 +61,13 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
-    final Fragment fragment1 = new LoginFragment();
+    final Fragment fragment1 = new SupportkFragment();
     final Fragment fragment2 = new GameFragment();
     final Fragment fragment3 = new MyZoneFragment();
-
+    private NetworkRequest request;
     final FragmentManager fm = getSupportFragmentManager();
     public static UserBio user;
+    public static JoinedMatch jMatch;
     private static final String ONESIGNAL_APP_ID ="75715159-da5b-4540-9b57-76bc9916d532" ;
     Fragment active = fragment2;
 
@@ -74,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         customActionbar();
+
+        request = new NetworkRequest(MainActivity.this);
+        fetchJoinedMatch();
         loadFragment();
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
@@ -91,17 +101,18 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             saveTokenLocal(sp, i.getToken());
         }
 //MaterialDialog
+
         SmartDialog mDialog = new SmartDialogBuilder(MainActivity.this)
                 .setTitle("Network State")
                 .setSubTitle("No Internet Connection Live")
                 .setCancalable(false)
                 .build();
-
         BottomNavigationView navigation = findViewById(R.id.navigation);
         Wallet.fetch(MainActivity.this,status -> {
 
         });
 //        loadNotification();
+
         navigation.setOnItemSelectedListener(this);
         fab.setOnClickListener(this);
 
@@ -131,11 +142,39 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     }
 
     public void loadFragment() {
-        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").attach(fragment3).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
     }
 
+    private void fetchJoinedMatch(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",User.userToken(MainActivity.this));
+        ArrayList<String> matches = new ArrayList<>();
+        request.sendRequest(params, JOINED_MATCH_URL, new RedeemRequestResponse() {
+            @Override
+            public void onSuccessResponse(JSONObject response) throws JSONException {
+                if (response.getBoolean("success")) {
+                    JSONArray data = response.getJSONArray("data");
+
+                    for (int i = 0; i < data.length();i++){
+                            Log.e(TAG, "fetchJoin Match"+ data.getString(i));
+                        matches.add(data.getString(i));
+                    }
+                    jMatch = new JoinedMatch(matches);
+                }else{
+                    Log.e(TAG, "fetchJoinedMatch"+response.getString("error"));
+                    matches.add("0");
+                    jMatch = new JoinedMatch(matches);
+                }
+            }
+
+            @Override
+            public void onErrorResponse(JSONObject response) {
+                Log.e(TAG, "onErrorResponse: "+response);
+            }
+        });
+    }
 
 
 
@@ -162,6 +201,13 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     }
 
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchJoinedMatch();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -173,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 break;
         }
     }
+
 
 
 

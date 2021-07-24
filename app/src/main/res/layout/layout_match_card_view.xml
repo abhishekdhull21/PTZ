@@ -258,12 +258,13 @@
                     android:weightSum="10">
 
                     <LinearLayout
+                        android:id="@+id/layout_slot_spot"
                         android:layout_width="@dimen/dimen_0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:orientation="vertical"
                         android:padding="8sp"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:weightSum="8">
 
                         <ProgressBar
@@ -311,24 +312,45 @@
                         android:textColor="#FFFFFF"
                         android:textSize="14sp"
                         app:cornerRadius="@dimen/dimen_10dp"
-                        app:rippleColor="#FFFFFF" />
+                        app:rippleColor="#FFFFFF"
+                        tools:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btnCompleted"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:background="@color/submit_easy_pay"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="View Results"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        tools:visibility="visible" />
 
                     <Button
                         android:id="@+id/btn_yt"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/dimen_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center|center_horizontal|fill_horizontal"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dimen_10dp"
                         android:layout_marginEnd="2sp"
-                        android:layout_weight="2"
+                        android:layout_weight="5"
                         android:background="#F81212"
+                        android:clickable="true"
+                        android:contextClickable="true"
                         android:gravity="center_horizontal|center_vertical"
+                        android:justificationMode="inter_word"
                         android:paddingStart="4sp"
                         android:paddingEnd="4sp"
                         android:text="@string/yt_watch_live"
+                        android:textAlignment="gravity"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:typeface="serif"
-                        tools:visibility="gone" />
+                        tools:visibility="visible" />
                 </TableRow>
 
                 <TableRow
@@ -338,16 +360,6 @@
                     android:paddingTop="8sp"
                     android:weightSum="10">
 
-                    <TextView
-                        android:id="@+id/txtCompleted"
-                        android:layout_width="@dimen/dimen_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:text="@string/completed"
-                        android:textAlignment="center"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:visibility="gone" />
                 </TableRow>
 
             </TableLayout>

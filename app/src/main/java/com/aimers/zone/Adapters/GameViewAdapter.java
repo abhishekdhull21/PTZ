@@ -42,13 +42,10 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
         holder.game_title.setText(game.getTitle());
 //        Log.d(TAG, "onBindViewHolder: "+game.getPic());
         Glide.with(context).load(game.getPic()).into(holder.game_img);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context,MatchActivity.class);
-                i.putExtra("game", game);
-                context.startActivity(i);
-            }
+        holder.cardView.setOnClickListener(v -> {
+            Intent i = new Intent(context,MatchActivity.class);
+            i.putExtra("game", game);
+            context.startActivity(i);
         });
     }
 

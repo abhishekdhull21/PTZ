@@ -172,17 +172,14 @@ public class UserBio {
                     }
 
 
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                }, error -> {
 
-                Log.d(TAG, " userfromserver  onErrorResponse: "+error.getLocalizedMessage() );
-                if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                    Toast.makeText(context, ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(context, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
-            }
-        });
+                    Log.d(TAG, " userfromserver  onErrorResponse: "+error.getLocalizedMessage() );
+                    if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
+                        Toast.makeText(context, ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(context, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+                });
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
