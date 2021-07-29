@@ -1,7 +1,13 @@
 package com.aimers.zone;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,6 +23,10 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
+
 public class MatchActivity extends AppCompatActivity {
 
     ViewPager2 viewPager;
@@ -27,7 +37,7 @@ public class MatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
         GameModal game = (GameModal) getIntent().getSerializableExtra("game");
-        customActionbar();
+        customActionbar("Matches");
         FragmentStateAdapter pagerAdapter = new MyPagerAdapter(this, game);
         viewPager =  findViewById(R.id.match_view_pager);
         viewPager.setAdapter(pagerAdapter);
@@ -45,30 +55,27 @@ public class MatchActivity extends AppCompatActivity {
 
 
     }
-    private void customActionbar() {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Context context;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.custom_menu_backbtn,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void customActionbar(String title){
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar == null) return;
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setDisplayShowCustomEnabled(true);
-
-
-        actionBar.setCustomView(R.layout.custom_actionbar_backbutton);
-
-        View view = actionBar.getCustomView();
-//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-//        view.setBackgroundColor(getColor(R.color.colorPrimary));
-//        view.setPadding(0,0,0,0);
-//        ImageView backBtn = view.findViewById(R.id.back_btn_actionbar );
-//        Log.d(TAG, "customActionbar: "+backBtn);
-/*
-        backBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MatchActivity.super.onBackPressed();
-            }
-        });
-*/
+        if(actionBar == null)return;
+        Log.d(TAG, "customActionbar: "+actionBar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar_backbutton);
+        View view =getSupportActionBar().getCustomView();
+        ImageView backBtn = view.findViewById(R.id.back_btn_actionbar);
+        TextView txt_title = view.findViewById(R.id.txt_action_bar_title);
+        txt_title.setText(title);
+        backBtn.setOnClickListener(v -> MatchActivity.super.onBackPressed());
     }
     private static class MyPagerAdapter extends FragmentStateAdapter {
         final GameModal game;

@@ -6,8 +6,8 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:icon="@drawable/ic_baseline_contact_support_24"
+        android:title="@string/e_support" />
 
     <item
         android:id="@+id/navigation_dashboard"
@@ -16,7 +16,7 @@
     <item
         android:id="@+id/myzone_menu_item"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="My Zone" />
+        android:title="@string/my_zone" />
 
         <!--        <item-->
 <!--            android:id="@+id/navigation_notifications"-->

@@ -1,27 +1,41 @@
 package com.aimers.zone.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.aimers.zone.Interface.RedeemRequestResponse;
+import com.aimers.zone.MainActivity;
 import com.aimers.zone.R;
+import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
+import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.Utils.Utils;
 import com.aimers.zone.databinding.FragmentLoginBinding;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.aimers.zone.Utils.Constant.LOGIN_URL;
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private FragmentLoginBinding binding;
+    NetworkRequest request;
     private static final String ARG_COUNT = "param1";
     private ProgressDialog dialog;
     private User user;
@@ -45,6 +59,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
        binding = FragmentLoginBinding.inflate(getLayoutInflater());
        View v = binding.getRoot();
+       request = new NetworkRequest(getActivity());
        dialog = new ProgressDialog(requireActivity());
        dialog.setCancelable(false);
         binding.btnLogin.setOnClickListener(this);
@@ -56,9 +71,47 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnLogin) {
-            user.login(loginInfo(), dialog);
+            login(loginInfo());
         }
     }
+
+    private void login(Map<String, String> params) {
+        if(params == null) return;
+        Context context =requireActivity();
+        request.sendRequest(params, LOGIN_URL, new RedeemRequestResponse() {
+            @Override
+            public void onSuccessResponse(JSONObject response) throws JSONException {
+                try {
+                    if (response.getBoolean("success")){
+                        Log.d("TAG", "onResponse: "+response);
+                        Intent i = new Intent(context, MainActivity.class);
+                        UserInfo userInfo = new UserInfo(response.getString("token"));
+                        i.putExtra("user", userInfo);
+                        context.startActivity(i);
+                    }
+                    else {
+
+                        Toast.makeText(context, response.getString("error"), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+                Toast.makeText(context, ""+response, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onErrorResponse(JSONObject response) throws JSONException {
+                dialog.dismiss();
+                Log.d(TAG, "onErrorResponse: "+response);
+
+                Toast.makeText(requireActivity(), ""+response.getString("error"), Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
     private Map<String,String> loginInfo(){
         Map<String,String> map = new HashMap<String, String>();
         boolean err = false;

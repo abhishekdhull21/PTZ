@@ -71,7 +71,7 @@
                 android:shadowRadius="8" />
 
             <EditText
-                android:id="@+id/txt_password"
+                android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="14sp"

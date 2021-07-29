@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aimers.zone.Adapters.MyMatchAdapter;
+
+import java.util.Objects;
 
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
@@ -20,7 +24,7 @@ private RecyclerView recyclerView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_match);
-        customActionbar();
+        customActionbar("Match List");
         initViews();
         setAdapter();
 
@@ -35,19 +39,17 @@ private RecyclerView recyclerView;
         recyclerView.setAdapter(new MyMatchAdapter());
     }
 
-    private void customActionbar(){
+    private void customActionbar(String title){
         ActionBar actionBar = getSupportActionBar();
         Log.d(TAG, "customActionbar: "+actionBar);
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setDisplayShowCustomEnabled(true);
-//        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
-//        View view =getSupportActionBar().getCustomView();
-//        assert actionBar != null;
-//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-////        view.setBackgroundColor(getColor(R.color.colorPrimary));
-////        view.setPadding(0,0,0,0);
-//        ImageView notification = view.findViewById(R.id.notification_custom_navbar);
-//        notification.setOnClickListener(this);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_actionbar_backbutton);
+        View view =getSupportActionBar().getCustomView();
+        ImageView backBtn = view.findViewById(R.id.back_btn_actionbar);
+        TextView txt_title = view.findViewById(R.id.txt_action_bar_title);
+        txt_title.setText(title);
+        backBtn.setOnClickListener(v -> MyMatchActivity.super.onBackPressed());
     }
 
     @Override

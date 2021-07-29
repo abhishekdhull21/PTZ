@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.JoinedMatch;
@@ -26,15 +24,10 @@ import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.fragments.GameFragment;
-import com.aimers.zone.fragments.LoginFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
 import com.aimers.zone.fragments.SupportkFragment;
 import com.aimers.zone.wallet.Wallet;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.androidstudy.networkmanager.Tovuti;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -50,12 +43,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 import static com.aimers.zone.Utils.Constant.JOINED_MATCH_URL;
-import static com.aimers.zone.Utils.Constant.WALLET_URL;
-import static com.aimers.zone.Utils.Utils.alert;
 import static com.aimers.zone.Utils.Utils.saveTokenLocal;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
@@ -130,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     private void customActionbar() {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar == null)return;
+        Log.e(TAG, "customActionbar: main activity" );
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
@@ -176,8 +167,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         });
     }
 
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -200,8 +189,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         return false;
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -219,8 +206,5 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 break;
         }
     }
-
-
-
 
 }

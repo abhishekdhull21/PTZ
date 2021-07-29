@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.aimers.zone.PayActivityTest;
+import com.aimers.zone.SignActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -125,7 +125,7 @@ public class User {
     }
     public  static void logout(Context context){
         Utils.removeTokenLocal(context.getSharedPreferences("token",Context.MODE_PRIVATE));
-        context.startActivity(new Intent(context, PayActivityTest.class));
+        context.startActivity(new Intent(context, SignActivity.class));
     }
 
 }

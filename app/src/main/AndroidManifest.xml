@@ -16,16 +16,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".MatchJoinActivity"></activity>
+        <activity android:name=".SupportActivity" />
         <activity
             android:name=".MatchResultActivity"
             android:screenOrientation="portrait" /> <!-- <activity android:name=".MyMatchActivity"></activity> -->
         <!-- <activity -->
         <!-- android:name=".MatchJoinActivity" -->
         <!-- android:label="@string/title_activity_match_join"></activity> -->
-        <activity
-            android:name=".PayActivityTest"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -55,6 +53,10 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

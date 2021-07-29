@@ -2,16 +2,20 @@ package com.aimers.zone.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
+import com.aimers.zone.MyMatchActivity;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
@@ -21,9 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import static com.aimers.zone.Utils.Constant.TEST_URL;
 import static com.aimers.zone.Utils.Utils.*;
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class SupportkFragment extends Fragment {
     private Button btnSubmit;
@@ -54,6 +60,7 @@ public class SupportkFragment extends Fragment {
         });
         return v;
     }
+
     public void  sendRequest(){
         String query = txtQuery.getText().toString();
         HashMap<String, String> params = new HashMap<>();

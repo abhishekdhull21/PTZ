@@ -11,24 +11,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aimers.zone.MatchResultActivity;
-import com.aimers.zone.fragments.MatchJoinActivity;
-import com.bumptech.glide.Glide;
 import com.aimers.zone.Modals.GameModal;
 import com.aimers.zone.Modals.MatchModal;
 import com.aimers.zone.R;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.aimers.zone.MatchJoinActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import static com.aimers.zone.MainActivity.*;
+import static com.aimers.zone.MainActivity.jMatch;
 import static com.aimers.zone.Utils.Constant.YT_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
@@ -37,7 +34,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
     private GameModal game;
     private MatchModal match;
     private  Context context;
-    BottomSheetDialogFragment bottomSheetDialogFragment;
+//    BottomSheetDialogFragment bottomSheetDialogFragment;
 
     public MatchViewAdapter(Context context,ArrayList<MatchModal> match, GameModal game) {
         this.matches = match;
@@ -83,8 +80,11 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             } else {
 
                 holder.btnJoin.setOnClickListener(v -> {
-                    bottomSheetDialogFragment = new MatchJoinActivity(context, matches.get(position));
-                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+                    Intent i  = new Intent(context,MatchJoinActivity.class);
+                    i.putExtra("match",match);
+                    context.startActivity(i);
+//                    bottomSheetDialogFragment = new MatchJoinActivity(context, matches.get(position));
+//                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
 
                 });
             }
