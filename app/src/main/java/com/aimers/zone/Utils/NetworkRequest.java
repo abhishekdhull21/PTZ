@@ -34,8 +34,6 @@ public class NetworkRequest {
         queue = Volley.newRequestQueue(context);
     }
     public void sendRequest(Map<String, String> params, String url, RedeemRequestResponse redeemRequestResponse){
-
-         
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,url,new JSONObject(params),
                 response -> {
                     try {
@@ -43,43 +41,14 @@ public class NetworkRequest {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-//                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-//                        try {
-//                            if (response.getBoolean("success")){
-//                                JSONObject object = response.getJSONObject("data");
-//                                Alerter.create(context)
-//                                        .setTitle("Congrats")
-//                                        .setBackgroundColorRes(R.color.colorBackgroundSuccess)
-//                                        .setText("Join Match Successfully...")
-//                                        .show();
-//                                //startActivity(new Intent(context, MyMatchActivity.class));
-//                            }else{
-//
-//
-//                                Toast.makeText(context, ""+response.getString("error"), Toast.LENGTH_SHORT).show();
-//                                Alerter.create(context)
-//                                        .setTitle("Unluckily, failed")
-//                                        .setBackgroundColorRes(R.color.colorBackgroundError)
-//                                        .setText(response.getString("error"))
-//                                        .show();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
+                }, error -> {
 
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.d(TAG, " userfromserver  onErrorResponse: "+error.getLocalizedMessage() );
-                if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                    Toast.makeText(context, ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(context, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // Add the request to the RequestQueue.
+                    Log.d(TAG, " userfromserver  onErrorResponse: "+error.getLocalizedMessage() );
+                    if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
+                        Toast.makeText(context, ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(context, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+                });
         queue.add(stringRequest);
     }
 }

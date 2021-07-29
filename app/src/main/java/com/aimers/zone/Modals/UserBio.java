@@ -139,38 +139,33 @@ public class UserBio {
        Map<String,String> params = new HashMap<>();
         params.put("token",token);
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,GET_USER_INFO,new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.getBoolean("success")){
-                                JSONObject object = response.getJSONObject("data");
-                                String[] name = object.getString("name").split(" ",1);
+                response -> {
+                    try {
+                        if (response.getBoolean("success")){
+                            JSONObject object = response.getJSONObject("data");
+                            String[] name = object.getString("name").split(" ",1);
 
-                                user.setUid( object.getString("uid"));
-                                 user.setName(name[0]);
-                                 user.setMobile(object.getString("mobile"));
-                                if(name.length >1)
-                                    user.setLastName(name[1]);
-                                user.setAddress(object.getString("address"));
-                                user.setEmail(object.getString("email"));
-                                user.setGender(object.getString("gender"));
-                                user.setDob(object.getString("dob"));
-                                user.setCoins(object.getString("coins"));
-                                user.setKills(object.getString("kills"));
-                                user.setMatch_played(object.getString("match_played"));
-                                fromServer.SetProfileUser();
-                                Log.d("TAG", "onResponse Userbio: "+response);
-                            }else{
+                            user.setUid( object.getString("uid"));
+                             user.setName(name[0]);
+                             user.setMobile(object.getString("mobile"));
+                            if(name.length >1)
+                                user.setLastName(name[1]);
+                            user.setAddress(object.getString("address"));
+                            user.setEmail(object.getString("email"));
+                            user.setGender(object.getString("gender"));
+                            user.setDob(object.getString("dob"));
+                            user.setCoins(object.getString("coins"));
+                            user.setKills(object.getString("kills"));
+                            user.setMatch_played(object.getString("match_played"));
+                            fromServer.SetProfileUser();
+                            Log.d("TAG", "onResponse Userbio: "+response);
+                        }else{
 
-                                Toast.makeText(context, ""+response.getString("error"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(context, ""+response.getString("error"), Toast.LENGTH_SHORT).show();
                         }
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
 
                 }, error -> {
 
@@ -180,8 +175,6 @@ public class UserBio {
                     else
                         Toast.makeText(context, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
                 });
-
-        // Add the request to the RequestQueue.
         queue.add(stringRequest);
         return true;
     }

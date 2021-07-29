@@ -73,7 +73,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
                         mButton1.setText(R.string.view_more);
                         mButton1.setOnClickListener(v -> {
                             Intent i  =new Intent(context, MatchResultActivity.class);
-                        i.putExtra("match",match);
+                            i.putExtra("match",match);
                             context.startActivity(i);
                         });
 

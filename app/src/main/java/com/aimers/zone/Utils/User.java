@@ -85,29 +85,24 @@ public class User {
         dialog.setMessage(" login proceeding...");
         dialog.show();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,LOGIN_URL,new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.getBoolean("success")){
-                                Log.d("TAG", "onResponse: "+response);
-                                Intent i = new Intent(context, MainActivity.class);
-                                UserInfo userInfo = new UserInfo(response.getString("token"));
-                                i.putExtra("user", userInfo);
-                                context.startActivity(i);
-                            }
-                            else {
-
-                                Toast.makeText(context, response.getString("error"), Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                response -> {
+                    try {
+                        if (response.getBoolean("success")){
+                            Log.d("TAG", "onResponse: "+response);
+                            Intent i = new Intent(context, MainActivity.class);
+                            UserInfo userInfo = new UserInfo(response.getString("token"));
+                            i.putExtra("user", userInfo);
+                            context.startActivity(i);
                         }
-                        dialog.dismiss();
-                        Toast.makeText(context, ""+response, Toast.LENGTH_SHORT).show();
+                        else {
+
+                            Toast.makeText(context, response.getString("error"), Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-
+                    dialog.dismiss();
+                    Toast.makeText(context, ""+response, Toast.LENGTH_SHORT).show();
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

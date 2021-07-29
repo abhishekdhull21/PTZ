@@ -126,8 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View view = getSupportActionBar().getCustomView();
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-//        view.setBackgroundColor(getColor(R.color.colorPrimary));
-//        view.setPadding(0,0,0,0);
         ImageView notification = view.findViewById(R.id.notification_custom_navbar);
         notification.setOnClickListener(this);
     }
@@ -147,17 +145,14 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             public void onSuccessResponse(JSONObject response) throws JSONException {
                 if (response.getBoolean("success")) {
                     JSONArray data = response.getJSONArray("data");
-
                     for (int i = 0; i < data.length();i++){
-                            Log.e(TAG, "fetchJoin Match"+ data.getString(i));
                         matches.add(data.getString(i));
                     }
-                    jMatch = new JoinedMatch(matches);
                 }else{
                     Log.e(TAG, "fetchJoinedMatch"+response.getString("error"));
                     matches.add("0");
-                    jMatch = new JoinedMatch(matches);
                 }
+                jMatch = new JoinedMatch(matches);
             }
 
             @Override
@@ -180,9 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 active = fragment2;
                 return true;
             case R.id.myzone_menu_item:
-//                fragment3 = new MyZoneFragment();
                 fm.beginTransaction().hide(active).show(fragment3).commit();
-//                replaceFragment(new MyZoneFragment());
                 active = fragment3;
                 return true;
         }

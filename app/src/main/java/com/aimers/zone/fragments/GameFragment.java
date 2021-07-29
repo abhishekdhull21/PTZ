@@ -1,5 +1,6 @@
 package com.aimers.zone.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.aimers.zone.Modals.Notification;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
+import com.aimers.zone.Utils.Utils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,6 +38,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.internal.Util;
+
 import static com.aimers.zone.MainActivity.notifications;
 import static com.aimers.zone.Utils.Constant.BASE_URL1;
 import static com.aimers.zone.Utils.Constant.GAME_URL;
@@ -48,6 +52,7 @@ public class GameFragment extends Fragment {
     private RecyclerView r;
     private TextView txt_notification;
     private CardView notification_cardview;
+    private ProgressDialog progressDialog;
     public GameFragment() {
         // Required empty public constructor
     }
@@ -59,8 +64,8 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_game, container, false);
-//        setRetainInstance(true);
         queue = Volley.newRequestQueue(requireActivity());
+        progressDialog = new ProgressDialog(requireActivity());
 //        games.add(new GameModal());
         games = new ArrayList<GameModal>();
         r= v.findViewById(R.id.recycler_game);
@@ -78,7 +83,7 @@ public class GameFragment extends Fragment {
         txt_notification.setText(notifications.get(0).getBody());
     }
     private void loadNotification(){
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("token", User.userToken(requireActivity()));
         NetworkRequest request = new NetworkRequest(requireActivity());
         request.sendRequest(params, NOTIFICATION_URL, new RedeemRequestResponse() {
@@ -114,10 +119,12 @@ public class GameFragment extends Fragment {
         setViewNotification();
     }
     private void gameInfo(){
-
-
+        progressDialog.setTitle("Requesting");
+        progressDialog.setMessage("Loading Matches___");
+        progressDialog.show();
             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,GAME_URL,null,
                     response -> {
+                        progressDialog.dismiss();
                         try {
                             if (response.getBoolean("success")){
 //                                    Log.d("TAGa", "onResponse: "+response);
@@ -129,42 +136,28 @@ public class GameFragment extends Fragment {
                                             object.getString("game_id"),
                                             object.getString("game_title"),
                                             BASE_URL1+img_url+object.getString("game_pic")
-
                                             ));
                                 }
                                 sendToAdapter(games);
-
                             }
                             else {
-
-                                Toast.makeText(requireActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
+                               Utils.alert("Error",response.getString("error"),requireActivity(),false);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(requireActivity(), ""+response, Toast.LENGTH_SHORT).show();
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-//                    Log.d(TAG, "onErrorResponse: "+error.getLocalizedMessage() );
-                    if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                        Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
-                    else
-                        Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-
-            // Add the request to the RequestQueue.
+                    }, error -> {
+                        progressDialog.dismiss();
+                     if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
+                            Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    });
             queue.add(stringRequest);
         }
     private void sendToAdapter(List<GameModal> games){
-
             r.setAdapter(new GameViewAdapter(requireActivity(),games));
             r.setLayoutManager(new LinearLayoutManager(getContext()));
-
         }
-
-
 
 }
