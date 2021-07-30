@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.R;
-import com.aimers.zone.Utils.Constant;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 
@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import ir.androidexception.datatable.DataTable;
 import ir.androidexception.datatable.model.DataTableHeader;
@@ -35,6 +34,7 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 public class TransactionWalletFragment extends Fragment {
     private View v;
     private DataTable dataTable;
+    ImageView img;
     public TransactionWalletFragment() {
         // Required empty public constructor
     }
@@ -48,6 +48,7 @@ public class TransactionWalletFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_transaction_wallet, container, false);
+        img = v.findViewById(R.id.img_no_found);
         initTable();
         sendRequest();
 
@@ -78,12 +79,16 @@ public class TransactionWalletFragment extends Fragment {
             @Override
             public void onErrorResponse(JSONObject response) {
                 Log.e(TAG, "onErrorResponse: "+response );
+                img.setVisibility(View.VISIBLE);
             }
         });
     }
 
     private void showTable(JSONObject response) throws JSONException {
-        if(!response.getBoolean("success")) return;
+        if(!response.getBoolean("success")){
+            img.setVisibility(View.VISIBLE);
+            return;
+        }
         JSONArray responseArray = response.getJSONArray("data");
         ArrayList<DataTableRow> rows = new ArrayList<>();
         // define 200 fake rows for table

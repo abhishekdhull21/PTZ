@@ -2,9 +2,10 @@ package com.aimers.zone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.MatchModal;
@@ -23,18 +24,19 @@ import ir.androidexception.datatable.model.DataTableHeader;
 import ir.androidexception.datatable.model.DataTableRow;
 
 import static com.aimers.zone.Utils.Constant.MATCH_RESULT_URL;
-import static com.aimers.zone.Utils.Constant.WALLET_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class MatchResultActivity extends AppCompatActivity {
     private DataTable dataTable;
     private NetworkRequest request;
     private MatchModal match;
+    private ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_result);
          match = (MatchModal) getIntent().getSerializableExtra("match");
+         img = findViewById(R.id.img_not);
         request = new NetworkRequest(this);
         initTable();
         initRequest();
@@ -53,7 +55,7 @@ public class MatchResultActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(JSONObject response) {
-
+                img.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -69,7 +71,10 @@ public class MatchResultActivity extends AppCompatActivity {
         dataTable.setHeader(header);
     }
     private void showTable(JSONObject response) throws JSONException {
-        if(!response.getBoolean("success")) return;
+        if(!response.getBoolean("success")){
+            img.setVisibility(View.VISIBLE);
+            return;
+        }
         JSONArray responseArray = response.getJSONArray("data");
         ArrayList<DataTableRow> rows = new ArrayList<>();
         // define 200 fake rows for table

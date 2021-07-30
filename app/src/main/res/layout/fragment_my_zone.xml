@@ -178,10 +178,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_baseline_person_24"
                     tools:src="@drawable/ic_baseline_person_24"
-                    tools:srcCompat="@drawable/ic_baseline_person_24" />
+                    tools:srcCompat="@drawable/ic_baseline_person_24"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -227,9 +227,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_wallet"
-                    tools:src="@drawable/ic_wallet" />
+                    tools:src="@drawable/ic_wallet"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -275,10 +275,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_stats"
                     tools:src="@drawable/ic_stats"
-                    tools:srcCompat="@drawable/ic_stats" />
+                    tools:srcCompat="@drawable/ic_stats"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -323,9 +323,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_top_player"
-                    tools:src="@drawable/ic_top_player" />
+                    tools:src="@drawable/ic_top_player"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -370,9 +370,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_baseline_notifications_active_24"
-                    tools:src="@drawable/ic_baseline_notifications_active_24" />
+                    tools:src="@drawable/ic_baseline_notifications_active_24"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -418,9 +418,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_baseline_headset_mic_24"
-                    tools:src="@drawable/ic_baseline_headset_mic_24" />
+                    tools:src="@drawable/ic_baseline_headset_mic_24"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -469,9 +469,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tint="#2196F3"
                     app:srcCompat="@drawable/ic_baseline_settings_24"
-                    tools:src="@drawable/ic_baseline_settings_24" />
+                    tools:src="@drawable/ic_baseline_settings_24"
+                    app:tint="#2196F3" />
 
                 <TextView
                     android:layout_width="0dp"

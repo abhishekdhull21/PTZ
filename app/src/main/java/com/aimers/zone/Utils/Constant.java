@@ -19,6 +19,7 @@ public class Constant {
     public static final String JOINED_MATCH_URL = BASE_URL+"get-joined-match.php";
     public static final String MATCH_RESULT_URL = BASE_URL+"match-result.php";
     public static final String SUBMIT_QUERY_URL = BASE_URL+"submit_query.php";
+    public static final String GET_ROOM = BASE_URL+"getroom.php";
 
     public static final String YT_URL = "https://www.youtube.com/channel/UCIaJIMy52Io3k3OM0Vy5gLA";
 

@@ -22,6 +22,7 @@ import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.Utils.Utils;
 import com.aimers.zone.databinding.FragmentLoginBinding;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,7 +56,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        binding = FragmentLoginBinding.inflate(getLayoutInflater());
        View v = binding.getRoot();

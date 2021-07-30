@@ -8,8 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.aimers.zone.Utils.UserInfo;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 
 public class SplashActivity extends AppCompatActivity {
 

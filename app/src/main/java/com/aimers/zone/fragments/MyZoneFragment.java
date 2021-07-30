@@ -1,9 +1,7 @@
 package com.aimers.zone.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.loader.content.AsyncTaskLoader;
 
 import com.aimers.zone.Interface.UsersFromServer;
 import com.aimers.zone.NotificationActivity;
@@ -22,7 +19,6 @@ import com.aimers.zone.WalletActivity;
 import com.aimers.zone.databinding.FragmentMyZoneBinding;
 
 import static com.aimers.zone.Modals.UserBio.*;
-import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
 public class MyZoneFragment extends Fragment implements View.OnClickListener, UsersFromServer {

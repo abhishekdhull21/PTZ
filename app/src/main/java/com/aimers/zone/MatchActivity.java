@@ -37,7 +37,7 @@ public class MatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
         GameModal game = (GameModal) getIntent().getSerializableExtra("game");
-        customActionbar("Matches");
+        customActionbar();
         FragmentStateAdapter pagerAdapter = new MyPagerAdapter(this, game);
         viewPager =  findViewById(R.id.match_view_pager);
         viewPager.setAdapter(pagerAdapter);
@@ -64,7 +64,7 @@ public class MatchActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void customActionbar(String title){
+    private void customActionbar(){
         ActionBar actionBar = getSupportActionBar();
         if(actionBar == null)return;
         Log.d(TAG, "customActionbar: "+actionBar);
@@ -74,7 +74,7 @@ public class MatchActivity extends AppCompatActivity {
         View view =getSupportActionBar().getCustomView();
         ImageView backBtn = view.findViewById(R.id.back_btn_actionbar);
         TextView txt_title = view.findViewById(R.id.txt_action_bar_title);
-        txt_title.setText(title);
+        txt_title.setText("Matches");
         backBtn.setOnClickListener(v -> MatchActivity.super.onBackPressed());
     }
     private static class MyPagerAdapter extends FragmentStateAdapter {

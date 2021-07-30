@@ -3,8 +3,10 @@ package com.aimers.zone;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.MatchModal;
@@ -19,6 +22,7 @@ import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.Utils;
 import com.aimers.zone.databinding.ActivityMatchJoin2Binding;
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -27,6 +31,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.aimers.zone.Utils.Constant.GET_ROOM;
 import static com.aimers.zone.Utils.Constant.MATCH_JOIN_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
@@ -38,6 +43,8 @@ public class MatchJoinActivity extends AppCompatActivity {
     private String pID,pName;
     private ProgressDialog progressDialog;
     private Activity context;
+    private NetworkRequest request;
+    private boolean isRoom=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,15 +52,39 @@ public class MatchJoinActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         context = this;
         progressDialog = new ProgressDialog(this);
+        request = new NetworkRequest(this);
         Intent i= getIntent();
         match = (MatchModal) i.getSerializableExtra("match");
         setViewContent();
         LayoutInflater inflater = getLayoutInflater();
-        View mDialog = inflater.inflate(R.layout.custom_dialog_input_player,null);
+        @SuppressLint("InflateParams") View mDialog = inflater.inflate(R.layout.custom_dialog_input_player,null);
         initView(mDialog);
         playerInfoPopup(mDialog);
         Button join = mDialog.findViewById(R.id.buttonJoinMatch);
-
+        binding.copyId.setOnClickListener(v -> {
+            if (isRoom)
+            {
+                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(binding.txtRoomId.getText());
+                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+            }else{
+                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText("Wait Until Room Credentials available");
+                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+        binding.copyPassword.setOnClickListener(v -> {
+            if (isRoom)
+            {
+                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(binding.txtRoomPassword.getText());
+                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+            }else{
+                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText("Wait Until Room Credentials available");
+                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
         join.setOnClickListener(v -> {
             if (inputValid()){
                 joinMatch();
@@ -64,13 +95,17 @@ public class MatchJoinActivity extends AppCompatActivity {
     }
     private void setViewContent(){
         if(match == null)return;
+        Log.d(TAG, "setViewContent: "+match.getMatch_id() );
 //        binding.txt1stPrize.setText(match.getPrize());
         binding.txtTotalPrizePool.setText(match.getPrize_pool());
         binding.txtPerKillPrize.setText(match.getPer_kill());
-//        Glide.with(this).load(match.getImageUrl()).into(binding.imageViewMatchMain);
-//        binding.txtPassword.setText(match.getRoomPassword());
-//        binding.txtRoomId.setText(match.getRoomId());
+        Glide.with(this).load(match.getPic()).into(binding.imageViewMatchMain);
 
+
+    }
+    private void setRoom(String id, String password){
+        binding.txtRoomPassword.setText(password);
+        binding.txtRoomId.setText(id);
     }
     private void playerInfoPopup(View v){
         dialog = new AlertDialog.Builder(this)
@@ -105,7 +140,6 @@ public class MatchJoinActivity extends AppCompatActivity {
         progressDialog.setTitle("Request in progress");
         progressDialog.show();
         dialog.cancel();
-        NetworkRequest request = new NetworkRequest(this);
         request.sendRequest(params, MATCH_JOIN_URL, new RedeemRequestResponse() {
             @Override
             public void onSuccessResponse(JSONObject response) throws JSONException {
@@ -122,6 +156,28 @@ public class MatchJoinActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 Log.e(TAG, "onErrorResponse: "+response );
                 Utils.alert("Error","please try after some moment",context,false);
+            }
+        });
+    }
+    private void getRoom(){
+        progressDialog.setTitle("Wait...");
+        progressDialog.setMessage("Getting Room Credentials");
+        HashMap<String,String> params = new HashMap<>();
+        params.put("token",User.userToken(this));
+        params.put("match_id",match.getMatch_id());
+        request.sendRequest(params, GET_ROOM, new RedeemRequestResponse() {
+            @Override
+            public void onSuccessResponse(JSONObject response) throws JSONException {
+                if (response.getBoolean("success")){
+                    JSONObject obj = response.getJSONObject("data");
+                    setRoom(obj.getString("id"),obj.getString("password"));
+                    isRoom= true;
+                }
+            }
+
+            @Override
+            public void onErrorResponse(JSONObject response) throws JSONException {
+                Utils.alert("Error Occurred","Please try after few couple of minutes",context,false);
             }
         });
     }

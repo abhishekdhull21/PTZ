@@ -10,10 +10,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.aimers.zone.Interface.WalletFetchResponse;
 import com.aimers.zone.fragments.AddMoneyWalletFragment;
 import com.aimers.zone.fragments.RedeemFragment;
-import com.aimers.zone.fragments.RedeemMoneyWalletFragment;
 import com.aimers.zone.fragments.TransactionWalletFragment;
 import com.aimers.zone.wallet.Wallet;
 import com.google.android.material.tabs.TabLayout;

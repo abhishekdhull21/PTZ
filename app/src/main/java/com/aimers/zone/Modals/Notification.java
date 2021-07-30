@@ -1,7 +1,8 @@
 package com.aimers.zone.Modals;
 
 public class Notification {
-    String header,body;
+    final String header;
+    final String body;
 
     public Notification(String header, String body) {
         this.header = header;

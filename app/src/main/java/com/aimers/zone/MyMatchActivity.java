@@ -24,7 +24,7 @@ private RecyclerView recyclerView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_match);
-        customActionbar("Match List");
+        customActionbar();
         initViews();
         setAdapter();
 
@@ -39,7 +39,7 @@ private RecyclerView recyclerView;
         recyclerView.setAdapter(new MyMatchAdapter());
     }
 
-    private void customActionbar(String title){
+    private void customActionbar(){
         ActionBar actionBar = getSupportActionBar();
         Log.d(TAG, "customActionbar: "+actionBar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -48,7 +48,7 @@ private RecyclerView recyclerView;
         View view =getSupportActionBar().getCustomView();
         ImageView backBtn = view.findViewById(R.id.back_btn_actionbar);
         TextView txt_title = view.findViewById(R.id.txt_action_bar_title);
-        txt_title.setText(title);
+        txt_title.setText("Match List");
         backBtn.setOnClickListener(v -> MyMatchActivity.super.onBackPressed());
     }
 

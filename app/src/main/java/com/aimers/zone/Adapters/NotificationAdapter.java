@@ -16,11 +16,10 @@ import com.aimers.zone.NotificationShowActivity;
 import com.aimers.zone.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
     final Context context;
-    private ArrayList<Notification> notifications;
+    private final ArrayList<Notification> notifications;
     public NotificationAdapter(Context context, ArrayList<Notification> notifications) {
         this.context = context;
         this.notifications = notifications;
@@ -46,7 +45,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final CardView notification_cardview;
-        public TextView txt_header;
+        public final TextView txt_header;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             notification_cardview = itemView.findViewById(R.id.notification_msg_node_cardview);

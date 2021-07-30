@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomsheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -267,7 +266,8 @@
             android:textColor="#F4364C"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:tooltipText="No Enough Coin To Join This Match" />
+            android:tooltipText="No Enough Coin To Join This Match"
+            tools:targetApi="o" />
 
         <Button
             android:id="@+id/addCoin"
@@ -282,6 +282,7 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:tooltipText="Add Coin To Join Match" />
+            android:tooltipText="Add Coin To Join Match"
+            tools:targetApi="o" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

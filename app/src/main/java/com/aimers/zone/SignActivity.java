@@ -14,6 +14,8 @@ import com.aimers.zone.fragments.RegisterFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SignActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     private static final int NUM_PAGES = 2;
@@ -46,6 +48,7 @@ public class SignActivity extends AppCompatActivity {
         }
 
 
+        @NotNull
         @Override
         public Fragment createFragment(int pos) {
             switch (pos) {

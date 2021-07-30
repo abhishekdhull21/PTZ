@@ -24,8 +24,6 @@ import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.Utils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -37,8 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.internal.Util;
 
 import static com.aimers.zone.MainActivity.notifications;
 import static com.aimers.zone.Utils.Constant.BASE_URL1;

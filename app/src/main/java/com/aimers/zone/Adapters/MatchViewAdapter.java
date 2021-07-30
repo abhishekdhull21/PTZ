@@ -30,10 +30,10 @@ import static com.aimers.zone.Utils.Constant.YT_URL;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.ViewHolder> implements View.OnClickListener {
-    private ArrayList<MatchModal> matches ;
-    private GameModal game;
+    private final ArrayList<MatchModal> matches ;
+    private final GameModal game;
     private MatchModal match;
-    private  Context context;
+    private final Context context;
 //    BottomSheetDialogFragment bottomSheetDialogFragment;
 
     public MatchViewAdapter(Context context,ArrayList<MatchModal> match, GameModal game) {
@@ -73,7 +73,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
                         mButton1.setText(R.string.view_more);
                         mButton1.setOnClickListener(v -> {
                             Intent i  =new Intent(context, MatchResultActivity.class);
-                            i.putExtra("match",match);
+                            i.putExtra("match",matches.get(position));
                             context.startActivity(i);
                         });
 
@@ -81,7 +81,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
 
                 holder.btnJoin.setOnClickListener(v -> {
                     Intent i  = new Intent(context,MatchJoinActivity.class);
-                    i.putExtra("match",match);
+                    i.putExtra("match",matches.get(position));
                     context.startActivity(i);
 //                    bottomSheetDialogFragment = new MatchJoinActivity(context, matches.get(position));
 //                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());

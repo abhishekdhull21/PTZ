@@ -38,10 +38,10 @@
                 android:minWidth="32sp"
                 android:minHeight="32sp"
                 android:padding="8sp"
-                android:tint="#FFFFFF"
                 app:srcCompat="@drawable/ic_baseline_email_24"
                 tools:src="@drawable/ic_baseline_email_24"
-                tools:srcCompat="@drawable/ic_baseline_email_24" />
+                tools:srcCompat="@drawable/ic_baseline_email_24"
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:id="@+id/txt_notification"

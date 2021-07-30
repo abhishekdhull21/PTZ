@@ -1,7 +1,6 @@
 package com.aimers.zone.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,15 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
-import com.aimers.zone.Modals.Wallet;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
-import com.aimers.zone.Utils.Utils;
-import com.tapadoo.alerter.Alerter;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
@@ -21,7 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dimen_16dp">
 
             <TextView
                 android:id="@+id/textView24"
@@ -51,6 +52,7 @@
                 android:clickable="true"
                 android:contextClickable="true"
                 android:linksClickable="true"
+                android:padding="@dimen/dimen_8dp"
                 android:paddingStart="@dimen/dimen_8dp"
                 android:paddingEnd="@dimen/dimen_8dp"
                 android:text="@string/aimerszone29_gmail_com" />
@@ -87,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/enter_your_query"

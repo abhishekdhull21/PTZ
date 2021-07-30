@@ -20,12 +20,7 @@ import com.aimers.zone.MainActivity;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
-import com.aimers.zone.Utils.Utils;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -49,7 +44,7 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 public class AddMoneyWalletFragment extends Fragment implements View.OnClickListener {
 
 
-    private String orderId = "order_from_app";
+    private final String orderId = "order_from_app";
     private final String MID ="VCWQWH26061118544596";
     private RequestQueue queue;
     private Map<String, String> trans;
@@ -88,6 +83,7 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
         return v;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
