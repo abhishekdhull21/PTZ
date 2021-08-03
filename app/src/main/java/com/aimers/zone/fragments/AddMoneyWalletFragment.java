@@ -45,7 +45,6 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
 
 
     private final String orderId = "order_from_app";
-    private final String MID ="VCWQWH26061118544596";
     private RequestQueue queue;
     private Map<String, String> trans;
     private String orderIdString;
@@ -116,54 +115,19 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
                 if (response.getBoolean("success")){
                                 JSONObject data = response.getJSONObject("data");
                                 startPaytmPayment(data.getString("txnToken"),data.getString("callback"));
-                            }
-
-                        Log.d("TAG", "onResponse: "+response);
-                        Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
+                }
+                Log.d("TAG", "onResponse: "+response);
+//                Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
             }
-
             @Override
             public void onErrorResponse(JSONObject response) {
                 Log.d("TAG", "onResponse: "+response);
-                Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
+//                Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
 
-//        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,PAYMENT_INIT,new JSONObject(trans),
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            if (response.getBoolean("success")){
-//
-//                                JSONObject data = response.getJSONObject("data");
-//                                startPaytmPayment(data.getString("txnToken"),data.getString("callback"));
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                        Log.d("TAG", "onResponse: "+response);
-//                        Toast.makeText(requireActivity(), ":"+response, Toast.LENGTH_LONG).show();
-//                        progressDialog.dismiss();
-//                    }
-//
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                Log.d(TAG, "onErrorResponse: "+error );
-//                if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-//                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-//                else
-//                    Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
-//                progressDialog.dismiss();
-//            }
-//        });
-//
-//        // Add the request to the RequestQueue.
-//        queue.add(stringRequest);
     }
 
     public String generateOrderId() {
@@ -179,9 +143,9 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
     public void startPaytmPayment (String token,String callBackUrl){
 
         // for test mode use it
-        String host = "https://securegw-stage.paytm.in/";
+//        String host = "https://securegw-stage.paytm.in/";
         // for production mode use it
-//        String host = "https://securegw.paytm.in/";
+        String host = "https://securegw.paytm.in/";
 //        String orderDetails = "MID: " + trans.get("MID") + ", OrderId: " + trans.get("order_id") + ", TxnToken: " + token+ ", Amount: " + trans.get("amount");
 //        Log.e(TAG, "order details "+ orderDetails);
 
