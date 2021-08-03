@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SupportkFragment">
+    tools:context=".fragments.SupportFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -60,6 +60,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -109,4 +110,17 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fragmentContainerView"-->
+<!--        android:name="com.aimers.zone.fragments.RuleScrollingFragment"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/cardView8"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/cardView8"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/cardView8" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

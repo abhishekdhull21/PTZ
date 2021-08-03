@@ -48,7 +48,7 @@ public class TransactionWalletFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_transaction_wallet, container, false);
-        img = v.findViewById(R.id.img_no_found);
+//        img = v.findViewById(R.id .img_no_found);
         initTable();
         sendRequest();
 
@@ -79,7 +79,7 @@ public class TransactionWalletFragment extends Fragment {
             @Override
             public void onErrorResponse(JSONObject response) {
                 Log.e(TAG, "onErrorResponse: "+response );
-                img.setVisibility(View.VISIBLE);
+//                img.setVisibility(View.VISIBLE);
             }
         });
     }

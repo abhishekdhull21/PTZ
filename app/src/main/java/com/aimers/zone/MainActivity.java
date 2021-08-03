@@ -1,5 +1,5 @@
 package com.aimers.zone;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +25,7 @@ import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.UserInfo;
 import com.aimers.zone.fragments.GameFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
-import com.aimers.zone.fragments.SupportkFragment;
+import com.aimers.zone.fragments.SupportFragment;
 import com.aimers.zone.wallet.Wallet;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -49,20 +49,19 @@ import static com.aimers.zone.Utils.Constant.JOINED_MATCH_URL;
 import static com.aimers.zone.Utils.Utils.saveTokenLocal;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
-
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
-    final Fragment fragment1 = new SupportkFragment();
+    final Fragment fragment1 = new SupportFragment();
     final Fragment fragment2 = new GameFragment();
     final Fragment fragment3 = new MyZoneFragment();
     private NetworkRequest request;
     final FragmentManager fm = getSupportFragmentManager();
     public static UserBio user;
     public static JoinedMatch jMatch;
-    private static final String ONESIGNAL_APP_ID ="75715159-da5b-4540-9b57-76bc9916d532" ;
+    private static final String ONESIGNAL_APP_ID ="75715159-da5b-4540-9b57-76bc9916d532";
     Fragment active = fragment2;
 
-    private HashMap<String, String> params;
-    private RequestQueue queue;
+//    private HashMap<String, String> params;
+//    private RequestQueue queue;
     private ProgressDialog progressBar;
     public static ArrayList<Notification> notifications;
 
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // OneSignal Initialization
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
-        queue = Volley.newRequestQueue(this);
+//        queue = Volley.newRequestQueue(this);
         progressBar =new ProgressDialog(this);
 //        get intent from pervious activity
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");
@@ -129,13 +128,11 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         ImageView notification = view.findViewById(R.id.notification_custom_navbar);
         notification.setOnClickListener(this);
     }
-
     public void loadFragment() {
         fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
     }
-
     private void fetchJoinedMatch(){
         HashMap<String, String> params = new HashMap<>();
         params.put("token",User.userToken(MainActivity.this));
@@ -161,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             }
         });
     }
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -181,13 +178,12 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         }
         return false;
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         fetchJoinedMatch();
     }
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

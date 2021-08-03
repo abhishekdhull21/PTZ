@@ -31,12 +31,6 @@
         app:row_vertical_padding="16dp"
         app:shadow="8dp">
 
-        <ImageView
-            android:id="@+id/img_not"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/no_data_illustration_concept_108061_573"
-            tools:visibility="gone" />
     </ir.androidexception.datatable.DataTable>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

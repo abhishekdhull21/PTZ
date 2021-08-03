@@ -36,7 +36,7 @@ public class MatchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_result);
          match = (MatchModal) getIntent().getSerializableExtra("match");
-         img = findViewById(R.id.img_not);
+//         img = findViewById(R.id.img_not);
         request = new NetworkRequest(this);
         initTable();
         initRequest();
@@ -72,7 +72,7 @@ public class MatchResultActivity extends AppCompatActivity {
     }
     private void showTable(JSONObject response) throws JSONException {
         if(!response.getBoolean("success")){
-            img.setVisibility(View.VISIBLE);
+//            img.setVisibility(View.VISIBLE);
             return;
         }
         JSONArray responseArray = response.getJSONArray("data");

@@ -27,12 +27,6 @@
         app:row_vertical_padding="16dp"
         app:shadow="8dp" >
 
-        <ImageView
-            android:id="@+id/img_no_found"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/no_data_illustration_concept_108061_573"
-            tools:visibility="gone" />
     </ir.androidexception.datatable.DataTable>
 
 </FrameLayout>

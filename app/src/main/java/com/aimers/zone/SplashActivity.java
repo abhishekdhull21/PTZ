@@ -45,12 +45,12 @@ public class SplashActivity extends AppCompatActivity {
         public void run() {
             if (iSLogin) {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 startActivity(i);
-
+                finishActivity();
             }
             else
                 startActivity(new Intent(SplashActivity.this,SignActivity.class));
