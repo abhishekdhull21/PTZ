@@ -32,11 +32,11 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         View v  = binding.getRoot();
         CardView walletView = v.findViewById(R.id.my_wallet);
         CardView notification = v.findViewById(R.id.myzone_notification);
-        CardView setting = v.findViewById(R.id.myzone_logout);
+        CardView logout = v.findViewById(R.id.myzone_logout);
         setProfileName();
         notification.setOnClickListener(this);
         walletView.setOnClickListener(this);
-        setting.setOnClickListener(this);
+        logout.setOnClickListener(this);
         return v;
     }
 
