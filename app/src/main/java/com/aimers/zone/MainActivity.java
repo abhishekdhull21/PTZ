@@ -1,5 +1,6 @@
 package com.aimers.zone;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -162,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         });
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

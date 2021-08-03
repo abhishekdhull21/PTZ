@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 startActivity(i);
-
+                finishActivity();
             }
             else
                 startActivity(new Intent(SplashActivity.this,SignActivity.class));
