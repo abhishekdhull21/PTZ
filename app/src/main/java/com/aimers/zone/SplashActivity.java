@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.aimers.zone.Utils.UserInfo;
 
@@ -16,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         SharedPreferences sharedPreferences = getSharedPreferences("token", MODE_PRIVATE);
+
 //        Log.d(TAG, "onCreate: "+sharedPreferences.getString("token",null));
         Intent i = new Intent(SplashActivity.this, SignActivity.class);
         boolean iSLogin = false;
