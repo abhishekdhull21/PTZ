@@ -52,6 +52,7 @@
                 android:clickable="true"
                 android:contextClickable="true"
                 android:linksClickable="true"
+                android:minHeight="48dp"
                 android:padding="@dimen/dimen_8dp"
                 android:paddingStart="@dimen/dimen_8dp"
                 android:paddingEnd="@dimen/dimen_8dp"
@@ -91,9 +92,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_marginBottom="@dimen/dimen_8dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/enter_your_query"
+                android:hintTextColor="#757575"
                 android:inputType="textMultiLine"
                 android:lines="5"
                 android:padding="@dimen/dimen_8dp" />
@@ -105,7 +108,7 @@
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:background="@color/colorSecondaryDark"
                 android:text="@string/submit"
-                android:textColor="#FFFFFF"
+                android:textColor="#5D4037"
                 android:textSize="18sp" />
 
         </LinearLayout>

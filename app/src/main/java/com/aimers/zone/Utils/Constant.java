@@ -7,6 +7,7 @@ public class Constant {
     public static final String BASE_URL = "http://aimerszone.nexttechtrend.com/api/";
     public static final String BASE_URL1 = "https://aimerzone.herokuapp.com/";
     public static final String TEST_URL = BASE_URL+"test.php";
+    public static final String MID = "OgdBig44888892307561";
     public static final String REGISTER_URL = BASE_URL+"register.php";
     public static final String GET_USER_INFO = BASE_URL+"get-user.php";
     public static final String LOGIN_URL = BASE_URL+"login.php";

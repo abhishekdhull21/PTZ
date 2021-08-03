@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
+import static com.aimers.zone.Utils.Constant.MID;
 import static com.aimers.zone.Utils.Constant.PAYMENT_INIT;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
@@ -48,7 +49,7 @@ public class AddMoneyWalletFragment extends Fragment implements View.OnClickList
     private RequestQueue queue;
     private Map<String, String> trans;
     private String orderIdString;
-    private final String midString="OgdBig44888892307561";
+    private final String midString=MID;
     private String txnAmountString;
     private final int ActivityRequestCode=2;
     private ProgressDialog progressDialog;
