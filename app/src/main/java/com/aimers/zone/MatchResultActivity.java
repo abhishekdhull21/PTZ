@@ -67,10 +67,12 @@ public class MatchResultActivity extends AppCompatActivity {
                 .item("Player Name",3)
                 .item("Total Kill",2)
                 .item("Win",2)
+                .item("Position",2)
                 .build();
         dataTable.setHeader(header);
     }
     private void showTable(JSONObject response) throws JSONException {
+        Log.e(TAG, "showTable: "+response );
         if(!response.getBoolean("success")){
 //            img.setVisibility(View.VISIBLE);
             return;
@@ -81,10 +83,11 @@ public class MatchResultActivity extends AppCompatActivity {
         for(int i=0;i<responseArray.length();i++) {
             JSONObject data = responseArray.getJSONObject(i);
             DataTableRow row = new DataTableRow.Builder()
-                    .value("#" + i)
+                    .value("#" + (i+1))
                     .value(data.getString("username"))
-                    .value(data.getString("total_kill"))
+                    .value(data.getString("kills"))
                     .value(data.getString("win"))
+                    .value(data.getString("position"))
 
                     .build();
             rows.add(row);

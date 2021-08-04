@@ -96,7 +96,7 @@ public class TransactionWalletFragment extends Fragment {
         for(int i=0;i<responseArray.length();i++) {
             JSONObject data = responseArray.getJSONObject(i);
             DataTableRow row = new DataTableRow.Builder()
-                    .value("#" + i+1)
+                    .value("#" + (i+1))
                     .value(data.getString("type"))
                     .value(data.getString("coins"))
 

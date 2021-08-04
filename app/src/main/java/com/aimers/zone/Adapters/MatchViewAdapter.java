@@ -82,8 +82,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
 //                            context.startActivity(i);
 //                        });
 
-            } else {
-
+            }
                 holder.btnJoin.setOnClickListener(v -> {
                     Intent i  = new Intent(context,MatchJoinActivity.class);
                     i.putExtra("match",matches.get(position));
@@ -92,7 +91,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
 //                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
 
                 });
-            }
+
         }
         else{                                               //(match.getPos() == 0)
             holder.layout_slots.setVisibility(View.GONE);

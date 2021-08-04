@@ -89,6 +89,7 @@
         android:layout_marginTop="32dp"
         android:paddingStart="@dimen/dimen_16sp"
         android:text="Payment done via Paytm"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />

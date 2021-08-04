@@ -89,6 +89,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         UserInfo userInfo = new UserInfo(response.getString("token"));
                         i.putExtra("user", userInfo);
                         context.startActivity(i);
+                        requireActivity().finishActivity(1);
                     }
                     else {
 

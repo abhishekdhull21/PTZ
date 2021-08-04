@@ -177,7 +177,7 @@ public class MatchJoinActivity extends AppCompatActivity {
         params.put("token",token);
         params.put("match_id",match.getMatch_id());
         params.put("user_game_id", pID);
-        params.put("username", pName);
+        params.put("user_game_name", pName);
         sendRequestForMatchJoin(params);
     }
     public void sendRequestForMatchJoin(Map<String, String> params){

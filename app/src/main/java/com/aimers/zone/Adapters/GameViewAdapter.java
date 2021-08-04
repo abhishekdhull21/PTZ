@@ -1,7 +1,10 @@
 package com.aimers.zone.Adapters;
 
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
+
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +43,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameModal game = games.get(position);
         holder.game_title.setText(game.getTitle());
-//        Log.d(TAG, "onBindViewHolder: "+game.getPic());
+        Log.d(TAG, "onBindViewHolder: "+game.getPic());
         Glide.with(context).load(game.getPic()).into(holder.game_img);
         holder.cardView.setOnClickListener(v -> {
             Intent i = new Intent(context,MatchActivity.class);

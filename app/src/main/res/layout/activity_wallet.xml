@@ -16,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:tabSelectedTextColor="#ffffffff"
-        app:tabTextColor="#D0B6B3B3" />
+        app:tabTextColor="#D0B6B3B3"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/wallet_view_pager"
@@ -58,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="100dp" />
+        app:layout_constraintGuide_begin="52dp" />
 
     <TextView
         android:id="@+id/textView16"
@@ -108,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="200dp" />
+        app:layout_constraintGuide_percent="0.21" />
 
     <ImageView
         android:id="@+id/imageView7"

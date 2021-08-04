@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="227dp"
                 android:maxHeight="227sp"
+                android:scaleType="fitXY"
                 android:src="@drawable/pubg_mobile"
                 app:srcCompat="@drawable/pubg_mobile" />
 
