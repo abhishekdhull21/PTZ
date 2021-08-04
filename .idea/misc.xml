@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match_join2.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_game.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_match_virew.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_my_zone.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_redeem.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_rule_scrolling.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_supportk.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/game_card_layout.xml" value="0.25416666666666665" />

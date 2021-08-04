@@ -17,6 +17,8 @@ public class Constant {
     public static final String PAYMENT_INIT = BASE_URL+"paytm/initiate-payment.php";
     public static final String NOTIFICATION_URL = BASE_URL+"Notification/notification.php";
     public static final String WALLET_URL = BASE_URL+"initiate-wallet.php";
+    public static final String REDEEM_REQUEST = BASE_URL+"redeem_request.php";
+    public static final String TRANSACTION_LIST_REQUEST = BASE_URL+"get_transactions.php";
     public static final String JOINED_MATCH_URL = BASE_URL+"get-joined-match.php";
     public static final String MATCH_RESULT_URL = BASE_URL+"match-result.php";
     public static final String SUBMIT_QUERY_URL = BASE_URL+"submit_query.php";

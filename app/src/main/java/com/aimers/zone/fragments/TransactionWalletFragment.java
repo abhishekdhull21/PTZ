@@ -28,6 +28,7 @@ import ir.androidexception.datatable.model.DataTableHeader;
 import ir.androidexception.datatable.model.DataTableRow;
 
 import static com.aimers.zone.Utils.Constant.TEST_URL;
+import static com.aimers.zone.Utils.Constant.TRANSACTION_LIST_REQUEST;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 
@@ -69,7 +70,7 @@ public class TransactionWalletFragment extends Fragment {
     private void sendRequest(){
         Map<String,String> params = initRequest();
         NetworkRequest request = new NetworkRequest(requireActivity());
-        request.sendRequest(params, TEST_URL, new RedeemRequestResponse() {
+        request.sendRequest(params, TRANSACTION_LIST_REQUEST, new RedeemRequestResponse() {
             @Override
             public void onSuccessResponse(JSONObject response) throws JSONException {
                 showTable(response);
@@ -95,7 +96,7 @@ public class TransactionWalletFragment extends Fragment {
         for(int i=0;i<responseArray.length();i++) {
             JSONObject data = responseArray.getJSONObject(i);
             DataTableRow row = new DataTableRow.Builder()
-                    .value("#" + i)
+                    .value("#" + i+1)
                     .value(data.getString("type"))
                     .value(data.getString("coins"))
 

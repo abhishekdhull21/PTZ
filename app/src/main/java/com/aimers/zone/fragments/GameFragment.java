@@ -85,10 +85,9 @@ public class GameFragment extends Fragment {
         request.sendRequest(params, NOTIFICATION_URL, new RedeemRequestResponse() {
             @Override
             public void onSuccessResponse(JSONObject response) throws JSONException {
-                Log.e(TAG, "onSuccessResponse: "+response );
+                Log.e(TAG, "onSuccessResponse: notification"+response );
                 setNotification(response);
             }
-
             @Override
             public void onErrorResponse(JSONObject response) {
                 Log.e(TAG, "onErrorResponse: "+response );

@@ -71,7 +71,7 @@ final MatchModal match;
         String user_name = editTextName.getText().toString();
         if(!game_id.isEmpty() && !user_name.isEmpty()) {
             params.put("user_game_id", game_id);
-            params.put("username", user_name);
+            params.put("user_game_name", user_name);
             sendRequestForMatchJoin(params);
         }
 

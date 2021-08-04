@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.aimers.zone.Modals.Wallet.*;
+import static com.aimers.zone.Utils.Constant.REDEEM_REQUEST;
 import static com.aimers.zone.Utils.Constant.TEST_URL;
 import static com.aimers.zone.Utils.Utils.*;
 import static com.aimers.zone.fragments.RegisterFragment.TAG;
@@ -56,13 +57,15 @@ public class RedeemFragment extends Fragment {
 //        progressDialog.show();
         btnRedeem.setOnClickListener(v1 -> {
             progressDialog.show();
+            progressDialog.setTitle("Please Wait");
+            progressDialog.setMessage("Processing redeem request");
             if(getRedeemValue() != null) {
                 if(!verifyRedeemCoin()){
                  alert("Not enough coins","coin should be 50",requireActivity(),false);
                  progressDialog.dismiss();
                  return;
                 }
-                request.sendRequest(getRedeemValue(), TEST_URL, new RedeemRequestResponse() {
+                request.sendRequest(getRedeemValue(), REDEEM_REQUEST, new RedeemRequestResponse() {
                     @Override
                     public void onSuccessResponse(JSONObject response) {
                         showResponse(response);
