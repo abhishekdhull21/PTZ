@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import static com.aimers.zone.Utils.Constant.SUBMIT_QUERY_URL;
 import static com.aimers.zone.Utils.Constant.TEST_URL;
 import static com.aimers.zone.Utils.Utils.*;
 
@@ -101,10 +102,11 @@ public class SupportFragment extends Fragment {
 
         if(!query.isEmpty()){
             params.put("query",query);
-            request.sendRequest(params, TEST_URL, new RedeemRequestResponse() {
+            request.sendRequest(params, SUBMIT_QUERY_URL, new RedeemRequestResponse() {
                 @Override
                 public void onSuccessResponse(JSONObject response) throws JSONException {
                     alert("Success","Query Submitted",requireActivity(),true);
+                    txtQuery.setText("");
                 }
 
                 @Override
