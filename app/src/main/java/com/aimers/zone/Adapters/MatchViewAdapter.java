@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aimers.zone.MatchResultActivity;
@@ -63,14 +64,17 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         Button mButton1 = holder.btnJoin;
         if (jMatch !=null)
         Log.e(TAG, "get match id: "+ jMatch.getMatchId().get(0));
-
+        holder.card_join_msg.setVisibility(View.GONE);
         if(match.getPos() == 1) {
             holder.layout_slots.setVisibility(View.VISIBLE);
             holder.btnJoin.setVisibility(View.VISIBLE);
             holder.btnYT.setVisibility(View.GONE);
             holder.btnCompleted.setVisibility(View.GONE);
+
             if (jMatch.getMatchId().contains(match.getMatch_id())) {
-                        mButton1.setText(R.string.join_teammate);
+                holder.card_join_msg.setVisibility(View.VISIBLE);
+                Log.e(TAG, "onBindViewHolder: "+jMatch.getMatchId() +" and curr match:"+match.getMatch_id() );
+//                        mButton1.setText(R.string.join_teammate);
 
 //                        mButton1.setOnClickListener(v -> {
 //                            Intent i  =new Intent(context, MatchResultActivity.class);
@@ -187,6 +191,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         public final Button btnBottomsheetJoin;
         public final LinearLayout layout_slots;
         public final View bottomsheet;
+        public final CardView card_join_msg;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtPrize = itemView.findViewById(R.id.txt_pool);
@@ -207,6 +212,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             layout_slots = itemView.findViewById(R.id.layout_slot_spot);
             bottomsheet = itemView.findViewById(R.id.bottomsheet);
             btnBottomsheetJoin = itemView.findViewById(R.id.join_req_btn);
+            card_join_msg = itemView.findViewById(R.id.card_join_msg);
         }
     }
 }

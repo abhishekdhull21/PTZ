@@ -143,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 if (response.getBoolean("success")) {
                     JSONArray data = response.getJSONArray("data");
                     for (int i = 0; i < data.length();i++){
-                        matches.add(data.getString(i));
+                        JSONObject obj = data.getJSONObject(i);
+                        matches.add(obj.getString("match_id"));
                     }
                 }else{
                     Log.e(TAG, "fetchJoinedMatch"+response.getString("error"));
