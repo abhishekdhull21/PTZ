@@ -70,12 +70,13 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             holder.btnYT.setVisibility(View.GONE);
             holder.btnCompleted.setVisibility(View.GONE);
             if (jMatch.getMatchId().contains(match.getMatch_id())) {
-                        mButton1.setText(R.string.view_more);
-                        mButton1.setOnClickListener(v -> {
-                            Intent i  =new Intent(context, MatchResultActivity.class);
-                            i.putExtra("match",matches.get(position));
-                            context.startActivity(i);
-                        });
+                        mButton1.setText(R.string.join_teammate);
+
+//                        mButton1.setOnClickListener(v -> {
+//                            Intent i  =new Intent(context, MatchResultActivity.class);
+//                            i.putExtra("match",matches.get(position));
+//                            context.startActivity(i);
+//                        });
 
             } else {
 

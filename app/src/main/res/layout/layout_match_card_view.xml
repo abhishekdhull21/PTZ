@@ -32,50 +32,55 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <ImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="75dp"
-                    android:layout_height="101dp"
-                    android:layout_weight="2"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="91dp"
+                    android:layout_weight="4"
                     android:background="@drawable/img_circular"
                     android:maxHeight="50sp"
                     app:srcCompat="@drawable/logo___copy" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="10">
 
                     <TextView
                         android:id="@+id/txt_game_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dimen_0dp"
                         android:layout_marginTop="6sp"
+                        android:layout_weight="5"
                         android:autoText="true"
                         android:padding="8sp"
+                        android:paddingBottom="@dimen/dimen_0dp"
                         android:text="@string/pubg_mobile_india"
                         android:textAlignment="viewStart"
                         android:textAllCaps="true"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        tools:ignore="Deprecated,TextViewEdits" />
+                        tools:ignore="Deprecated,TextViewEdits,TouchTargetSizeCheck" />
 
                     <TextView
                         android:id="@+id/txt_time"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dimen_0dp"
+                        android:layout_weight="5"
                         android:autoText="true"
+                        android:gravity="top"
                         android:padding="8sp"
                         android:paddingTop="0sp"
                         android:text="@string/time_21_06_2021_at_12_00pm"
                         android:textAlignment="viewStart"
                         android:textAllCaps="true"
-                        tools:ignore="Deprecated,TextViewEdits" />
+                        tools:ignore="Deprecated,TextViewEdits,TouchTargetSizeCheck" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -265,7 +270,8 @@
                         android:orientation="vertical"
                         android:padding="8sp"
                         android:visibility="gone"
-                        android:weightSum="8">
+                        android:weightSum="8"
+                        tools:visibility="visible">
 
                         <ProgressBar
                             android:id="@+id/progressBar_slot"
@@ -313,7 +319,8 @@
                         android:textSize="14sp"
                         app:cornerRadius="@dimen/dimen_10dp"
                         app:rippleColor="#FFFFFF"
-                        tools:visibility="gone" />
+                        tools:ignore="TextContrastCheck"
+                        tools:visibility="visible" />
 
                     <Button
                         android:id="@+id/btnCompleted"
@@ -323,12 +330,15 @@
                         android:background="@color/submit_easy_pay"
                         android:clickable="true"
                         android:contextClickable="true"
+                        android:fontFamily="@font/roboto"
                         android:gravity="center_horizontal|center_vertical"
                         android:text="View Results"
                         android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
-                        tools:visibility="visible" />
+                        android:visibility="gone"
+                        tools:visibility="gone" />
 
                     <Button
                         android:id="@+id/btn_yt"
@@ -341,6 +351,7 @@
                         android:background="#F81212"
                         android:clickable="true"
                         android:contextClickable="true"
+                        android:fontFamily="@font/roboto_medium"
                         android:gravity="center_horizontal|center_vertical"
                         android:justificationMode="inter_word"
                         android:paddingStart="4sp"
@@ -349,8 +360,8 @@
                         android:textAlignment="gravity"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
-                        android:typeface="serif"
-                        tools:visibility="visible" />
+                        android:typeface="sans"
+                        tools:visibility="gone" />
                 </TableRow>
 
                 <TableRow
