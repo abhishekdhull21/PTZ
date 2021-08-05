@@ -88,7 +88,7 @@ public class RedeemFragment extends Fragment {
             if (response.getBoolean("success")){
                 alert("Success","Your request submitted wait 3-5 working days",requireActivity(),true);
             }else{
-                alert("Failed","error: "+response.getString("error"),requireActivity(),false);
+                alert("Failed","err or: "+response.getString("error"),requireActivity(),false);
             }
         } catch (JSONException e) {
             e.printStackTrace();

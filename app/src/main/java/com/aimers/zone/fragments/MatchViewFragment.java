@@ -110,11 +110,11 @@ public class MatchViewFragment extends Fragment {
                             sendToAdapter(match);
 
                         }
-                        else {
+                        /*else {
                             alert("error that hate ",response.getString("error"),requireActivity(),false);
 //                                Toast.makeText(requireActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
                                     group.setVisibility(View.VISIBLE);
-                        }
+                        }*/
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

@@ -62,15 +62,14 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         match = matches.get(position);
         Button mButton1 = holder.btnJoin;
-        if (jMatch !=null)
-        Log.e(TAG, "get match id: "+ jMatch.getMatchId().get(0));
+
         holder.card_join_msg.setVisibility(View.GONE);
         if(match.getPos() == 1) {
             holder.layout_slots.setVisibility(View.VISIBLE);
             holder.btnJoin.setVisibility(View.VISIBLE);
             holder.btnYT.setVisibility(View.GONE);
             holder.btnCompleted.setVisibility(View.GONE);
-
+            if (jMatch !=null)
             if (jMatch.getMatchId().contains(match.getMatch_id())) {
                 holder.card_join_msg.setVisibility(View.VISIBLE);
                 Log.e(TAG, "onBindViewHolder: "+jMatch.getMatchId() +" and curr match:"+match.getMatch_id() );
@@ -187,9 +186,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         public final ImageView gameImg;
         public final Button btnJoin;
         public final Button btnYT;
-        public final Button btnBottomsheetJoin;
         public final LinearLayout layout_slots;
-        public final View bottomsheet;
         public final CardView card_join_msg;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -209,8 +206,6 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             btnYT = itemView.findViewById(R.id.btn_yt);
             gameImg = itemView.findViewById(R.id.match_game_img);
             layout_slots = itemView.findViewById(R.id.layout_slot_spot);
-            bottomsheet = itemView.findViewById(R.id.bottomsheet);
-            btnBottomsheetJoin = itemView.findViewById(R.id.join_req_btn);
             card_join_msg = itemView.findViewById(R.id.card_join_msg);
         }
     }
