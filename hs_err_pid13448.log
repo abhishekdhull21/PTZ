@@ -1,0 +1,36 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc212e2cf3, pid=13448, tid=17072
+#
+# JRE version: OpenJDK Runtime Environment (11.0.10) (build 11.0.10+0-b96-7249189)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.10+0-b96-7249189, mixed mode, tiered, compressed oops, g1 gc, windows-amd64)
+# Problematic frame:
+# V  [jvm.dll+0x372cf3]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: org.jetbrains.git4idea.http.GitAskPassApp Username for 'https://github.com': 
+
+Host: AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  , 8 cores, 5G,  Windows 10 , 64 bit Build 19041 (10.0.19041.1023)
+Time: Wed Aug 18 21:59:46 2021 India Standard Time elapsed time: 4.270500 seconds (0d 0h 0m 4s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001e2e90bf000):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=17072, stack(0x0000007dd5c00000,0x0000007dd5d00000)]
+
+Stack: [0x0000007dd5c00000,0x0000007dd5d00000],  sp=0x0000007dd5cff280,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x372cf3]
+V  [jvm.dll+0x5eced2]
+V  [jvm.dll+0x3736aa]
+V  [jvm.dll+0x373937]
+V  [jvm.dll+0x6e6024]
+V  [jvm.dll+0x6eb208]
+V  [jvm.dll+0x6e3d45]

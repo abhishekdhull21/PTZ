@@ -1,14 +1,20 @@
 package com.aimers.zone;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.aimers.zone.Adapters.MatchResultAdapter;
 import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.MatchModal;
+import com.aimers.zone.Modals.MatchResultModal;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 
@@ -18,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import ir.androidexception.datatable.DataTable;
 import ir.androidexception.datatable.model.DataTableHeader;
@@ -31,6 +38,7 @@ public class MatchResultActivity extends AppCompatActivity {
     private NetworkRequest request;
     private MatchModal match;
     private ImageView img;
+    ArrayList<MatchResultModal> matchResults;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +46,7 @@ public class MatchResultActivity extends AppCompatActivity {
          match = (MatchModal) getIntent().getSerializableExtra("match");
 //         img = findViewById(R.id.img_not);
         request = new NetworkRequest(this);
-        initTable();
+        customActionbar();
         initRequest();
 
     }
@@ -46,11 +54,30 @@ public class MatchResultActivity extends AppCompatActivity {
     private void initRequest() {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", User.userToken(this));
-        params.put("match_id",match.getMatch_id());
+//        params.put("match_id",match.getMatch_id());
+        params.put("match_id","7");
+        // TODO: 18-08-2021  change with real id
+        Log.e(TAG, "initRequest: "+match.getMatch_id() );
+        matchResults = new ArrayList<>();
         request.sendRequest(params, MATCH_RESULT_URL, new RedeemRequestResponse() {
             @Override
             public void onSuccessResponse(JSONObject response) throws JSONException {
-                showTable(response);
+                Log.e(TAG, "onSuccessResponse: "+response );
+                if(response.getBoolean("success")){
+
+                    JSONArray responseArray = response.getJSONArray("data");
+                    // define 200 fake rows for table
+                    Log.e(TAG, "onSuccessResponse:"+responseArray );
+                    for(int i=0;i<responseArray.length();i++) {
+                        JSONObject data = responseArray.getJSONObject(i);
+                                matchResults.add(new MatchResultModal(
+                                    data.getString("username"),
+                                    data.getString("kills"),
+                                    data.getString("win"),
+                                    data.getString("position")));
+                    }
+                        showTable(matchResults);
+                    }
             }
 
             @Override
@@ -59,44 +86,23 @@ public class MatchResultActivity extends AppCompatActivity {
             }
         });
     }
-    private void initTable(){
-        dataTable = findViewById(R.id.data_table);
-        Log.d(TAG, "initTable: "+dataTable);
-        DataTableHeader header = new DataTableHeader.Builder()
-                .item("Sn",1)
-                .item("Player Name",3)
-                .item("Total Kill",2)
-                .item("Win",2)
-                .item("Position",2)
-                .build();
-        dataTable.setHeader(header);
-    }
-    private void showTable(JSONObject response) throws JSONException {
-        Log.e(TAG, "showTable: "+response );
-        if(!response.getBoolean("success")){
-//            img.setVisibility(View.VISIBLE);
-            return;
-        }
-        JSONArray responseArray = response.getJSONArray("data");
-        ArrayList<DataTableRow> rows = new ArrayList<>();
-        // define 200 fake rows for table
-        for(int i=0;i<responseArray.length();i++) {
-            JSONObject data = responseArray.getJSONObject(i);
-            DataTableRow row = new DataTableRow.Builder()
-                    .value("#" + (i+1))
-                    .value(data.getString("username"))
-                    .value(data.getString("kills"))
-                    .value(data.getString("win"))
-                    .value(data.getString("position"))
-
-                    .build();
-            rows.add(row);
-        }
-
-//        dataTable.setTypeface(typeface);
-
-        dataTable.setRows(rows);
-        dataTable.inflate(this);
+//    private void customActionbar() {
+//        ActionBar actionBar = getSupportActionBar();
+//        if(actionBar == null)return;
+//        Log.e(TAG, "customActionbar: main activity" );
+//        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getSupportActionBar().setDisplayShowCustomEnabled(true);
+//        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+//        View view = getSupportActionBar().getCustomView();
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+//        ImageView notification = view.findViewById(R.id.notification_custom_navbar);
+////        notification.setOnClickListener(this);
+//    }
+    private void showTable(ArrayList<MatchResultModal> matchResultModals) {
+        if (matchResultModals == null) return;
+        RecyclerView recyclerView = findViewById(R.id.recycleViewResult);
+        recyclerView.setAdapter(new MatchResultAdapter(matchResultModals,this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 }

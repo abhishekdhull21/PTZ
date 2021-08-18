@@ -43,13 +43,15 @@ public class MatchViewFragment extends Fragment {
     private TextView msg;
     private final ArrayList <MatchModal> match = new ArrayList<>();
     private static  GameModal game;
-    private final int pos;
+    private  int pos=1;
 
     public MatchViewFragment(GameModal param1, int pos) {
         game = param1;
        this.pos = pos;
     }
 
+//    public MatchViewFragment() {
+//    }
 
     public static MatchViewFragment newInstance(GameModal param1, int pos) {
         return new MatchViewFragment(param1,pos);

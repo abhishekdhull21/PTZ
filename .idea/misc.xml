@@ -5,9 +5,12 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match_join.xml" value="0.30251256281407035" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match_join2.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match_result.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_wallet.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/custom_layout_result.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_add_money_wallet.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_game.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_match_virew.xml" value="0.25416666666666665" />

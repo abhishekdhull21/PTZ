@@ -104,7 +104,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             });
             holder.btnCompleted.setOnClickListener(v -> {
                 Intent i  =new Intent(context, MatchResultActivity.class);
-                i.putExtra("match",match);
+                i.putExtra("match",matches.get(position));
                 context.startActivity(i);
             });
         }
