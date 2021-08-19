@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // OneSignal Initialization
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
-//        queue = Volley.newRequestQueue(this);
         progressBar =new ProgressDialog(this);
 //        get intent from pervious activity
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");
@@ -89,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             assert i != null;
             saveTokenLocal(sp, i.getToken());
         }
-//MaterialDialog
 
         SmartDialog mDialog = new SmartDialogBuilder(MainActivity.this)
                 .setTitle("Network State")

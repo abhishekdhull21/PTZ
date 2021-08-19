@@ -76,7 +76,6 @@ public class GameFragment extends Fragment {
         loadNotification();
         gameInfo();
 
-
         return v;
     }
     private void setViewNotification(){
@@ -110,12 +109,10 @@ public class GameFragment extends Fragment {
             JSONObject data = responseArray.getJSONObject(i);
             notifications.add(
                     new Notification(
-                            data.getString("noti_header"),
-                            data.getString("noti_body")
-
+                            data.getString("head"),
+                            data.getString("body")
                     )
             );
-
         }
         setViewNotification();
     }
@@ -164,7 +161,6 @@ public class GameFragment extends Fragment {
             txtSub.setVisibility(View.GONE);
             txtHead.setVisibility(View.GONE);
             img.setVisibility(View.GONE);
-        Log.e(TAG, "sendToAdapter: gone" );
             r.setAdapter(new GameViewAdapter(requireActivity(),games));
             r.setLayoutManager(new LinearLayoutManager(getContext()));
         }

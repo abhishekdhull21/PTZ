@@ -37,20 +37,17 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private FragmentLoginBinding binding;
     NetworkRequest request;
-    private static final String ARG_COUNT = "param1";
+
     private ProgressDialog dialog;
     private User user;
     public LoginFragment() {
         // Required empty public constructor
     }
     public static LoginFragment newInstance(String text) {
-
         LoginFragment f = new LoginFragment();
         Bundle b = new Bundle();
         b.putString("msg", text);
-
         f.setArguments(b);
-
         return f;
     }
 
@@ -99,7 +96,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     e.printStackTrace();
                 }
                 dialog.dismiss();
-                Toast.makeText(context, ""+response, Toast.LENGTH_SHORT).show();
 
             }
 
