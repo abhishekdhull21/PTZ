@@ -42,7 +42,6 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
 
     public void setProfileName(){
         UserFromServer(requireActivity(),this);
-//            new MyTask(requireActivity()).loadInBackground();
     }
 
     @Override
@@ -66,7 +65,6 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
             case R.id.myzone_logout:
                     User.logout(requireActivity());
                 break;
-
         }
         if (i!= null)
             startActivity(i);
@@ -79,19 +77,4 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
         binding.txtTotalKillCount.setText(user.getKills());
         binding.txtMatchPlayedCount.setText(user.getMatch_played());
     }
-
-/*    private static class MyTask extends AsyncTaskLoader<String>{
-
-        public MyTask(@NonNull Context context) {
-            super(context);
-        }
-
-        @Nullable
-        @Override
-        public String loadInBackground() {
-//            if())
-//                Log.d("TAG", "loadInBackground: "+user.getName());
-            return null;
-        }
-    }*/
 }
