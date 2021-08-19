@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,8 @@ public class GameFragment extends Fragment {
     public static GameFragment newInstance(String text) {
         return new GameFragment();
     }
+    private TextView txtHead,txtSub;
+    private ImageView img;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,6 +68,9 @@ public class GameFragment extends Fragment {
 //        games.add(new GameModal());
         games = new ArrayList<GameModal>();
         r= v.findViewById(R.id.recycler_game);
+        txtHead= v.findViewById(R.id.textViewFragGame404);
+        txtSub= v.findViewById(R.id.textViewFragGameSub404);
+        img= v.findViewById(R.id.imageViewFragGame404);
         txt_notification = v.findViewById(R.id.txt_notification);
         notification_cardview = v.findViewById(R.id.notification_cardview);
         loadNotification();
@@ -133,9 +139,11 @@ public class GameFragment extends Fragment {
                                             BASE_URL1+img_url+object.getString("game_pic")
                                             ));
                                 }
+                                Log.e(TAG, "gameInfo: "  );
                                 sendToAdapter(games);
                             }
                             else {
+                                Log.e(TAG, "gameInfo: erro"+response );
                                Utils.alert("Error",response.getString("error"),requireActivity(),false);
                             }
                         } catch (JSONException e) {
@@ -151,6 +159,12 @@ public class GameFragment extends Fragment {
             queue.add(stringRequest);
         }
     private void sendToAdapter(List<GameModal> games){
+            if (games == null)return;
+            r.setVisibility(View.VISIBLE);
+            txtSub.setVisibility(View.GONE);
+            txtHead.setVisibility(View.GONE);
+            img.setVisibility(View.GONE);
+        Log.e(TAG, "sendToAdapter: gone" );
             r.setAdapter(new GameViewAdapter(requireActivity(),games));
             r.setLayoutManager(new LinearLayoutManager(getContext()));
         }

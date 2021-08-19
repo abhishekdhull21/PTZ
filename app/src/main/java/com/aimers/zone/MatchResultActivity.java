@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aimers.zone.Adapters.MatchResultAdapter;
 import com.aimers.zone.Interface.RedeemRequestResponse;
@@ -46,7 +47,7 @@ public class MatchResultActivity extends AppCompatActivity {
          match = (MatchModal) getIntent().getSerializableExtra("match");
 //         img = findViewById(R.id.img_not);
         request = new NetworkRequest(this);
-        customActionbar();
+
         initRequest();
 
     }
@@ -54,9 +55,8 @@ public class MatchResultActivity extends AppCompatActivity {
     private void initRequest() {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", User.userToken(this));
-//        params.put("match_id",match.getMatch_id());
-        params.put("match_id","7");
-        // TODO: 18-08-2021  change with real id
+        params.put("match_id",match.getMatch_id());
+//        params.put("match_id","7");
         Log.e(TAG, "initRequest: "+match.getMatch_id() );
         matchResults = new ArrayList<>();
         request.sendRequest(params, MATCH_RESULT_URL, new RedeemRequestResponse() {
@@ -101,6 +101,11 @@ public class MatchResultActivity extends AppCompatActivity {
     private void showTable(ArrayList<MatchResultModal> matchResultModals) {
         if (matchResultModals == null) return;
         RecyclerView recyclerView = findViewById(R.id.recycleViewResult);
+        ImageView img = findViewById(R.id.imageViewMatcResult404);
+        TextView textView = findViewById(R.id.textView42);
+        recyclerView.setVisibility(View.VISIBLE);
+        img.setVisibility(View.GONE);
+        textView.setVisibility(View.GONE);
         recyclerView.setAdapter(new MatchResultAdapter(matchResultModals,this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

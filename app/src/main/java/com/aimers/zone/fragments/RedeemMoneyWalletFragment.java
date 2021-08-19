@@ -17,7 +17,6 @@ import com.aimers.zone.R;
  */
 public class RedeemMoneyWalletFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -33,7 +32,6 @@ public class RedeemMoneyWalletFragment extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment RedeemMoneyWalletFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static RedeemMoneyWalletFragment newInstance(String param1) {
         RedeemMoneyWalletFragment fragment = new RedeemMoneyWalletFragment();
         Bundle args = new Bundle();
@@ -46,7 +44,6 @@ public class RedeemMoneyWalletFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            // TODO: Rename and change types of parameters
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
         }

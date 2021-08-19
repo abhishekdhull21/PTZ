@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -39,7 +40,7 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 public class MatchViewFragment extends Fragment {
     private RequestQueue queue;
     private RecyclerView recyclerView;
-    private Group group;
+    private ImageView imageView;
     private TextView msg;
     private final ArrayList <MatchModal> match = new ArrayList<>();
     private static  GameModal game;
@@ -71,7 +72,8 @@ public class MatchViewFragment extends Fragment {
         Log.d(TAG, "onCreateView: "+game.getTitle());
         queue = Volley.newRequestQueue(requireActivity());
         recyclerView= v.findViewById(R.id.match_view_recyler);
-        group = v.findViewById(R.id.no_data_found_group);
+        imageView = v.findViewById(R.id.imageViewFragMatchView);
+        msg = v.findViewById(R.id.textViewFragMatchView);
                 getMatchInfo(pos);
         return v;
     }
@@ -122,8 +124,7 @@ public class MatchViewFragment extends Fragment {
                     }
 //                        Toast.makeText(requireActivity(), ""+response, Toast.LENGTH_SHORT).show();
                 }, error -> {
-                    recyclerView.setVisibility(View.GONE);
-                    group.setVisibility(View.VISIBLE);
+
                     msg.setText(R.string.error_occurred);
                     Log.d(TAG, "onErrorResponse: "+error.getLocalizedMessage() );
                     if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
@@ -139,6 +140,10 @@ public class MatchViewFragment extends Fragment {
     }
 
       public void sendToAdapter(ArrayList<MatchModal> map){
+        if (map.isEmpty()) return;
+        recyclerView.setVisibility(View.VISIBLE);
+        msg.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
         recyclerView.setAdapter(new MatchViewAdapter(requireActivity(),map,game));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

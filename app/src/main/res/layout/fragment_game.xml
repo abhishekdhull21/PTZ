@@ -61,12 +61,47 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notification_cardview" />
+        app:layout_constraintTop_toBottomOf="@+id/notification_cardview">
 
-<!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/imageViewFragGame404"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/images"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewFragGame404"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="No Game Right Now"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFragGame404"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFragGame404"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFragGame404" />
+
+    <TextView
+        android:id="@+id/textViewFragGameSub404"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wait for new Game.."
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFragGame404"
+        app:layout_constraintStart_toStartOf="@+id/textViewFragGame404"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFragGame404" />
+
+    <!--    <com.facebook.shimmer.ShimmerFrameLayout-->
 <!--        android:id="@+id/shimmer_view_container"-->
 <!--        android:layout_width="0dp"-->
 <!--        android:layout_height="0dp"-->

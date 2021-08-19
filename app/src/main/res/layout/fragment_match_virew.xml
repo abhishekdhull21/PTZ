@@ -14,24 +14,34 @@
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:paddingBottom="@dimen/dimen_16dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/no_data_found_group"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <ImageView
+        android:id="@+id/imageViewFragMatchView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/images"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewFragMatchView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="No Record Found"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFragMatchView"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFragMatchView"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFragMatchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

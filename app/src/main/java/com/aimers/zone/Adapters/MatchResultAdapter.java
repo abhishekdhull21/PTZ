@@ -42,7 +42,6 @@ public class MatchResultAdapter extends RecyclerView.Adapter<MatchResultAdapter.
         holder.txtRank.setText((matchResult.getPosition() != null)?matchResult.getPosition(): "0");
         holder.txtRemarks.setText(matchResult.getRemarks()!= null?matchResult.getRemarks():"");
         holder.txtKills.setText(matchResult.getKill() != null ? matchResult.getKill():"0");
-//        // TODO: 18-08-2021  set remarks
         holder.txtNo.setText(String.format("%d", position + 1));
         holder.txtName.setText(matchResult.getUsername()!=null?matchResult.getUsername():"no name");
 
