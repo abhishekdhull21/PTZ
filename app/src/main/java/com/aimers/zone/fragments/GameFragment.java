@@ -73,9 +73,12 @@ public class GameFragment extends Fragment {
         img= v.findViewById(R.id.imageViewFragGame404);
         txt_notification = v.findViewById(R.id.txt_notification);
         notification_cardview = v.findViewById(R.id.notification_cardview);
+
         loadNotification();
         gameInfo();
+        notification_cardview.setOnClickListener(view -> {
 
+        });
         return v;
     }
     private void setViewNotification(){

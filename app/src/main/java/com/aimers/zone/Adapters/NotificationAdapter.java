@@ -34,8 +34,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Notification notification = notifications.get(position);
-        holder.txt_header.setText(notification.getHeader());
-        holder.notification_cardview.setOnClickListener(v -> context.startActivity(new Intent(context, NotificationShowActivity.class)));
+        holder.txt_header.setText(notification.getHeader() != null ? notification.getHeader():"");
+        holder.txt_body.setText(notification.getBody()!= null ? notification.getBody() : "");
+//        holder.notification_cardview.setOnClickListener(v -> context.startActivity(new Intent(context, NotificationShowActivity.class)));
     }
 
     @Override
@@ -45,11 +46,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final CardView notification_cardview;
-        public final TextView txt_header;
+        public final TextView txt_header,txt_body;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             notification_cardview = itemView.findViewById(R.id.notification_msg_node_cardview);
             txt_header= itemView.findViewById(R.id.txt_notification_child_node);
+            txt_body= itemView.findViewById(R.id.textviewNotiBody);
         }
     }
 }
