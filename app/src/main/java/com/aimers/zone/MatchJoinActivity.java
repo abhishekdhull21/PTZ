@@ -78,8 +78,7 @@ public class MatchJoinActivity extends AppCompatActivity {
             }
         });
         binding.copyPassword.setOnClickListener(v -> {
-            if (isRoom)
-            {
+            if (isRoom){
                 ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                 cm.setText(binding.txtRoomPassword.getText());
                 Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
@@ -103,6 +102,7 @@ public class MatchJoinActivity extends AppCompatActivity {
 //        binding.txt1stPrize.setText(match.getPrize());
         binding.txtTotalPrizePool.setText(match.getPrize_pool());
         binding.txtPerKillPrize.setText(match.getPer_kill());
+        binding.txt1stPrize.setText(match.getFirst_prize());
         Glide.with(this).load(match.getPic()).into(binding.imageViewMatchMain);
 
 

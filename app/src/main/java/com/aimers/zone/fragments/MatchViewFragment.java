@@ -2,7 +2,6 @@ package com.aimers.zone.fragments;
 
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -107,7 +106,8 @@ public class MatchViewFragment extends Fragment {
                                         object.getString("total_slot"),
                                         object.getString("alloted_slot"),
                                         object.getString("remaining_slot"),
-                                        game.getPic()
+                                        game.getPic(),
+                                        !object.getString("first_prize").equals("") ?object.getString("first_prize"):"00"
                                         ));
                             }
 //                                Log.d(TAG, "onResponse: after p"+response.length());
