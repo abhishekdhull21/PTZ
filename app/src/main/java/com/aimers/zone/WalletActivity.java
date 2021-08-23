@@ -43,8 +43,8 @@ public class WalletActivity extends AppCompatActivity {
                 txtTotalCoin.setText(wallet.getCoins());
             }
             else{
-                SmartDialog mDialog = new SmartDialogBuilder(WalletActivity.this)
-                        .setTitle("Error")
+                SmartDialogBuilder mDialog = new SmartDialogBuilder(WalletActivity.this);
+                        mDialog.setTitle("Error")
                         .setSubTitle("Something Going Wrong Please try after restart the app")
                         .setCancalable(false)
                         .build();

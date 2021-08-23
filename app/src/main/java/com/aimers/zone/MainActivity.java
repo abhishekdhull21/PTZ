@@ -1,4 +1,11 @@
 package com.aimers.zone;
+
+import static com.aimers.zone.Modals.Wallet.wallet;
+import static com.aimers.zone.Utils.Constant.JOINED_MATCH_URL;
+import static com.aimers.zone.Utils.Utils.saveTokenLocal;
+import static com.aimers.zone.fragments.RegisterFragment.TAG;
+import static com.aimers.zone.wallet.Wallet.fetch;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.aimers.zone.Interface.RedeemRequestResponse;
+import com.aimers.zone.Interface.WalletFetchResponse;
 import com.aimers.zone.Modals.JoinedMatch;
 import com.aimers.zone.Modals.Notification;
 import com.aimers.zone.Modals.UserBio;
@@ -27,8 +36,6 @@ import com.aimers.zone.fragments.GameFragment;
 import com.aimers.zone.fragments.MyZoneFragment;
 import com.aimers.zone.fragments.SupportFragment;
 import com.aimers.zone.wallet.Wallet;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.androidstudy.networkmanager.Tovuti;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,10 +52,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-import static com.aimers.zone.Utils.Constant.JOINED_MATCH_URL;
-import static com.aimers.zone.Utils.Utils.saveTokenLocal;
-import static com.aimers.zone.fragments.RegisterFragment.TAG;
-
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
     final Fragment fragment1 = new SupportFragment();
     final Fragment fragment2 = new GameFragment();
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     public static JoinedMatch jMatch;
     private static final String ONESIGNAL_APP_ID ="75715159-da5b-4540-9b57-76bc9916d532";
     Fragment active = fragment2;
-
 //    private HashMap<String, String> params;
 //    private RequestQueue queue;
     private ProgressDialog progressBar;
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         customActionbar();
 
         request = new NetworkRequest(MainActivity.this);
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 .setCancalable(false)
                 .build();
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        Wallet.fetch(MainActivity.this,status -> {
+        fetch(MainActivity.this,status -> {
 
         });
 //        loadNotification();
@@ -117,14 +120,26 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     private void customActionbar() {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar == null)return;
-        Log.e(TAG, "customActionbar: main activity" );
+//        Log.e(TAG, "customActionbar: main activity" );
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View view = getSupportActionBar().getCustomView();
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+        TextView walletCoin = view.findViewById(R.id.textViewWallet);
+        fetch(this, status -> {
+            if (status)
+                walletCoin.setText(com.aimers.zone.Modals.Wallet.wallet.getCoins());
+//            Log.e(TAG, "customActionbar: "+wallet.getCoins() );
+
+        });
+
+//        Log.e(TAG, "customActionbar: "+wallet.getCoins() );
         ImageView notification = view.findViewById(R.id.notification_custom_navbar);
         notification.setOnClickListener(this);
+        walletCoin.setOnClickListener(view1 -> {
+            startActivity(new Intent(MainActivity.this,WalletActivity.class));
+        });
     }
     public void loadFragment() {
         fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
