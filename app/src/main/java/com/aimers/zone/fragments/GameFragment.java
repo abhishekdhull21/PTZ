@@ -76,9 +76,9 @@ public class GameFragment extends Fragment {
 
         loadNotification();
         gameInfo();
-        notification_cardview.setOnClickListener(view -> {
-
-        });
+//        notification_cardview.setOnClickListener(view -> {
+//
+//        });
         return v;
     }
     private void setViewNotification(){
@@ -123,12 +123,13 @@ public class GameFragment extends Fragment {
         progressDialog.setTitle("Requesting");
         progressDialog.setMessage("Loading Matches___");
         progressDialog.show();
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,GAME_URL,null,
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,"http://aimerszone.nexttechtrend.com/api/game.php",null,
                     response -> {
+                        Log.e(TAG, "gameInfo: "+response );
                         progressDialog.dismiss();
                         try {
                             if (response.getBoolean("success")){
-//                                    Log.d("TAGa", "onResponse: "+response);
+                                    Log.d("TAGa", "onResponse: "+response);
                                 String img_url = response.getString("img_url");
                                 JSONArray data = response.getJSONArray("data");
                                 for (int i=0;i<data.length();i++) {

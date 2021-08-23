@@ -60,6 +60,7 @@ public class MyZoneFragment extends Fragment implements View.OnClickListener, Us
                i = new Intent(getActivity(),WalletActivity.class);
                 break;
             case R.id.myzone_notification:
+
                 i = new Intent(getActivity(), NotificationActivity.class);
                 break;
             case R.id.myzone_logout:
