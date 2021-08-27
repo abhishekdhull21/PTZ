@@ -1,5 +1,7 @@
 package com.aimers.zone.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,8 @@ public class TransactionWalletFragment extends Fragment {
     private View v;
     private DataTable dataTable;
     ImageView img;
+    private Activity mActivity;
+
     public TransactionWalletFragment() {
         // Required empty public constructor
     }
@@ -50,6 +54,7 @@ public class TransactionWalletFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_transaction_wallet, container, false);
 //        img = v.findViewById(R.id .img_no_found);
+        mActivity = requireActivity();
         initTable();
         sendRequest();
 
@@ -69,6 +74,7 @@ public class TransactionWalletFragment extends Fragment {
 
     private void sendRequest(){
         Map<String,String> params = initRequest();
+        if (params== null)return;
         NetworkRequest request = new NetworkRequest(requireActivity());
         request.sendRequest(params, TRANSACTION_LIST_REQUEST, new RedeemRequestResponse() {
             @Override
@@ -107,12 +113,14 @@ public class TransactionWalletFragment extends Fragment {
 //        dataTable.setTypeface(typeface);
 
         dataTable.setRows(rows);
-        dataTable.inflate(requireActivity());
+        dataTable.inflate(mActivity);
 
     }
     private Map<String, String> initRequest(){
+        if (mActivity == null) return null;
         Map<String, String> params = new HashMap<>();
-        params.put("token", User.userToken(requireActivity()));
+
+        params.put("token", User.userToken(mActivity));
         return params;
     }
 }

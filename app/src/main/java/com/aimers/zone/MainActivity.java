@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");
         SharedPreferences sp = getSharedPreferences("token", MODE_PRIVATE);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        if (!sp.contains("token")) {
-            assert i != null;
+        if (!sp.contains("token") && i != null) {
+            if (i.getToken() !=null)
             saveTokenLocal(sp, i.getToken());
         }
 

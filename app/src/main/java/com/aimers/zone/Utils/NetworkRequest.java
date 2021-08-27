@@ -34,7 +34,7 @@ public class NetworkRequest {
                     }
                 }, error -> {
 
-                    Log.d(TAG, " userfromserver  onErrorResponse: "+error.getLocalizedMessage() );
+//                    Log.d(TAG, " userfromserver  onErrorResponse: "+error.getLocalizedMessage() );
                     if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
                         Toast.makeText(context, ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                     else

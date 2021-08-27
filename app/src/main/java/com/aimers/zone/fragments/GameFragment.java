@@ -1,6 +1,8 @@
 package com.aimers.zone.fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +52,8 @@ public class GameFragment extends Fragment {
     private TextView txt_notification;
     private CardView notification_cardview;
     private ProgressDialog progressDialog;
+    private Context mActivity;
+
     public GameFragment() {
         // Required empty public constructor
     }
@@ -63,8 +67,9 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_game, container, false);
-        queue = Volley.newRequestQueue(requireActivity());
-        progressDialog = new ProgressDialog(requireActivity());
+        mActivity = requireActivity();
+        queue = Volley.newRequestQueue(mActivity);
+        progressDialog = new ProgressDialog(mActivity);
 //        games.add(new GameModal());
         games = new ArrayList<GameModal>();
         r= v.findViewById(R.id.recycler_game);
@@ -88,7 +93,7 @@ public class GameFragment extends Fragment {
     }
     private void loadNotification(){
         Map<String, String> params = new HashMap<>();
-        params.put("token", User.userToken(requireActivity()));
+        params.put("token", User.userToken(mActivity));
         NetworkRequest request = new NetworkRequest(requireActivity());
         request.sendRequest(params, NOTIFICATION_URL, new RedeemRequestResponse() {
             @Override
@@ -145,7 +150,7 @@ public class GameFragment extends Fragment {
                             }
                             else {
                                 Log.e(TAG, "gameInfo: erro"+response );
-                               Utils.alert("Error",response.getString("error"),requireActivity(),false);
+                               Utils.alert("Error",response.getString("error"), (Activity) mActivity,false);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -153,20 +158,20 @@ public class GameFragment extends Fragment {
                     }, error -> {
                         progressDialog.dismiss();
                      if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                            Toast.makeText(requireActivity(), "error occurred: try after sometime", Toast.LENGTH_LONG).show();
+                            Toast.makeText(mActivity, "error occurred: try after sometime", Toast.LENGTH_LONG).show();
                         else
-                            Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(mActivity, ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                     });
             queue.add(stringRequest);
         }
     private void sendToAdapter(List<GameModal> games){
-            if (games == null)return;
+            if (games == null || mActivity ==null)return;
             r.setVisibility(View.VISIBLE);
             txtSub.setVisibility(View.GONE);
             txtHead.setVisibility(View.GONE);
             img.setVisibility(View.GONE);
-            r.setAdapter(new GameViewAdapter(requireActivity(),games));
-            r.setLayoutManager(new LinearLayoutManager(getContext()));
+            r.setAdapter(new GameViewAdapter(mActivity,games));
+            r.setLayoutManager(new LinearLayoutManager(mActivity));
         }
 
 }

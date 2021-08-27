@@ -1,5 +1,6 @@
 package com.aimers.zone.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -44,7 +45,7 @@ public class MatchViewFragment extends Fragment {
     private final ArrayList <MatchModal> match = new ArrayList<>();
     private static  GameModal game;
     private  int pos=1;
-
+    private Activity mActivity;
     public MatchViewFragment(GameModal param1, int pos) {
         game = param1;
        this.pos = pos;
@@ -67,9 +68,9 @@ public class MatchViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_match_virew, container, false);
-
+        mActivity= requireActivity();
         Log.d(TAG, "onCreateView: "+game.getTitle());
-        queue = Volley.newRequestQueue(requireActivity());
+        queue = Volley.newRequestQueue(mActivity);
         recyclerView= v.findViewById(R.id.match_view_recyler);
         imageView = v.findViewById(R.id.imageViewFragMatchView);
         msg = v.findViewById(R.id.textViewFragMatchView);
@@ -127,11 +128,12 @@ public class MatchViewFragment extends Fragment {
 
                     msg.setText(R.string.error_occurred);
                     Log.d(TAG, "onErrorResponse: "+error.getLocalizedMessage() );
-                    if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
-                        alert("","error occurred: try after sometime",requireActivity(),false);
+
+            if (error.getLocalizedMessage() == null || error.getLocalizedMessage().isEmpty() )
+                        alert("","error occurred: try after sometime",mActivity,false);
     //                    Toast.makeText(requireActivity(), "", Toast.LENGTH_LONG).show();
                     else
-                        alert("error",error.getLocalizedMessage(),requireActivity(),false);
+                        alert("error",error.getLocalizedMessage(),mActivity,false);
     //                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 });
 
@@ -140,13 +142,13 @@ public class MatchViewFragment extends Fragment {
     }
 
       public void sendToAdapter(ArrayList<MatchModal> map){
-        if (map.isEmpty()) return;
+        if (map.isEmpty() || mActivity == null) return;
         recyclerView.setVisibility(View.VISIBLE);
         msg.setVisibility(View.GONE);
         imageView.setVisibility(View.GONE);
-        recyclerView.setAdapter(new MatchViewAdapter(requireActivity(),map,game));
+        recyclerView.setAdapter(new MatchViewAdapter(mActivity,map,game));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
 
     }
 
