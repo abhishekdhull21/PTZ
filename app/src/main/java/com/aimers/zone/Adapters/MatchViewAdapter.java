@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aimers.zone.MatchResultActivity;
 import com.aimers.zone.Modals.GameModal;
 import com.aimers.zone.Modals.MatchModal;
+import com.aimers.zone.Modals.OfferModal;
 import com.aimers.zone.R;
 import com.aimers.zone.MatchJoinActivity;
 import com.bumptech.glide.Glide;
@@ -43,11 +45,6 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         this.context = context;
     }
 
-    @Override
-    public void onViewDetachedFromWindow(@NonNull ViewHolder holder) {
-        super.onViewDetachedFromWindow(holder);
-        Log.e(TAG, "onViewDetachedFromWindow: " );
-    }
 
 
 
@@ -62,7 +59,8 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         match = matches.get(position);
         Button mButton1 = holder.btnJoin;
-
+        OfferModal offer = match.getOffers();
+        String yt = match.getYt();
         holder.card_join_msg.setVisibility(View.GONE);
         if(match.getPos() == 1) {
             holder.layout_slots.setVisibility(View.VISIBLE);
@@ -72,7 +70,14 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             if (jMatch !=null)
             if (jMatch.getMatchId().contains(match.getMatch_id())) {
                 holder.card_join_msg.setVisibility(View.VISIBLE);
-                Log.e(TAG, "onBindViewHolder: "+jMatch.getMatchId() +" and curr match:"+match.getMatch_id() );
+
+                if (offer != null)
+                {
+                    holder.match_offer_cardview.setVisibility(View.VISIBLE);
+                    holder.textView_offer_body.setText(offer.getBody() != null ? offer.getBody(): "");
+                    holder.textView_offer_heading.setText(offer.getHeading() != null ? offer.getHeading(): "");
+                }
+//                Log.e(TAG, "onBindViewHolder: "+jMatch.getMatchId() +" and curr match:"+match.getMatch_id() );
 //                        mButton1.setText(R.string.join_teammate);
 
 //                        mButton1.setOnClickListener(v -> {
@@ -82,24 +87,37 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
 //                        });
 
             }
-                holder.btnJoin.setOnClickListener(v -> {
-                    Intent i  = new Intent(context,MatchJoinActivity.class);
-                    i.putExtra("match",matches.get(position));
-                    context.startActivity(i);
+            holder.btnJoin.setOnClickListener(v -> {
+                Intent i  = new Intent(context,MatchJoinActivity.class);
+                i.putExtra("match",matches.get(position));
+                context.startActivity(i);
 //                    bottomSheetDialogFragment = new MatchJoinActivity(context, matches.get(position));
 //                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
 
-                });
+            });
+            holder.match_layout.setOnClickListener(v -> {
+//                todo: on image click app crash need to solve
+                Intent i  = new Intent(context,MatchJoinActivity.class);
+                i.putExtra("match",matches.get(position));
+                context.startActivity(i);
+//                    bottomSheetDialogFragment = new MatchJoinActivity(context, matches.get(position));
+//                    bottomSheetDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
+
+            });
 
         }
         else{                                               //(match.getPos() == 0)
             holder.layout_slots.setVisibility(View.GONE);
             holder.btnJoin.setVisibility(View.GONE);
             holder.btnYT.setVisibility(View.VISIBLE);
+
+            if ( yt== null)
+                yt = YT_URL;
             holder.btnCompleted.setVisibility(View.VISIBLE);
+            String finalYt = yt;
             holder.btnYT.setOnClickListener(v->{
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(YT_URL));
+                intent.setData(Uri.parse(finalYt));
                 context.startActivity(intent);
             });
             holder.btnCompleted.setOnClickListener(v -> {
@@ -181,13 +199,16 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
         public final TextView txtSlot;
         public final TextView txtRemaining;
         public final TextView txtGameName;
+        public final TextView textView_offer_heading;
+        public final TextView textView_offer_body;
         public final Button btnCompleted;
         public final ProgressBar progressBar;
         public final ImageView gameImg;
         public final Button btnJoin;
         public final Button btnYT;
         public final LinearLayout layout_slots;
-        public final CardView card_join_msg;
+        public final CardView card_join_msg,match_offer_cardview;
+        public final ConstraintLayout match_layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtPrize = itemView.findViewById(R.id.txt_pool);
@@ -207,6 +228,10 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             gameImg = itemView.findViewById(R.id.match_game_img);
             layout_slots = itemView.findViewById(R.id.layout_slot_spot);
             card_join_msg = itemView.findViewById(R.id.card_join_msg);
+            match_offer_cardview = itemView.findViewById(R.id.match_offer_cardview);
+            match_layout = itemView.findViewById(R.id.layout);
+            textView_offer_heading = itemView.findViewById(R.id.textView_offer_heading);
+            textView_offer_body = itemView.findViewById(R.id.textView_offer_body);
         }
     }
 }

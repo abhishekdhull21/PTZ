@@ -2,10 +2,12 @@ package com.aimers.zone.Utils;
 
 public class Constant {
     //Urls
+    public static final String BASE_URL = "http://df0b-2409-4051-11-3b6-394f-1ed2-7b04-2cc4.ngrok.io/ptz/api/";
+    public static final String BASE_URL1 = "http://df0b-2409-4051-11-3b6-394f-1ed2-7b04-2cc4.ngrok.io/ptz/admin/";
 //    public static final String BASE_URL = "http://10.0.2.2/ptz/api/";
 //    public static final String BASE_URL1 = "http://10.0.2.2/ptz/admin/";
-    public static final String BASE_URL = "http://aimerszone.nexttechtrend.com/api/";
-    public static final String BASE_URL1 = "http://aimerszone.nexttechtrend.com/admin";
+//    public static final String BASE_URL = "http://aimerszone.nexttechtrend.com/api/";
+//    public static final String BASE_URL1 = "http://aimerszone.nexttechtrend.com/admin";
     public static final String TEST_URL = BASE_URL+"test.php";
     public static final String MID = "VCWQWH26061118544596";
     public static final String REGISTER_URL = BASE_URL+"register.php";
@@ -23,6 +25,7 @@ public class Constant {
     public static final String MATCH_RESULT_URL = BASE_URL+"match-result.php";
     public static final String SUBMIT_QUERY_URL = BASE_URL+"submit_query.php";
     public static final String GET_ROOM = BASE_URL+"getroom.php";
+    public static final String LOGOUT_URL = BASE_URL+"logout.php";
 
     public static final String YT_URL = "https://www.youtube.com/channel/UCIaJIMy52Io3k3OM0Vy5gLA";
 

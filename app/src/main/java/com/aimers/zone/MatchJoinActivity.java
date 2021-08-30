@@ -216,8 +216,10 @@ public class MatchJoinActivity extends AppCompatActivity {
                 if (response.getBoolean("success")){
 
                     JSONObject obj = response.getJSONObject("data");
-                    setRoom(obj.getString("id"),obj.getString("password"));
-                    isRoom= true;
+                    if(!obj.getString("id").equals("") && !obj.getString("id").equals("null")) {
+                        setRoom(obj.getString("id"), obj.getString("password"));
+                        isRoom = true;
+                    }
                 }
             }
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,11 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
         holder.game_title.setText(game.getTitle());
         Log.d(TAG, "onBindViewHolder: "+game.getPic());
         Glide.with(context).load(game.getPic()).into(holder.game_img);
+        holder.game_title.setOnClickListener(v -> {
+            Intent i = new Intent(context,MatchActivity.class);
+            i.putExtra("game", game);
+            context.startActivity(i);
+        });
         holder.cardView.setOnClickListener(v -> {
             Intent i = new Intent(context,MatchActivity.class);
             i.putExtra("game", game);
@@ -63,11 +69,13 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.ViewHo
         public final CardView cardView;
         public final ImageView game_img;
         public final TextView game_title;
+        public final LinearLayout layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.game_card_layout);
             game_img = itemView.findViewById(R.id.game_img);
             game_title = itemView.findViewById(R.id.game_title);
+            layout = itemView.findViewById(R.id.linear_layout_game);
         }
     }
 }

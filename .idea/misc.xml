@@ -9,12 +9,15 @@
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match_join2.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_match_result.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_notification.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_sign.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_verify_otpactivity.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_wallet.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/custom_action_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/custom_layout_result.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_add_money_wallet.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_game.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_login.xml" value="0.536" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_match_virew.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_my_zone.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_redeem.xml" value="0.25416666666666665" />
@@ -22,7 +25,7 @@
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_rule_scrolling.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_supportk.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/game_card_layout.xml" value="0.25416666666666665" />
-        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/layout_match_card_view.xml" value="0.4" />
+        <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/layout_match_card_view.xml" value="0.536" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/my_match_view_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MyApplication/app/src/main/res/layout/notification_msg_node.xml" value="0.25416666666666665" />
       </map>

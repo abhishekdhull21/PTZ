@@ -16,6 +16,22 @@ public class MatchModal implements Serializable {
     final String total_slot;
     final String alloted_slot;
     final String remaining_slot;
+    private OfferModal offers;
+    final String yt;
+    public String getYt() {
+        return yt;
+    }
+
+
+
+
+    public OfferModal getOffers() {
+        return offers;
+    }
+
+    public void setOffers(OfferModal offers) {
+        this.offers = offers;
+    }
 
     public String getFirst_prize() {
         return first_prize;
@@ -93,7 +109,7 @@ int pos;
         this.pos = pos;
     }
 
-    public MatchModal(int pos, String match_id, String game_id, String match_date, String match_time, String prize_pool, String per_kill, String entry_fee, String type, String version, String map, String total_slot, String alloted_slot, String remaining_slot, String pic, String first_prize) {
+    public MatchModal(int pos, String match_id, String game_id, String match_date, String match_time, String prize_pool, String per_kill, String entry_fee, String type, String version, String map, String total_slot, String alloted_slot, String remaining_slot,String yt, String pic, String first_prize) {
         this.pos = pos;
         this.match_id = match_id;
         this.game_id = game_id;
@@ -110,5 +126,6 @@ int pos;
         this.remaining_slot = remaining_slot;
         this.first_prize = first_prize;
         this.pic = pic;
+        this.yt = yt;
     }
 }

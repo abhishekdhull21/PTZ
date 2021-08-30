@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     final Fragment fragment2 = new GameFragment();
     final Fragment fragment3 = new MyZoneFragment();
     private NetworkRequest request;
+    String  onesignal_userid ;
     final FragmentManager fm = getSupportFragmentManager();
     public static UserBio user;
     public static JoinedMatch jMatch;
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // OneSignal Initialization
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
+         onesignal_userid = Objects.requireNonNull(OneSignal.getDeviceState()).getUserId();
+
         progressBar =new ProgressDialog(this);
 //        get intent from pervious activity
         UserInfo i = (UserInfo) getIntent().getSerializableExtra("user");
@@ -91,7 +94,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             if (i.getToken() !=null)
             saveTokenLocal(sp, i.getToken());
         }
+//        OneSignal.setExternalUserId();
 
+//        OneSignal.setSMSNumber(user.getMobile() != null ? user.getMobile() : "0");
         SmartDialog mDialog = new SmartDialogBuilder(MainActivity.this)
                 .setTitle("Network State")
                 .setSubTitle("No Internet Connection Live")
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     private void fetchJoinedMatch(){
         HashMap<String, String> params = new HashMap<>();
         params.put("token",User.userToken(MainActivity.this));
+        params.put("onesignal_userid",onesignal_userid);
         ArrayList<String> matches = new ArrayList<>();
         request.sendRequest(params, JOINED_MATCH_URL, new RedeemRequestResponse() {
             @Override

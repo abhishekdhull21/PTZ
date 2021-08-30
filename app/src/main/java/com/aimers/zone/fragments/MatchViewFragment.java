@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aimers.zone.Modals.OfferModal;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -43,9 +45,11 @@ public class MatchViewFragment extends Fragment {
     private ImageView imageView;
     private TextView msg;
     private final ArrayList <MatchModal> match = new ArrayList<>();
+    private  final HashMap<String, OfferModal> offerModalHashMap = new HashMap<>();
     private static  GameModal game;
     private  int pos=1;
     private Activity mActivity;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public MatchViewFragment(GameModal param1, int pos) {
         game = param1;
        this.pos = pos;
@@ -69,12 +73,19 @@ public class MatchViewFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_match_virew, container, false);
         mActivity= requireActivity();
+        swipeRefreshLayout = v.findViewById(R.id.swipeRefreshLayout);
         Log.d(TAG, "onCreateView: "+game.getTitle());
         queue = Volley.newRequestQueue(mActivity);
         recyclerView= v.findViewById(R.id.match_view_recyler);
         imageView = v.findViewById(R.id.imageViewFragMatchView);
         msg = v.findViewById(R.id.textViewFragMatchView);
                 getMatchInfo(pos);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMatchInfo(pos);
+            }
+        });
         return v;
     }
 
@@ -82,19 +93,33 @@ public class MatchViewFragment extends Fragment {
         Map<String,String> map = new HashMap<>();
         map.put("game_id",game.getId());
         map.put("status",MATCH_STATUS[pos]);
+        match.clear();
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,MATCH_URL,new JSONObject(map),
                 response -> {
                     try {
                         if (response.getBoolean("success")){
-//                                Log.d("TAGa", "onResponse: "+response);
+                                Log.d("TAGa", "onResponse matches: "+response);
 //                                String img_url = response.getString("img_url");
                             JSONArray data = response.getJSONArray("data");
+                            JSONArray offers = response.getJSONArray("offers");
+                            for(int i =0; i<offers.length(); i++){
 
+                                JSONObject offersJSONObject = offers.getJSONObject(i);
+                                String offerMatch_id = offersJSONObject.getString("match_id");
+                                offerModalHashMap.put(offerMatch_id,
+                                        new OfferModal(
+                                                offersJSONObject.getString("heading"),
+                                                offersJSONObject.getString("body"),
+                                                offerMatch_id
+
+                                        )
+                                        );
+                            }
                             for (int i=0;i<data.length();i++) {
                                 Log.d(TAG, "onResponse: "+ data.getString(i));
                                 JSONObject object = data.getJSONObject(i);
-                                match.add(new MatchModal(pos,
-                                        object.getString("match_id"),
+                                String dataMatch_id = object.getString("match_id");
+                                match.add(new MatchModal(pos,dataMatch_id,
                                         object.getString("game_id"),
                                         object.getString("match_date"),
                                         object.getString("match_time"),
@@ -107,9 +132,12 @@ public class MatchViewFragment extends Fragment {
                                         object.getString("total_slot"),
                                         object.getString("alloted_slot"),
                                         object.getString("remaining_slot"),
+                                        !object.getString("yt").equals("") ?object.getString("yt"):null,
                                         game.getPic(),
                                         !object.getString("first_prize").equals("") ?object.getString("first_prize"):"00"
                                         ));
+                                if (offerModalHashMap.containsKey(dataMatch_id))
+                                    match.get(i).setOffers(offerModalHashMap.get(dataMatch_id));
                             }
 //                                Log.d(TAG, "onResponse: after p"+response.length());
                             sendToAdapter(match);
@@ -124,6 +152,7 @@ public class MatchViewFragment extends Fragment {
                         e.printStackTrace();
                     }
 //                        Toast.makeText(requireActivity(), ""+response, Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
                 }, error -> {
 
                     msg.setText(R.string.error_occurred);
@@ -135,13 +164,16 @@ public class MatchViewFragment extends Fragment {
                     else
                         alert("error",error.getLocalizedMessage(),mActivity,false);
     //                    Toast.makeText(requireActivity(), ""+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            swipeRefreshLayout.setRefreshing(false);
                 });
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
 
-      public void sendToAdapter(ArrayList<MatchModal> map){
+
+
+    public void sendToAdapter(ArrayList<MatchModal> map){
         if (map.isEmpty() || mActivity == null) return;
         recyclerView.setVisibility(View.VISIBLE);
         msg.setVisibility(View.GONE);

@@ -104,10 +104,61 @@
                         android:text="@string/time_21_06_2021_at_12_00pm"
                         android:textAlignment="viewStart"
                         android:textAllCaps="true"
+                        android:textSize="15sp"
                         tools:ignore="Deprecated,TextViewEdits,TouchTargetSizeCheck" />
                 </LinearLayout>
 
             </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/match_offer_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:padding="10sp"
+                android:paddingBottom="16sp"
+                android:visibility="gone"
+                app:cardCornerRadius="12sp"
+                app:cardElevation="4sp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_offer_heading"
+                        style="@style/Widget.AppCompat.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:padding="8sp"
+                        android:paddingTop="@dimen/dimen_16dp"
+                        android:paddingBottom="2sp"
+                        android:text="New Offer On This Match"
+                        android:textColor="#0E0E0E" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="2sp"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:layout_marginEnd="@dimen/dimen_8dp"
+                        android:background="#00BCD4" />
+
+                    <TextView
+                        android:id="@+id/textView_offer_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autoLink="all|web|phone|email"
+                        android:autoSizeMaxTextSize="24sp"
+                        android:autoSizeMinTextSize="@dimen/dimen_16sp"
+                        android:autoText="false"
+                        android:padding="8sp"
+                        android:paddingBottom="16sp"
+                        android:text="On Join This Match You Get a offer and more offer so join fast to get this offer thankyou" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TableLayout
                 android:layout_width="match_parent"

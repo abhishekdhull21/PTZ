@@ -1,5 +1,6 @@
 package com.aimers.zone.Utils;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -118,9 +119,12 @@ public class User {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
-    public  static void logout(Context context){
-        Utils.removeTokenLocal(context.getSharedPreferences("token",Context.MODE_PRIVATE));
-        context.startActivity(new Intent(context, SignActivity.class));
+    public  static void logout(Activity context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("token",Context.MODE_PRIVATE);
+        if (sharedPreferences != null)
+        Utils.removeTokenLocal(sharedPreferences,context);
+
+
     }
 
 }
