@@ -32,10 +32,11 @@
                     android:id="@+id/textView24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:padding="@dimen/dimen_8dp"
                     android:text="@string/contact_us"
                     android:textAlignment="center"
-                    android:textColor="#1E1E1E"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -44,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_8dp"
+                    android:fontFamily="@font/roboto"
                     android:paddingStart="@dimen/dimen_8dp"
                     android:paddingEnd="@dimen/dimen_8dp"
                     android:text="@string/e_mail" />
@@ -53,8 +55,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_8dp"
+                    android:autoLink="all"
                     android:clickable="true"
                     android:contextClickable="true"
+                    android:fontFamily="@font/roboto"
                     android:linksClickable="true"
                     android:minHeight="48dp"
                     android:padding="@dimen/dimen_8dp"
@@ -71,6 +75,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
+            app:cardCornerRadius="@dimen/dimen_0dp"
+            app:cardElevation="@dimen/dimen_0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
@@ -85,9 +91,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_8dp"
+                    android:fontFamily="@font/roboto"
                     android:text="@string/submit_query"
                     android:textAlignment="center"
-                    android:textColor="#1C1C1C"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <EditText
@@ -96,7 +103,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_8dp"
                     android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:background="@drawable/border_edittext"
                     android:ems="10"
+                    android:fontFamily="@font/roboto"
                     android:gravity="start|top"
                     android:hint="@string/enter_your_query"
                     android:inputType="textMultiLine"
@@ -108,10 +117,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_8dp"
-                    android:background="@color/colorSecondaryDark"
+                    android:background="@drawable/border_btn"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/submit"
-                    android:textColor="#5D4037"
-                    android:textSize="18sp" />
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -121,6 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
+            android:fontFamily="@font/roboto"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="@+id/cardView8"
             app:layout_constraintTop_toBottomOf="@+id/cardView8" />

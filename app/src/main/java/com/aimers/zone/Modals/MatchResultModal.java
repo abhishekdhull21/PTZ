@@ -3,12 +3,15 @@ package com.aimers.zone.Modals;
 public class MatchResultModal {
     String username,kill,win,position,remarks;
 
-    public MatchResultModal(String username, String kill, String win, String position) {
+
+
+    public MatchResultModal(String username, String kill, String win, String position,String remarks) {
         this.username = username;
         this.kill = kill;
         this.win = win;
         this.position = position;
-        this.remarks = "";
+
+        this.remarks = remarks;
     }
 
     public String getUsername() {

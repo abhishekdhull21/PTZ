@@ -17,11 +17,10 @@
         android:layout_margin="10sp"
         android:layout_marginTop="32sp"
         android:visibility="gone"
-        app:cardCornerRadius="11sp"
+        app:cardCornerRadius="6sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,10 +48,11 @@
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
+                android:autoLink="all"
                 android:padding="8sp"
                 android:text="This is demo alert you should get ok alert from the admin to server the best qualti w\sadfjklasd  "
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -60,7 +60,7 @@
         android:id="@+id/recycler_game"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16sp"
+        android:layout_margin="8sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -69,12 +69,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnLogin) {
+            dialog.setMessage("Processing...");
+            dialog.show();
             login(loginInfo());
         }
     }
 
     private void login(Map<String, String> params) {
         if(params == null) return;
+
         Context context =requireActivity();
         request.sendRequest(params, LOGIN_URL, new RedeemRequestResponse() {
             @Override

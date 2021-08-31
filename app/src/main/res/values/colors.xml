@@ -12,6 +12,8 @@
     <color name="white">#ffffff</color>
     <color name="text">#ffffff</color>
     <color name="textLight">#bdbdbd</color>
+    <color name="inputBackground">#fafafa</color>
+    <color name="inputBorder">#eeeeee</color>
 
     <color name="colorBackground">#EEEEEE</color>
     <color name="colorBackgroundError">#A80F03</color>

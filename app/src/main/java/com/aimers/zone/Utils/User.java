@@ -123,7 +123,9 @@ public class User {
         SharedPreferences sharedPreferences = context.getSharedPreferences("token",Context.MODE_PRIVATE);
         if (sharedPreferences != null)
         Utils.removeTokenLocal(sharedPreferences,context);
-
+        Intent i =new Intent(context, SignActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(i);
 
     }
 

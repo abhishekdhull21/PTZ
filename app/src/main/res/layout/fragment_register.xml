@@ -14,7 +14,7 @@
         android:layout_height="374dp"
         android:background="@drawable/border_cardview_sign"
         app:cardBackgroundColor="#fff"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/dimen_20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -35,57 +35,70 @@
                     android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="14sp"
+                    android:layout_margin="8sp"
                     android:layout_weight="5"
                     android:background="@drawable/border_edittext"
-                    android:elevation="16sp"
+                    android:fontFamily="@font/roboto"
                     android:hint="First Name"
                     android:inputType="text"
+                    android:minHeight="48dp"
                     android:padding="10sp"
-                    android:shadowRadius="8" />
+                    android:shadowRadius="8"
+                    android:textColorHint="@color/textLight" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="14sp"
+                    android:layout_margin="8sp"
                     android:layout_weight="5"
                     android:background="@drawable/border_edittext"
-                    android:elevation="16sp"
+                    android:fontFamily="@font/roboto"
                     android:hint="Last Name"
                     android:inputType="textPersonName|text"
+                    android:minHeight="48dp"
                     android:padding="10sp"
-                    android:shadowRadius="8" />
+                    android:shadowRadius="8"
+                    android:textColorHint="@color/textLight" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="14sp"
+                android:layout_margin="8sp"
                 android:background="@drawable/border_edittext"
-                android:elevation="16sp"
+                android:fontFamily="@font/roboto"
                 android:hint="Mobile"
                 android:inputType="number"
+                android:minHeight="48dp"
                 android:padding="10sp"
-                android:shadowRadius="8" />
+                android:textColorHint="@color/textLight" />
 
             <EditText
                 android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="14sp"
+                android:layout_margin="8sp"
                 android:background="@drawable/border_edittext"
+                android:fontFamily="@font/roboto"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="10sp" />
+                android:minHeight="48dp"
+                android:padding="10sp"
+                android:textColorHint="@color/textLight" />
 
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
-                android:text="Register" />
+                android:background="@drawable/border_btn"
+                android:elevation="4sp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Register"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

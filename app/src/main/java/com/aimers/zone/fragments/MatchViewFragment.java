@@ -179,8 +179,13 @@ public class MatchViewFragment extends Fragment {
         msg.setVisibility(View.GONE);
         imageView.setVisibility(View.GONE);
         recyclerView.setAdapter(new MatchViewAdapter(mActivity,map,game));
+        LinearLayoutManager layoutManager =new LinearLayoutManager(mActivity);
+        if(pos != 1){
+            layoutManager.setReverseLayout(true);
+            layoutManager.setStackFromEnd(true);
+        }
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        recyclerView.setLayoutManager(layoutManager);
 
     }
 

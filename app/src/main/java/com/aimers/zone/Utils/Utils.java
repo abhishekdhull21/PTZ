@@ -38,7 +38,7 @@ public class Utils {
 
     }
 //remove token from user device , like when user hit logout or etc
-    public static void removeTokenLocal(SharedPreferences sharedPreferences, Activity context){
+    public static void   removeTokenLocal(SharedPreferences sharedPreferences, Activity context){
         if(sharedPreferences.contains("token")){
             String token = sharedPreferences.getString("token","");
             NetworkRequest request = new NetworkRequest(context);
@@ -51,14 +51,13 @@ public class Utils {
                     editor.remove("token");
                     editor.clear();
                     editor.apply();
-                    Intent i =new Intent(context, SignActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(i);
+                    
                 }
 
                 @Override
                 public void onErrorResponse(JSONObject response) throws JSONException {
                     Toast.makeText(context,"Something went wrong, Please restart app",Toast.LENGTH_SHORT).show();
+
                 }
             });
 

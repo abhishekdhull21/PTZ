@@ -96,7 +96,7 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
 
             });
             holder.match_layout.setOnClickListener(v -> {
-//                todo: on image click app crash need to solve
+//                 on image click app crash need to solve
                 Intent i  = new Intent(context,MatchJoinActivity.class);
                 i.putExtra("match",matches.get(position));
                 context.startActivity(i);

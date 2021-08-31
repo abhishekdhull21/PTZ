@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -46,6 +47,7 @@ public class MatchJoinActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private Activity context;
     private NetworkRequest request;
+    private SharedPreferences playerInfoShared;
     private boolean isRoom=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class MatchJoinActivity extends AppCompatActivity {
         context = this;
         progressDialog = new ProgressDialog(this);
         request = new NetworkRequest(this);
+        playerInfoShared = getSharedPreferences("playerinfo",MODE_PRIVATE);
         Intent i= getIntent();
         match = (MatchModal) i.getSerializableExtra("match");
         setViewContent();
@@ -64,29 +67,34 @@ public class MatchJoinActivity extends AppCompatActivity {
         @SuppressLint("InflateParams") View mDialog = inflater.inflate(R.layout.custom_dialog_input_player,null);
         initView(mDialog);
         playerInfoPopup(mDialog);
+        TextView autoFill =mDialog.findViewById(R.id.textView3Fill);
+        if(playerInfoShared.contains("playerName")||playerInfoShared.contains("playerID"))
+            autoFill.setVisibility(View.VISIBLE);
         Button join = mDialog.findViewById(R.id.buttonJoinMatch);
-        binding.copyId.setOnClickListener(v -> {
-            if (isRoom)
-            {
-                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-                cm.setText(binding.txtRoomId.getText());
-                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
-            }else{
-                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-                cm.setText("Wait Until Room Credentials available");
-                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+        autoFill.setOnClickListener(v->{
+            if(playerInfoShared.contains("playerName") && playerInfoShared.contains("playerID")){
+                 edtName.setText(playerInfoShared.getString("playerName",""));
+                 edtID.setText(playerInfoShared.getString("playerID",""));
             }
         });
-        binding.copyPassword.setOnClickListener(v -> {
-            if (isRoom){
-                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-                cm.setText(binding.txtRoomPassword.getText());
-                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+        binding.copyId.setOnClickListener(v -> {
+            ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (isRoom)
+            {
+                cm.setText(binding.txtRoomId.getText());
             }else{
-                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                 cm.setText("Wait Until Room Credentials available");
-                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
             }
+            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+        });
+        binding.copyPassword.setOnClickListener(v -> {
+            ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (isRoom){
+                cm.setText(binding.txtRoomPassword.getText());
+            }else{
+                cm.setText("Wait Until Room Credentials available");
+            }
+            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
         });
         join.setOnClickListener(v -> {
             if (inputValid()){
@@ -163,6 +171,10 @@ public class MatchJoinActivity extends AppCompatActivity {
         if (!edtID.getText().toString().equals("") && !edtName.getText().toString().equals("")){
             pID = edtID.getText().toString();
             pName = edtName.getText().toString();
+            SharedPreferences.Editor editor = playerInfoShared.edit();
+            editor.putString("playerName",pName);
+            editor.putString("playerID",pID);
+            editor.commit();
             return true;
         }
         return false;

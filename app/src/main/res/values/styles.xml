@@ -12,6 +12,10 @@
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetEnd">0dp</item>
     </style>
+    <style name="CustomThemeNoActionBar" parent="Theme.AppCompat.Light">
+
+</style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="contentInsetStart">0dp</item>

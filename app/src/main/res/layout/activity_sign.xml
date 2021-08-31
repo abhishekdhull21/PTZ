@@ -16,19 +16,19 @@
         app:tabBackground="@color/colorPrimaryLight"
         app:tabIndicator="@color/colorPrimaryDark"
         app:tabIndicatorColor="@color/colorPrimaryDark"
-        app:tabIndicatorHeight="6px"
+        app:tabIndicatorHeight="8px"
         app:tabRippleColor="@color/colorPrimary"
         app:tabSelectedTextColor="@color/text"
         app:tabTextColor="@color/textLight" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs" >
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
 
     </androidx.viewpager2.widget.ViewPager2>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,11 +13,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabBackground="@color/colorSecondaryLight"
-        app:tabIndicator="@color/colorSecondaryDark"
-        app:tabIndicatorColor="@color/colorSecondaryDark"
+        app:tabBackground="@color/colorPrimaryLight"
+        app:tabIndicator="@color/colorPrimaryDark"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
         app:tabIndicatorHeight="@dimen/dimen_4sp"
-        app:tabSelectedTextColor="@color/white" />
+        app:tabRippleColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/textLight" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/match_view_pager"

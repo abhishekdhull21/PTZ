@@ -48,7 +48,7 @@
                     android:text="Room Details"
                     android:textAlignment="inherit"
                     android:textAllCaps="false"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text"
                     android:textColorHint="#FFFFFF"
                     android:textSize="24sp"
                     android:typeface="sans" />
@@ -182,7 +182,7 @@
                     android:text="Prize Description"
                     android:textAlignment="inherit"
                     android:textAllCaps="false"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text"
                     android:textColorHint="#FFFFFF"
                     android:textSize="24sp"
                     android:typeface="sans" />
@@ -322,9 +322,10 @@
         <TextView
             android:id="@+id/txt_rules"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="match_parent"
+            android:text="" />
     </ScrollView>
+
     <Button
         android:id="@+id/btn_join_match"
         android:layout_width="0dp"
@@ -332,8 +333,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorSecondaryLight"
+        android:background="@drawable/border_btn"
         android:text="@string/join_match"
+        android:textColor="@color/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

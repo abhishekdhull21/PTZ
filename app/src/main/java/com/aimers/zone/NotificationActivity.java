@@ -1,6 +1,7 @@
 package com.aimers.zone;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +15,7 @@ import com.aimers.zone.Adapters.NotificationAdapter;
 import static com.aimers.zone.MainActivity.notifications;
 
 public class NotificationActivity extends AppCompatActivity {
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class NotificationActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.notification_recycler);
         TextView textView = findViewById(R.id.textView43);
         ImageView imageView = findViewById(R.id.imageView17);
+        toolbar = findViewById(R.id.toolbar_notification);
         if (!notifications.isEmpty()) {
             recyclerView.setVisibility(View.VISIBLE);
             textView.setVisibility(View.GONE);
