@@ -5,14 +5,19 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.aimers.zone.Adapters.TransactionAdapter;
 import com.aimers.zone.Interface.RedeemRequestResponse;
+import com.aimers.zone.Modals.TransactionModal;
 import com.aimers.zone.R;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
@@ -36,9 +41,11 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class TransactionWalletFragment extends Fragment {
     private View v;
-    private DataTable dataTable;
-    ImageView img;
+    private ArrayList<TransactionModal> transactions;
+    private ImageView img;
+    private RecyclerView recyclerView;
     private Activity mActivity;
+    private TextView txt404;
 
     public TransactionWalletFragment() {
         // Required empty public constructor
@@ -53,24 +60,17 @@ public class TransactionWalletFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_transaction_wallet, container, false);
-//        img = v.findViewById(R.id .img_no_found);
+        recyclerView = v.findViewById(R.id.recyclerViewTransactionWallet);
+        img = v.findViewById(R.id.imageViewTransaction404);
+        txt404 = v.findViewById(R.id.textViewTransaction404);
         mActivity = requireActivity();
-        initTable();
+//        initTable();
         sendRequest();
 
 
         return v;
     }
-    private void initTable(){
-        dataTable = v.findViewById(R.id.data_table);
-        Log.d(TAG, "initTable: "+dataTable);
-        DataTableHeader header = new DataTableHeader.Builder()
-                .item("Sn",1)
-                .item("Type",3)
-                .item("Rs",2)
-                .build();
-        dataTable.setHeader(header);
-    }
+
 
     private void sendRequest(){
         Map<String,String> params = initRequest();
@@ -97,23 +97,23 @@ public class TransactionWalletFragment extends Fragment {
             return;
         }
         JSONArray responseArray = response.getJSONArray("data");
-        ArrayList<DataTableRow> rows = new ArrayList<>();
+        img.setVisibility(View.GONE);
+        txt404.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         // define 200 fake rows for table
         for(int i=0;i<responseArray.length();i++) {
-            JSONObject data = responseArray.getJSONObject(i);
-            DataTableRow row = new DataTableRow.Builder()
-                    .value("#" + (i+1))
-                    .value(data.getString("type"))
-                    .value(data.getString("coins"))
-
-                    .build();
-            rows.add(row);
+            String sn = String.valueOf(i);
+            JSONObject obj = responseArray.getJSONObject(i);
+            transactions.add(new TransactionModal(sn,
+                    obj.getString("type"),
+                    obj.getString("rs"),
+                    obj.getString("status"),
+                    obj.getString("remarks")
+                    ));
         }
+        recyclerView.setAdapter(new TransactionAdapter(transactions));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
 
-//        dataTable.setTypeface(typeface);
-
-        dataTable.setRows(rows);
-        dataTable.inflate(mActivity);
 
     }
     private Map<String, String> initRequest(){

@@ -2,12 +2,12 @@ package com.aimers.zone.Utils;
 
 public class Constant {
     //Urls
-    public static final String BASE_URL = "http://5ace-2409-4051-11-3b6-491a-906-f6c5-f741.ngrok.io/ptz/api/";
-    public static final String BASE_URL1 = "http://5ace-2409-4051-11-3b6-491a-906-f6c5-f741.ngrok.io/ptz/admin";
+//    public static final String BASE_URL = "http://5ace-2409-4051-11-3b6-491a-906-f6c5-f741.ngrok.io/ptz/api/";
+//    public static final String BASE_URL1 = "http://5ace-2409-4051-11-3b6-491a-906-f6c5-f741.ngrok.io/ptz/admin";
 //    public static final String BASE_URL = "http://10.0.2.2/ptz/api/";
 //    public static final String BASE_URL1 = "http://10.0.2.2/ptz/admin/";
-//    public static final String BASE_URL = "http://aimerszone.nexttechtrend.com/api/";
-//    public static final String BASE_URL1 = "http://aimerszone.nexttechtrend.com/admin";
+    public static final String BASE_URL = "http://aimerszone.nexttechtrend.com/api/";
+    public static final String BASE_URL1 = "http://aimerszone.nexttechtrend.com/admin";
     public static final String TEST_URL = BASE_URL+"test.php";
     public static final String MID = "VC WQWH26061118544596";
     public static final String REGISTER_URL = BASE_URL+"register.php";

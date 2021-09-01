@@ -102,14 +102,15 @@ public class MatchViewFragment extends Fragment {
 //                                String img_url = response.getString("img_url");
                             JSONArray data = response.getJSONArray("data");
                             JSONArray offers = response.getJSONArray("offers");
+//                            offerModalHashMa null;
                             for(int i =0; i<offers.length(); i++){
 
                                 JSONObject offersJSONObject = offers.getJSONObject(i);
                                 String offerMatch_id = offersJSONObject.getString("match_id");
                                 offerModalHashMap.put(offerMatch_id,
                                         new OfferModal(
-                                                offersJSONObject.getString("heading"),
-                                                offersJSONObject.getString("body"),
+                                                !offersJSONObject.getString("heading").equals("")?offersJSONObject.getString("heading"):"",
+                                                !offersJSONObject.getString("body").equals("")?offersJSONObject.getString("body"):"",
                                                 offerMatch_id
 
                                         )
