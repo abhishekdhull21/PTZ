@@ -67,12 +67,11 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 //    private RequestQueue queue;
     private ProgressDialog progressBar;
     public static ArrayList<Notification> notifications;
-
+    TextView walletCoin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         customActionbar();
 
         request = new NetworkRequest(MainActivity.this);
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View view = getSupportActionBar().getCustomView();
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-        TextView walletCoin = view.findViewById(R.id.textViewWallet);
+        walletCoin = view.findViewById(R.id.textViewWallet);
         fetch(this, status -> {
             if (status)
                 walletCoin.setText(com.aimers.zone.Modals.Wallet.wallet.getCoins());
@@ -202,6 +201,13 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     protected void onResume() {
         super.onResume();
         fetchJoinedMatch();
+        fetch(this, status -> {
+            if (status)
+                if(walletCoin != null)
+                walletCoin.setText(com.aimers.zone.Modals.Wallet.wallet.getCoins());
+//            Log.e(TAG, "customActionbar: "+wallet.getCoins() );
+
+        });
     }
     @SuppressLint("NonConstantResourceId")
     @Override

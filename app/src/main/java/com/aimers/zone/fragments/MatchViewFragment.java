@@ -97,6 +97,7 @@ public class MatchViewFragment extends Fragment {
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,MATCH_URL,new JSONObject(map),
                 response -> {
                     try {
+
                         if (response.getBoolean("success")){
                                 Log.d("TAGa", "onResponse matches: "+response);
 //                                String img_url = response.getString("img_url");

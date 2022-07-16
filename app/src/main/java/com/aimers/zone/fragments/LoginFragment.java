@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -36,8 +37,8 @@ import static com.aimers.zone.fragments.RegisterFragment.TAG;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private FragmentLoginBinding binding;
-    NetworkRequest request;
-
+    private NetworkRequest request;
+    private AlertDialog.Builder ab;
     private ProgressDialog dialog;
     private User user;
     public LoginFragment() {
@@ -61,8 +62,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
        dialog = new ProgressDialog(requireActivity());
        dialog.setCancelable(false);
         binding.btnLogin.setOnClickListener(this);
+        binding.forgotPassword.setOnClickListener(this);
         user = new User(requireActivity());
-
+        Context context = getContext();
+        if (context != null) {
+            ab = new AlertDialog.Builder(context);
+            View view = inflater.inflate(R.layout.custom_forgot_password,null);
+            ab.setView(view).create();
+        }
         return v;
     }
 
@@ -72,6 +79,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             dialog.setMessage("Processing...");
             dialog.show();
             login(loginInfo());
+        }
+        if (v.getId() == R.id.forgotPassword){
+            ab.show();
         }
     }
 
@@ -83,6 +93,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccessResponse(JSONObject response) throws JSONException {
                 try {
+                    dialog.dismiss();
                     if (response.getBoolean("success")){
                         Log.d("TAG", "onResponse: "+response);
                         Intent i = new Intent(context, MainActivity.class);

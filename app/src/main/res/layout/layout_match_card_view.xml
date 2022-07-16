@@ -78,10 +78,10 @@
 
                     <TextView
                         android:id="@+id/txt_game_name"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/dimen_0dp"
                         android:layout_marginTop="6sp"
-                        android:layout_weight="5"
+                        android:layout_weight="6"
                         android:autoText="true"
                         android:padding="8sp"
                         android:paddingBottom="@dimen/dimen_0dp"
@@ -90,6 +90,9 @@
                         android:textAllCaps="true"
                         android:textSize="24sp"
                         android:textStyle="bold"
+                        app:autoSizeMaxTextSize="@dimen/dimen_24dp"
+                        app:autoSizeMinTextSize="@dimen/dimen_16dp"
+                        app:autoSizeTextType="uniform"
                         tools:ignore="Deprecated,TextViewEdits,TouchTargetSizeCheck" />
 
                     <TextView
@@ -340,11 +343,11 @@
                     <LinearLayout
                         android:id="@+id/layout_slot_spot"
                         android:layout_width="@dimen/dimen_0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="8"
                         android:orientation="vertical"
                         android:padding="8sp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:weightSum="8"
                         tools:visibility="visible">
 
@@ -386,12 +389,14 @@
                     <Button
                         android:id="@+id/btn_join"
                         android:layout_width="@dimen/dimen_0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
                         android:background="@color/submit_easy_pay"
                         android:text="@string/join"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp"
+                        android:visibility="visible"
                         app:cornerRadius="@dimen/dimen_10dp"
                         app:rippleColor="#FFFFFF"
                         tools:ignore="TextContrastCheck"
@@ -400,7 +405,8 @@
                     <Button
                         android:id="@+id/btnCompleted"
                         android:layout_width="@dimen/dimen_0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_gravity="center"
                         android:layout_weight="5"
                         android:background="@color/submit_easy_pay"
                         android:clickable="true"
@@ -412,13 +418,12 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
-                        android:visibility="gone"
-                        tools:visibility="gone" />
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/btn_yt"
                         android:layout_width="@dimen/dimen_0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30sp"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/dimen_10dp"
                         android:layout_marginEnd="2sp"
@@ -436,6 +441,7 @@
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:typeface="sans"
+                        android:visibility="gone"
                         tools:visibility="gone" />
                 </TableRow>
 

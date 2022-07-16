@@ -1,6 +1,8 @@
 package com.aimers.zone.Modals;
 
-public class OfferModal {
+import java.io.Serializable;
+
+public class OfferModal implements Serializable {
     String heading,body,match_id;
 
     public OfferModal(String heading, String body, String match_id) {

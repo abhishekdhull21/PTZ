@@ -22,6 +22,7 @@ import com.aimers.zone.Interface.RedeemRequestResponse;
 import com.aimers.zone.Modals.GameModal;
 import com.aimers.zone.Modals.Notification;
 import com.aimers.zone.R;
+import com.aimers.zone.Utils.Constant;
 import com.aimers.zone.Utils.NetworkRequest;
 import com.aimers.zone.Utils.User;
 import com.aimers.zone.Utils.Utils;
@@ -128,7 +129,7 @@ public class GameFragment extends Fragment {
         progressDialog.setTitle("Requesting");
         progressDialog.setMessage("Loading Matches___");
         progressDialog.show();
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  ,"http://aimerszone.nexttechtrend.com/api/game.php",null,
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST  , GAME_URL,null,
                     response -> {
                         Log.e(TAG, "gameInfo: "+response );
                         progressDialog.dismiss();

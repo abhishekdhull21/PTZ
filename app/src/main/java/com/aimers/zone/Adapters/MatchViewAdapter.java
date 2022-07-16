@@ -67,16 +67,17 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             holder.btnJoin.setVisibility(View.VISIBLE);
             holder.btnYT.setVisibility(View.GONE);
             holder.btnCompleted.setVisibility(View.GONE);
+            Log.d(TAG, "onBindViewHolder: offer"+offer);
+            if (offer != null)
+            {
+                holder.match_offer_cardview.setVisibility(View.VISIBLE);
+                holder.textView_offer_body.setText(offer.getBody() != null ? offer.getBody(): "");
+                holder.textView_offer_heading.setText(offer.getHeading() != null ? offer.getHeading(): "");
+            }
             if (jMatch !=null)
             if (jMatch.getMatchId().contains(match.getMatch_id())) {
                 holder.card_join_msg.setVisibility(View.VISIBLE);
 
-                if (offer != null)
-                {
-                    holder.match_offer_cardview.setVisibility(View.VISIBLE);
-                    holder.textView_offer_body.setText(offer.getBody() != null ? offer.getBody(): "");
-                    holder.textView_offer_heading.setText(offer.getHeading() != null ? offer.getHeading(): "");
-                }
 //                Log.e(TAG, "onBindViewHolder: "+jMatch.getMatchId() +" and curr match:"+match.getMatch_id() );
 //                        mButton1.setText(R.string.join_teammate);
 
@@ -111,10 +112,11 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewAdapter.View
             holder.btnJoin.setVisibility(View.GONE);
             holder.btnYT.setVisibility(View.VISIBLE);
 
-            if ( yt== null)
+            if ( yt.equals("null"))
                 yt = YT_URL;
             holder.btnCompleted.setVisibility(View.VISIBLE);
             String finalYt = yt;
+            Log.e(TAG, "onBindViewHolder: yt"+finalYt );
             holder.btnYT.setOnClickListener(v->{
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(finalYt));

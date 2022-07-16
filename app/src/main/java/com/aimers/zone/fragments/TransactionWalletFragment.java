@@ -79,6 +79,7 @@ public class TransactionWalletFragment extends Fragment {
         request.sendRequest(params, TRANSACTION_LIST_REQUEST, new RedeemRequestResponse() {
             @Override
             public void onSuccessResponse(JSONObject response) throws JSONException {
+                Log.e(TAG, "onSuccessResponse: "+response );
                 showTable(response);
             }
 
@@ -97,18 +98,20 @@ public class TransactionWalletFragment extends Fragment {
             return;
         }
         JSONArray responseArray = response.getJSONArray("data");
+        Log.e(TAG, "showTable: "+responseArray );
         img.setVisibility(View.GONE);
         txt404.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+        transactions = new ArrayList<>();
         // define 200 fake rows for table
         for(int i=0;i<responseArray.length();i++) {
-            String sn = String.valueOf(i);
+            String sn = String.valueOf(i+1);
             JSONObject obj = responseArray.getJSONObject(i);
             transactions.add(new TransactionModal(sn,
                     obj.getString("type"),
                     obj.getString("rs"),
                     obj.getString("status"),
-                    obj.getString("remarks")
+                    !obj.getString("remarks").equals("null")?obj.getString("remarks"):""
                     ));
         }
         recyclerView.setAdapter(new TransactionAdapter(transactions));

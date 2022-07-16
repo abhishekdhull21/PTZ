@@ -67,7 +67,8 @@ public class Utils {
     public static void alert(String title,String message,Activity context, boolean success){
         Alerter alerter = Alerter.create(context)
                 .setText(message)
-                .setTitle(title);
+                .setTitle(title)
+                .setDismissable(true);
         if (success) {
             alerter.setBackgroundColorRes(R.color.colorBackgroundSuccess);
         } else {

@@ -7,7 +7,7 @@ public class TransactionModal {
     private String sn;
     private String status;
 
-    public TransactionModal(String sn,String type, String rs, String remarks,String status) {
+    public TransactionModal(String sn,String type, String rs,String status, String remarks) {
         this.sn = sn;
         this.type = type;
         this.rs = rs;

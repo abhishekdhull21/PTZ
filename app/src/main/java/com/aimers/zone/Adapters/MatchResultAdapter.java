@@ -39,9 +39,9 @@ public class MatchResultAdapter extends RecyclerView.Adapter<MatchResultAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MatchResultModal matchResult = resultModals.get(position);
         Log.e(TAG, "onBindViewHolder: "+matchResult.getKill() );
-        holder.txtRank.setText((matchResult.getPosition() != null)?matchResult.getPosition(): "0");
+//        holder.txtRank.setText((matchResult.getPosition() != null)?matchResult.getPosition(): "0");
         holder.txtRemarks.setText(matchResult.getRemarks()!= null?matchResult.getRemarks():"");
-//        holder.txtKills.setText(matchResult.getKill() != null ? matchResult.getKill():"0");
+        holder.txtKills.setText(matchResult.getKill() != null ? matchResult.getKill():"0");
         holder.txtNo.setText(String.format("%d", position + 1));
         holder.txtName.setText(matchResult.getUsername()!=null?matchResult.getUsername():"no name");
 
@@ -54,13 +54,13 @@ public class MatchResultAdapter extends RecyclerView.Adapter<MatchResultAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtName,txtKills,txtWin,txtRemarks,txtNo,txtRank;
+        public TextView txtName,txtKills,txtWin,txtRemarks,txtNo;//txtRank;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
               txtName  =  itemView.findViewById(R.id.textViewName);
               txtKills  =  itemView.findViewById(R.id.textViewKills);
               txtNo  =  itemView.findViewById(R.id.textViewNo);
-              txtRank  =  itemView.findViewById(R.id.textViewRank);
+//              txtRank  =  itemView.findViewById(R.id.textViewRank);
               txtWin  =  itemView.findViewById(R.id.textViewWin);
               txtRemarks  =  itemView.findViewById(R.id.textViewRemarks);
         }
